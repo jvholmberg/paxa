@@ -1,0 +1,9 @@
+<mat-list>
+  <div mat-subheader>Bookings</div>
+  <mat-list-item *ngFor="let booking of (bookings$ | async)">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{booking.id}}</div>
+    <div mat-line> {{booking.users}}</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
