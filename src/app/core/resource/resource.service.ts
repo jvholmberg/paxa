@@ -32,6 +32,6 @@ export class ResourceService {
 
   getById(resourceId: number): Observable<Resource> {
 
-    return this.collection$;
+    return null;
   }
 }

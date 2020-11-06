@@ -8,7 +8,7 @@ export class PersonProxyApi implements PersonProxy {
     throw new Error("Method not implemented.");
   }
 
-  create(): Observable<Person[]> {
+  post(): Observable<Person[]> {
     throw new Error("Method not implemented.");
   }
 

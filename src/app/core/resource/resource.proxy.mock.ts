@@ -8,7 +8,7 @@ export class ResourceProxyMock implements ResourceProxy {
     throw new Error("Method not implemented.");
   }
 
-  create(): Observable<Resource[]> {
+  post(): Observable<Resource[]> {
     throw new Error("Method not implemented.");
   }
 

@@ -1,7 +1,7 @@
 import { UserProxy } from './user.proxy.base';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
-import { simulate } from '@utils/mocks/api';
+import { simulate } from '@utils/api';
 
 export class UserProxyMock implements UserProxy {
 
@@ -10,7 +10,7 @@ export class UserProxyMock implements UserProxy {
     return simulate(response);
   }
 
-  create(): Observable<User> {
+  post(): Observable<User> {
     const response: User = { id: 0, personId: 0, email: 'create_johan@paxa.se' };
     return simulate(response);
   }

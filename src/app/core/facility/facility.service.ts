@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FacilityProxy } from './facility.proxy.base';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Facility } from 'src/app/shared/models/facility.model';
+import { logInfo } from '@utils/logger';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,25 @@ export class FacilityService {
 
   constructor(private proxy: FacilityProxy) { }
 
-  getCollectionByLocation(location: Location): Observable<Facility[]> {
-
-    return this.collection$;
+  private setSource(loading: boolean, error: Error, collection: Facility[]): void {
+    logInfo('FacilityService.setSource', loading, error, collection);
+    this.loadingSource.next(loading);
+    this.errorSource.next(error);
+    this.collectionSource.next(collection);
   }
 
-  getCollectionByResourceType(resourceTypeId: number): Observable<Facility[]> {
-
-    return this.collection$;
-  }
-
-  getEntityById(facilityId: number): Observable<Facility> {
-
+  public getCollection(): Observable<Facility[]> {
+    logInfo('FacilityService.getCollection');
+    if (!this.initialized) {
+      this.loadingSource.next(true);
+      this.proxy.getCollection().subscribe(
+        (val) => {
+          this.initialized = true;
+          this.setSource(false, null, val);
+        },
+        (err) => this.setSource(false, err, null),
+      );
+    }
     return this.collection$;
   }
 }

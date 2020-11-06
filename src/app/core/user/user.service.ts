@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { logInfo } from '@utils/logger';
 import { UserProxy } from './user.proxy.base';
 import { User } from '@shared/models/user.model';
 
@@ -7,8 +8,6 @@ import { User } from '@shared/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  public initialized = false;
-
   private readonly loadingSource = new BehaviorSubject<boolean>(false);
   private readonly errorSource = new BehaviorSubject<Error>(undefined);
   private readonly entitySource = new BehaviorSubject<User>(undefined);
@@ -19,19 +18,15 @@ export class UserService {
 
   constructor(private proxy: UserProxy) { }
 
-  private setSource(
-    loading: boolean,
-    error?: Error,
-    entity?: User
-  ): void {
-    this.initialized = true;
+  private setSource(loading: boolean, error: Error, entity: User): void {
+    logInfo('UserService.setSource', loading, error, entity);
     this.loadingSource.next(loading);
-    if (error !== undefined) { this.errorSource.next(error); }
-    if (entity !== undefined) { this.entitySource.next(entity); }
+    this.errorSource.next(error);
+    this.entitySource.next(entity);
   }
 
   public getEntity(): Observable<User> {
-    this.setSource(true);
+    this.loadingSource.next(true);
     this.proxy.get().subscribe(
       (val) => this.setSource(false, null, val),
       (err) => this.setSource(false, err, null),
@@ -40,8 +35,8 @@ export class UserService {
   }
 
   public createEntity(): Observable<User> {
-    this.setSource(true);
-    this.proxy.create().subscribe(
+    this.loadingSource.next(true);
+    this.proxy.post().subscribe(
       (val) => this.setSource(false, null, val),
       (err) => this.setSource(false, err, null),
     );
@@ -49,7 +44,7 @@ export class UserService {
   }
 
   public updateEntity(): Observable<User> {
-    this.setSource(true);
+    this.loadingSource.next(true);
     this.proxy.update().subscribe(
       (val) => this.setSource(false, null, val),
       (err) => this.setSource(false, err, null),
@@ -58,9 +53,9 @@ export class UserService {
   }
 
   public deleteEntity(): void {
-    this.setSource(true);
+    this.loadingSource.next(true);
     this.proxy.delete().subscribe(
-      (val) => this.setSource(false, null, val ? null : undefined),
+      () => this.setSource(false, null, null),
       (err) => this.setSource(false, err, null),
     );
   }
