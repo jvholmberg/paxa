@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '@core/user/user.service';
+import { BookingService } from '@core/booking/booking.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private bookingService: BookingService,
   ) {}
 
   ngOnInit(): void {

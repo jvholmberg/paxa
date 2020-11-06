@@ -8,7 +8,7 @@ export class UserProxyApi implements UserProxy {
     throw new Error("Method not implemented.");
   }
 
-  create(): Observable<User> {
+  post(): Observable<User> {
     throw new Error("Method not implemented.");
   }
 

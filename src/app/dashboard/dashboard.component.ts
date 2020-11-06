@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.bookings$ = this.bookingService.getMyBookings();
+    this.bookings$ = this.bookingService.getCollection();
   }
 
 }

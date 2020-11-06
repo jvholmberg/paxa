@@ -8,7 +8,7 @@ export class FacilityProxyApi implements FacilityProxy {
     throw new Error("Method not implemented.");
   }
 
-  create(): Observable<Facility[]> {
+  post(): Observable<Facility[]> {
     throw new Error("Method not implemented.");
   }
 
