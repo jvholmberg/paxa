@@ -8,7 +8,7 @@ export class BookingProxyApi implements BookingProxy {
     throw new Error("Method not implemented.");
   }
 
-  create(): Observable<Booking[]> {
+  post(timeslotId: number): Observable<Booking> {
     throw new Error("Method not implemented.");
   }
 

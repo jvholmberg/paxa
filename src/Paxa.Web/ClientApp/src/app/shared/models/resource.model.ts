@@ -4,6 +4,6 @@ import { TimeSlot } from './time-slot.model';
 export interface Resource {
   id: number;
   name: string;
-  types: ResourceType[];
+  type: ResourceType;
   timeSlots: TimeSlot[];
 }

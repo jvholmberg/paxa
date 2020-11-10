@@ -1,7 +1,7 @@
 import { PersonProxy } from './person.proxy.base';
 import { Observable } from 'rxjs';
 import { Person } from 'src/app/shared/models/person.model';
-import { simulate } from '@utils/mocks/api';
+import { simulate } from '@utils/api';
 
 export class PersonProxyMock implements PersonProxy {
 
@@ -19,7 +19,7 @@ export class PersonProxyMock implements PersonProxy {
     return simulate(response);
   }
 
-  create(): Observable<Person[]> {
+  post(): Observable<Person[]> {
     const response: Person = {
       id: 0,
       firstName: 'Johan',
