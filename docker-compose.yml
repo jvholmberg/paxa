@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  web:
-    image: ${DOCKER_REGISTRY-}paxa-web
-    build:
-      context: .
-      dockerfile: src/Paxa.Web/Dockerfile
