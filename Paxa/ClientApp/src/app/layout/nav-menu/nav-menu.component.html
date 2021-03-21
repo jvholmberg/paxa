@@ -47,4 +47,8 @@
       </div>
     </div>
   </nav>
+  <mat-progress-bar
+    *ngIf="isLoading$ | async"
+    mode="indeterminate">
+  </mat-progress-bar>
 </header>

@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '@user/services/user.service';
+import { Component } from '@angular/core';
+import { HttpsStatusService } from '@core/http-status/https-status.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  title = 'app';
+  title = 'Paxa';
 
-  constructor(private userService: UserService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-  }
 }

@@ -68,6 +68,12 @@ namespace Paxa.Migrations
                             Id = 2,
                             HostId = 2,
                             TimeslotId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HostId = 1,
+                            TimeslotId = 3
                         });
                 });
 
@@ -295,56 +301,56 @@ namespace Paxa.Migrations
                         new
                         {
                             Id = 1,
-                            From = new DateTime(2021, 3, 4, 0, 34, 32, 788, DateTimeKind.Local).AddTicks(4220),
-                            To = new DateTime(2021, 3, 4, 1, 34, 32, 797, DateTimeKind.Local).AddTicks(8050)
+                            From = new DateTime(2021, 3, 17, 20, 5, 18, 540, DateTimeKind.Local).AddTicks(9760),
+                            To = new DateTime(2021, 3, 17, 21, 5, 18, 551, DateTimeKind.Local).AddTicks(3650)
                         },
                         new
                         {
                             Id = 2,
-                            From = new DateTime(2021, 3, 4, 1, 34, 32, 797, DateTimeKind.Local).AddTicks(8600),
-                            To = new DateTime(2021, 3, 4, 2, 34, 32, 797, DateTimeKind.Local).AddTicks(8600)
+                            From = new DateTime(2021, 3, 17, 21, 5, 18, 551, DateTimeKind.Local).AddTicks(4210),
+                            To = new DateTime(2021, 3, 17, 22, 5, 18, 551, DateTimeKind.Local).AddTicks(4220)
                         },
                         new
                         {
                             Id = 3,
-                            From = new DateTime(2021, 3, 4, 2, 34, 32, 797, DateTimeKind.Local).AddTicks(8610),
-                            To = new DateTime(2021, 3, 4, 3, 34, 32, 797, DateTimeKind.Local).AddTicks(8610)
+                            From = new DateTime(2021, 3, 17, 22, 5, 18, 551, DateTimeKind.Local).AddTicks(4220),
+                            To = new DateTime(2021, 3, 17, 23, 5, 18, 551, DateTimeKind.Local).AddTicks(4220)
                         },
                         new
                         {
                             Id = 4,
-                            From = new DateTime(2021, 3, 4, 3, 34, 32, 797, DateTimeKind.Local).AddTicks(8610),
-                            To = new DateTime(2021, 3, 4, 4, 34, 32, 797, DateTimeKind.Local).AddTicks(8610)
+                            From = new DateTime(2021, 3, 17, 23, 5, 18, 551, DateTimeKind.Local).AddTicks(4220),
+                            To = new DateTime(2021, 3, 18, 0, 5, 18, 551, DateTimeKind.Local).AddTicks(4220)
                         },
                         new
                         {
                             Id = 5,
-                            From = new DateTime(2021, 3, 4, 4, 34, 32, 797, DateTimeKind.Local).AddTicks(8610),
-                            To = new DateTime(2021, 3, 4, 5, 34, 32, 797, DateTimeKind.Local).AddTicks(8610)
+                            From = new DateTime(2021, 3, 18, 0, 5, 18, 551, DateTimeKind.Local).AddTicks(4230),
+                            To = new DateTime(2021, 3, 18, 1, 5, 18, 551, DateTimeKind.Local).AddTicks(4230)
                         },
                         new
                         {
                             Id = 6,
-                            From = new DateTime(2021, 3, 4, 5, 34, 32, 797, DateTimeKind.Local).AddTicks(8620),
-                            To = new DateTime(2021, 3, 4, 6, 34, 32, 797, DateTimeKind.Local).AddTicks(8620)
+                            From = new DateTime(2021, 3, 18, 1, 5, 18, 551, DateTimeKind.Local).AddTicks(4230),
+                            To = new DateTime(2021, 3, 18, 2, 5, 18, 551, DateTimeKind.Local).AddTicks(4230)
                         },
                         new
                         {
                             Id = 7,
-                            From = new DateTime(2021, 3, 4, 6, 34, 32, 797, DateTimeKind.Local).AddTicks(8620),
-                            To = new DateTime(2021, 3, 4, 7, 34, 32, 797, DateTimeKind.Local).AddTicks(8620)
+                            From = new DateTime(2021, 3, 18, 2, 5, 18, 551, DateTimeKind.Local).AddTicks(4230),
+                            To = new DateTime(2021, 3, 18, 3, 5, 18, 551, DateTimeKind.Local).AddTicks(4230)
                         },
                         new
                         {
                             Id = 8,
-                            From = new DateTime(2021, 3, 4, 7, 34, 32, 797, DateTimeKind.Local).AddTicks(8620),
-                            To = new DateTime(2021, 3, 4, 8, 34, 32, 797, DateTimeKind.Local).AddTicks(8620)
+                            From = new DateTime(2021, 3, 18, 3, 5, 18, 551, DateTimeKind.Local).AddTicks(4240),
+                            To = new DateTime(2021, 3, 18, 4, 5, 18, 551, DateTimeKind.Local).AddTicks(4240)
                         },
                         new
                         {
                             Id = 9,
-                            From = new DateTime(2021, 3, 4, 8, 34, 32, 797, DateTimeKind.Local).AddTicks(8620),
-                            To = new DateTime(2021, 3, 4, 9, 34, 32, 797, DateTimeKind.Local).AddTicks(8630)
+                            From = new DateTime(2021, 3, 18, 4, 5, 18, 551, DateTimeKind.Local).AddTicks(4240),
+                            To = new DateTime(2021, 3, 18, 5, 5, 18, 551, DateTimeKind.Local).AddTicks(4240)
                         });
                 });
 
@@ -361,13 +367,15 @@ namespace Paxa.Migrations
                     b.Property<int?>("OrganizationId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
                     b.Property<int?>("PersonId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationId")
-                        .IsUnique();
+                    b.HasIndex("OrganizationId");
 
                     b.HasIndex("PersonId");
 
@@ -489,8 +497,8 @@ namespace Paxa.Migrations
             modelBuilder.Entity("Paxa.Entities.User", b =>
                 {
                     b.HasOne("Paxa.Entities.Organization", "Organization")
-                        .WithOne("User")
-                        .HasForeignKey("Paxa.Entities.User", "OrganizationId");
+                        .WithMany()
+                        .HasForeignKey("OrganizationId");
 
                     b.HasOne("Paxa.Entities.Person", "Person")
                         .WithMany()
@@ -519,8 +527,6 @@ namespace Paxa.Migrations
             modelBuilder.Entity("Paxa.Entities.Organization", b =>
                 {
                     b.Navigation("Resources");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Paxa.Entities.Resource", b =>

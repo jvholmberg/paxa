@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedModule } from '@shared/shared.module';
@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAllowedComponent } from './not-allowed/not-allowed.component';
 import { LandingComponent } from './landing/landing.component';
 import { GetStartedComponent } from './get-started/get-started.component';
+import { HttpsStatusInterceptor } from '@core/http-status/https-status.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,15 @@ import { GetStartedComponent } from './get-started/get-started.component';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpsStatusInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

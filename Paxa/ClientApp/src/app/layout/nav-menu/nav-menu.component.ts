@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpsStatusService } from '@core/http-status/https-status.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+
   isExpanded = false;
+
+  isLoading$ = this.httpsStatusService.loading$;
+
+  constructor(
+    private httpsStatusService: HttpsStatusService,
+  ) {}
 
   collapse() {
     this.isExpanded = false;

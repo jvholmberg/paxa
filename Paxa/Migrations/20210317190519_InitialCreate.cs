@@ -123,6 +123,34 @@ namespace Paxa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    PersonId = table.Column<int>(type: "integer", nullable: true),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_user_organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "organization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_user_person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "timeslot",
                 columns: table => new
                 {
@@ -150,57 +178,47 @@ namespace Paxa.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TimeslotId = table.Column<int>(type: "integer", nullable: false),
-                    PersonId = table.Column<int>(type: "integer", nullable: true)
+                    HostId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_booking", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_booking_person_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "person",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_booking_timeslot_TimeslotId",
                         column: x => x.TimeslotId,
                         principalTable: "timeslot",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_booking_user_HostId",
+                        column: x => x.HostId,
+                        principalTable: "user",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user",
+                name: "BookingPerson",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PersonId = table.Column<int>(type: "integer", nullable: true),
-                    OrganizationId = table.Column<int>(type: "integer", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    BookingId = table.Column<int>(type: "integer", nullable: true)
+                    BookingsId = table.Column<int>(type: "integer", nullable: false),
+                    ParticipantsId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user", x => x.Id);
+                    table.PrimaryKey("PK_BookingPerson", x => new { x.BookingsId, x.ParticipantsId });
                     table.ForeignKey(
-                        name: "FK_user_booking_BookingId",
-                        column: x => x.BookingId,
+                        name: "FK_BookingPerson_booking_BookingsId",
+                        column: x => x.BookingsId,
                         principalTable: "booking",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_organization_OrganizationId",
-                        column: x => x.OrganizationId,
-                        principalTable: "organization",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_user_person_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_BookingPerson_person_ParticipantsId",
+                        column: x => x.ParticipantsId,
                         principalTable: "person",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -231,31 +249,15 @@ namespace Paxa.Migrations
                 columns: new[] { "Id", "From", "ResourceId", "To" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 3, 4, 0, 4, 11, 702, DateTimeKind.Local).AddTicks(3050), null, new DateTime(2021, 3, 4, 1, 4, 11, 711, DateTimeKind.Local).AddTicks(7250) },
-                    { 2, new DateTime(2021, 3, 4, 1, 4, 11, 711, DateTimeKind.Local).AddTicks(7770), null, new DateTime(2021, 3, 4, 2, 4, 11, 711, DateTimeKind.Local).AddTicks(7780) },
-                    { 3, new DateTime(2021, 3, 4, 2, 4, 11, 711, DateTimeKind.Local).AddTicks(7780), null, new DateTime(2021, 3, 4, 3, 4, 11, 711, DateTimeKind.Local).AddTicks(7780) },
-                    { 4, new DateTime(2021, 3, 4, 3, 4, 11, 711, DateTimeKind.Local).AddTicks(7790), null, new DateTime(2021, 3, 4, 4, 4, 11, 711, DateTimeKind.Local).AddTicks(7790) },
-                    { 5, new DateTime(2021, 3, 4, 4, 4, 11, 711, DateTimeKind.Local).AddTicks(7790), null, new DateTime(2021, 3, 4, 5, 4, 11, 711, DateTimeKind.Local).AddTicks(7790) },
-                    { 6, new DateTime(2021, 3, 4, 5, 4, 11, 711, DateTimeKind.Local).AddTicks(7790), null, new DateTime(2021, 3, 4, 6, 4, 11, 711, DateTimeKind.Local).AddTicks(7790) },
-                    { 7, new DateTime(2021, 3, 4, 6, 4, 11, 711, DateTimeKind.Local).AddTicks(7790), null, new DateTime(2021, 3, 4, 7, 4, 11, 711, DateTimeKind.Local).AddTicks(7800) },
-                    { 8, new DateTime(2021, 3, 4, 7, 4, 11, 711, DateTimeKind.Local).AddTicks(7800), null, new DateTime(2021, 3, 4, 8, 4, 11, 711, DateTimeKind.Local).AddTicks(7800) },
-                    { 9, new DateTime(2021, 3, 4, 8, 4, 11, 711, DateTimeKind.Local).AddTicks(7800), null, new DateTime(2021, 3, 4, 9, 4, 11, 711, DateTimeKind.Local).AddTicks(7800) }
-                });
-
-            migrationBuilder.InsertData(
-                table: "booking",
-                columns: new[] { "Id", "PersonId", "TimeslotId" },
-                values: new object[,]
-                {
-                    { 1, null, 1 },
-                    { 2, null, 2 },
-                    { 3, null, 3 },
-                    { 4, null, 4 },
-                    { 5, null, 5 },
-                    { 6, null, 6 },
-                    { 7, null, 7 },
-                    { 8, null, 8 },
-                    { 9, null, 9 }
+                    { 1, new DateTime(2021, 3, 17, 20, 5, 18, 540, DateTimeKind.Local).AddTicks(9760), null, new DateTime(2021, 3, 17, 21, 5, 18, 551, DateTimeKind.Local).AddTicks(3650) },
+                    { 2, new DateTime(2021, 3, 17, 21, 5, 18, 551, DateTimeKind.Local).AddTicks(4210), null, new DateTime(2021, 3, 17, 22, 5, 18, 551, DateTimeKind.Local).AddTicks(4220) },
+                    { 3, new DateTime(2021, 3, 17, 22, 5, 18, 551, DateTimeKind.Local).AddTicks(4220), null, new DateTime(2021, 3, 17, 23, 5, 18, 551, DateTimeKind.Local).AddTicks(4220) },
+                    { 4, new DateTime(2021, 3, 17, 23, 5, 18, 551, DateTimeKind.Local).AddTicks(4220), null, new DateTime(2021, 3, 18, 0, 5, 18, 551, DateTimeKind.Local).AddTicks(4220) },
+                    { 5, new DateTime(2021, 3, 18, 0, 5, 18, 551, DateTimeKind.Local).AddTicks(4230), null, new DateTime(2021, 3, 18, 1, 5, 18, 551, DateTimeKind.Local).AddTicks(4230) },
+                    { 6, new DateTime(2021, 3, 18, 1, 5, 18, 551, DateTimeKind.Local).AddTicks(4230), null, new DateTime(2021, 3, 18, 2, 5, 18, 551, DateTimeKind.Local).AddTicks(4230) },
+                    { 7, new DateTime(2021, 3, 18, 2, 5, 18, 551, DateTimeKind.Local).AddTicks(4230), null, new DateTime(2021, 3, 18, 3, 5, 18, 551, DateTimeKind.Local).AddTicks(4230) },
+                    { 8, new DateTime(2021, 3, 18, 3, 5, 18, 551, DateTimeKind.Local).AddTicks(4240), null, new DateTime(2021, 3, 18, 4, 5, 18, 551, DateTimeKind.Local).AddTicks(4240) },
+                    { 9, new DateTime(2021, 3, 18, 4, 5, 18, 551, DateTimeKind.Local).AddTicks(4240), null, new DateTime(2021, 3, 18, 5, 5, 18, 551, DateTimeKind.Local).AddTicks(4240) }
                 });
 
             migrationBuilder.InsertData(
@@ -269,11 +271,21 @@ namespace Paxa.Migrations
 
             migrationBuilder.InsertData(
                 table: "user",
-                columns: new[] { "Id", "BookingId", "Email", "OrganizationId", "PersonId" },
+                columns: new[] { "Id", "Email", "OrganizationId", "Password", "PersonId" },
                 values: new object[,]
                 {
-                    { 1, null, "johan.holmberg@domain.se", null, 1 },
-                    { 2, null, "joel.holmberg@domain.se", null, 2 }
+                    { 1, "johan.holmberg@domain.se", null, null, 1 },
+                    { 2, "joel.holmberg@domain.se", null, null, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "booking",
+                columns: new[] { "Id", "HostId", "TimeslotId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 3, 1, 3 },
+                    { 2, 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -291,23 +303,28 @@ namespace Paxa.Migrations
 
             migrationBuilder.InsertData(
                 table: "user",
-                columns: new[] { "Id", "BookingId", "Email", "OrganizationId", "PersonId" },
+                columns: new[] { "Id", "Email", "OrganizationId", "Password", "PersonId" },
                 values: new object[,]
                 {
-                    { 3, null, "owner@houseofpadel.se", 1, null },
-                    { 4, null, "owner@sanktgorans.se", 2, null }
+                    { 3, "owner@houseofpadel.se", 1, null, null },
+                    { 4, "owner@sanktgorans.se", 2, null, null }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_booking_PersonId",
+                name: "IX_booking_HostId",
                 table: "booking",
-                column: "PersonId");
+                column: "HostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_booking_TimeslotId",
                 table: "booking",
                 column: "TimeslotId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingPerson_ParticipantsId",
+                table: "BookingPerson",
+                column: "ParticipantsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_organization_LocationId",
@@ -335,15 +352,9 @@ namespace Paxa.Migrations
                 column: "ResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_BookingId",
-                table: "user",
-                column: "BookingId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_user_OrganizationId",
                 table: "user",
-                column: "OrganizationId",
-                unique: true);
+                column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_user_PersonId",
@@ -354,22 +365,25 @@ namespace Paxa.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PersonPerson");
+                name: "BookingPerson");
 
             migrationBuilder.DropTable(
-                name: "user");
+                name: "PersonPerson");
 
             migrationBuilder.DropTable(
                 name: "booking");
 
             migrationBuilder.DropTable(
-                name: "person");
-
-            migrationBuilder.DropTable(
                 name: "timeslot");
 
             migrationBuilder.DropTable(
+                name: "user");
+
+            migrationBuilder.DropTable(
                 name: "resource");
+
+            migrationBuilder.DropTable(
+                name: "person");
 
             migrationBuilder.DropTable(
                 name: "organization");
