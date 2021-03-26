@@ -1,1 +1,6 @@
 <p>user works!</p>
+<app-user-list
+  [loading]="loading$ | async"
+  [error]="error$ | async"
+  [collection]="collection$ | async">
+</app-user-list>
