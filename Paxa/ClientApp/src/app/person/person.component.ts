@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Person } from './services/person.model';
+import { PersonService } from './services/person.service';
 
 @Component({
   selector: 'app-person',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
   }

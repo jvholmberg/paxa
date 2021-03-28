@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Person } from '@person/services/person.model';
 
 @Component({
   selector: 'app-person-list',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonListComponent implements OnInit {
 
+  @Input() loading: boolean;
+  @Input() error: Error;
+  @Input() collection: Person[];
+
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'actions',
+  ];
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

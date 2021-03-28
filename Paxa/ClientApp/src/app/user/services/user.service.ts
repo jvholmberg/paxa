@@ -8,7 +8,7 @@ import { User } from './user.model';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends BaseService<User[]> {
+export class UserService extends BaseService<User> {
 
   constructor(http: HttpClient) {
     super(http, 'user');
@@ -19,7 +19,7 @@ export class UserService extends BaseService<User[]> {
       map((value) => {
         return value === null
           ? value
-          : value.filter((user) => !!user.person && !user.organization)
+          : value.filter((user) => !!user.person.id && !user.organization.id)
       })
     );
   }
@@ -27,12 +27,16 @@ export class UserService extends BaseService<User[]> {
   public get organizations$(): Observable<User[]> {
     return this.value$.pipe(
       map((value) => {
-        return value && value.filter((user) => !!user.organization && !user.person)
+        return value && value.filter((user) => !!user.organization.id && !user.person.id)
       }),
     );
   }
 
-  public findByUserId(id: number|number[]): Observable<User> {
+  public getMyUser(): Observable<User> {
+    return this.http.get<User>(`${this.serviceUrl}/my`);
+  }
+
+  public findByUserId(id: number): Observable<User> {
     return this.get().pipe(
       map((collection) => {
         return collection && collection.find((entity) => entity.id === id)
@@ -40,18 +44,18 @@ export class UserService extends BaseService<User[]> {
     );
   }
 
-  public findByPersonId(id: number|number[]): Observable<User> {
+  public findByPersonId(id: number): Observable<User> {
     return this.get().pipe(
       map((collection) => {
-        return collection && collection.find((entity) => entity?.person?.id === id)
+        return collection && collection.find((entity) => entity?.person.id === id)
       }),
     );
   }
 
-  public findByOrganizationId(id: number|number[]): Observable<User> {
+  public findByOrganizationId(id: number): Observable<User> {
     return this.get().pipe(
       map((collection) => {
-        return collection && collection.find((entity) => entity?.organization?.id === id)
+        return collection && collection.find((entity) => entity?.organization.id === id)
       }),
     );
   }

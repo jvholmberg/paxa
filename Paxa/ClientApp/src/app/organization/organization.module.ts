@@ -13,6 +13,9 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     RouterModule,
     OrganizationRoutingModule,
+  ],
+  exports: [
+    OrganizationViewComponent,
   ]
 })
 export class OrganizationModule { }

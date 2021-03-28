@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { User } from './services/user.model';
 import { UserService } from './services/user.service';
 
@@ -13,11 +14,16 @@ export class UserComponent implements OnInit {
   loading$: Observable<boolean> = this.userService.loading$;
   error$: Observable<Error> = this.userService.error$
   collection$: Observable<User[]> = this.userService.persons$;
+  myUser$: Observable<User>;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.get();
+    this.myUser$ = this.userService
+      .getMyUser()
+      .pipe(
+        share(),
+      );
   }
 
 }

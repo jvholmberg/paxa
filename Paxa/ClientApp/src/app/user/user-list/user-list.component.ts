@@ -16,8 +16,6 @@ export class UserListComponent implements OnInit {
   @Input() collection: User[];
 
   @Input() displayedColumns: string[] = [
-    'person.firstName',
-    'person.lastName',
     'email',
     'actions',
   ];

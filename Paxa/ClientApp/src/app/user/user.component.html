@@ -1,6 +1,11 @@
-<p>user works!</p>
-<app-user-list
-  [loading]="loading$ | async"
-  [error]="error$ | async"
-  [collection]="collection$ | async">
-</app-user-list>
+<app-person-view
+  *ngIf="(myUser$ | async)?.person as person"
+  [personId]="person?.id">
+</app-person-view>
+
+<app-organization-view
+  *ngIf="(myUser$ | async)?.organization as organization"
+  [organizationId]="organization.id">
+</app-organization-view>
+
+<app-user-view></app-user-view>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PersonComponent } from './person.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { PersonViewComponent } from './person-view/person-view.component';
@@ -17,6 +16,9 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     SharedModule,
     PersonRoutingModule
+  ],
+  exports: [
+    PersonViewComponent,
   ]
 })
 export class PersonModule { }

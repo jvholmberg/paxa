@@ -8,7 +8,7 @@ import { Resource } from './resource.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceService extends BaseService<Resource[]> {
+export class ResourceService extends BaseService<Resource> {
 
   constructor(http: HttpClient) {
     super(http, 'resource');

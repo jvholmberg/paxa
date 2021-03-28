@@ -7,32 +7,38 @@ import BaseServiceStatus from './base-serivce-status';
 
 export abstract class BaseService<T> {
 
+  private readonly statusSource: BehaviorSubject<string>;
   private readonly loadingSource: BehaviorSubject<boolean>;
   private readonly errorSource: BehaviorSubject<Error>;
-  private readonly valueSource: BehaviorSubject<T>;
-  private readonly statusSource: BehaviorSubject<string>;
+  private readonly valueSource: BehaviorSubject<T[]>;
 
+  public readonly status$: Observable<string>;
   public readonly loading$: Observable<boolean>;
   public readonly error$: Observable<Error>;
-  public readonly value$: Observable<T>;
-  public readonly status$: Observable<string>;
+  public readonly value$: Observable<T[]>;
 
+  http: HttpClient;
   serviceUrl: string;
   initialized: boolean;
 
-  constructor(private http: HttpClient, name: string) {
+  constructor(http: HttpClient, name: string) {
+    this.http = http;
     this.serviceUrl = `${environment.apiUrl}/${name}`;
     this.initialized = false;
 
+    this.statusSource = new BehaviorSubject<string>(null);
     this.loadingSource = new BehaviorSubject<boolean>(false);
     this.errorSource = new BehaviorSubject<Error>(null);
-    this.valueSource = new BehaviorSubject<T>(null);
-    this.statusSource = new BehaviorSubject<string>(null);
+    this.valueSource = new BehaviorSubject<T[]>(null);
 
+    this.status$ = this.statusSource.asObservable();
     this.loading$ = this.loadingSource.asObservable();
     this.error$ = this.errorSource.asObservable();
     this.value$ = this.valueSource.asObservable();
-    this.status$ = this.statusSource.asObservable();
+  }
+
+  private setStatus(value: string): void {
+    this.statusSource.next(value);
   }
 
   private setLoading(loading: boolean): void {
@@ -45,22 +51,18 @@ export abstract class BaseService<T> {
     this.errorSource.next(error);
   }
 
-  private setValue(value: T): void {
+  private setValue(value: T[]): void {
     logInfo(`${this.serviceUrl} => setValue`, value);
     this.valueSource.next(value);
   }
 
-  private setStatus(value: string): void {
-    this.statusSource.next(value);
-  }
-
-  get(): Observable<T> {
+  get(): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
     this.setStatus(BaseServiceStatus.loading);
 
     if (!this.initialized) {
-      this.http.get<T>(this.serviceUrl).subscribe(
+      this.http.get<T[]>(this.serviceUrl).subscribe(
         (res) => {
           this.initialized = true;
           this.setValue(res);
@@ -81,7 +83,7 @@ export abstract class BaseService<T> {
   }
 
   getById(id: number): Observable<T> {
-    logInfo(`${this.serviceUrl} => getById`);
+    logInfo(`${this.serviceUrl} => getById`, id);
     return this.http.get<T>(`${this.serviceUrl}/${id}`);
   }
 

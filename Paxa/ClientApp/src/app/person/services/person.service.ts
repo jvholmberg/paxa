@@ -8,7 +8,7 @@ import { Person } from './person.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService extends BaseService<Person[]> {
+export class PersonService extends BaseService<Person> {
 
   constructor(http: HttpClient) {
     super(http, 'person');

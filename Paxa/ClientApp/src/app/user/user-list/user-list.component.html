@@ -1,15 +1,5 @@
 <table mat-table [dataSource]="collection">
 
-  <ng-container matColumnDef="person.firstName">
-    <th mat-header-cell *matHeaderCellDef>First name</th>
-    <td mat-cell *matCellDef="let element">{{element.person.firstName}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="person.lastName">
-    <th mat-header-cell *matHeaderCellDef>Last name</th>
-    <td mat-cell *matCellDef="let element">{{element.person.lastName}}</td>
-  </ng-container>
-
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef>Email</th>
     <td mat-cell *matCellDef="let element">{{element.email}}</td>

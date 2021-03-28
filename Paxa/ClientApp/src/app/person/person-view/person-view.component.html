@@ -1,1 +1,4 @@
-<p>person-view works!</p>
+<h3 *ngIf="person$ | async as person">
+  {{person.firstName}} {{person.lastName}}
+</h3>
+

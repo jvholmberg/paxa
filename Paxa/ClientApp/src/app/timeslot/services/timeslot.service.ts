@@ -8,7 +8,7 @@ import { Timeslot } from './timeslot.model';
 @Injectable({
   providedIn: 'root'
 })
-export class TimeslotService extends BaseService<Timeslot[]> {
+export class TimeslotService extends BaseService<Timeslot> {
 
   constructor(http: HttpClient) {
     super(http, 'timeslot');

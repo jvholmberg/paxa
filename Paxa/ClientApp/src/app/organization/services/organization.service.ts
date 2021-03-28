@@ -8,7 +8,7 @@ import { Organization } from './organization.model';
 @Injectable({
   providedIn: 'root'
 })
-export class OrganizationService extends BaseService<Organization[]> {
+export class OrganizationService extends BaseService<Organization> {
 
   constructor(http: HttpClient) {
     super(http, 'organization');
