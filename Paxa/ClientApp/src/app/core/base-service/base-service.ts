@@ -1,21 +1,21 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
 import { HttpClient } from '@angular/common/http';
+import { map, share } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import BaseServiceStatus from './base-serivce-status';
 
 export abstract class BaseService<T> {
 
-  private readonly statusSource: BehaviorSubject<string>;
   private readonly loadingSource: BehaviorSubject<boolean>;
   private readonly errorSource: BehaviorSubject<Error>;
-  private readonly valueSource: BehaviorSubject<T[]>;
+  private readonly allIdsSource: BehaviorSubject<number[]>;
+  private readonly byIdSource: BehaviorSubject<{}>;
 
-  public readonly status$: Observable<string>;
   public readonly loading$: Observable<boolean>;
   public readonly error$: Observable<Error>;
-  public readonly value$: Observable<T[]>;
+  public readonly allIds$: Observable<number[]>;
+  public readonly byId$: Observable<{}>;
 
   http: HttpClient;
   serviceUrl: string;
@@ -26,19 +26,27 @@ export abstract class BaseService<T> {
     this.serviceUrl = `${environment.apiUrl}/${name}`;
     this.initialized = false;
 
-    this.statusSource = new BehaviorSubject<string>(null);
     this.loadingSource = new BehaviorSubject<boolean>(false);
     this.errorSource = new BehaviorSubject<Error>(null);
-    this.valueSource = new BehaviorSubject<T[]>(null);
+    this.allIdsSource = new BehaviorSubject<number[]>([]);
+    this.byIdSource = new BehaviorSubject<{}>({});
 
-    this.status$ = this.statusSource.asObservable();
     this.loading$ = this.loadingSource.asObservable();
     this.error$ = this.errorSource.asObservable();
-    this.value$ = this.valueSource.asObservable();
+    this.allIds$ = this.allIdsSource.asObservable();
+    this.byId$ = this.byIdSource.asObservable();
   }
 
-  private setStatus(value: string): void {
-    this.statusSource.next(value);
+  public get value$(): Observable<T[]> {
+    return combineLatest([this.allIds$, this.byId$]).pipe(
+      map(([ids, values]) => ids.reduce((acc, id) => {
+        const item: T = values[id];
+        return item !== null
+          ? [...acc, item]
+          : acc;
+      }, [])),
+      share(),
+    );
   }
 
   private setLoading(loading: boolean): void {
@@ -51,15 +59,31 @@ export abstract class BaseService<T> {
     this.errorSource.next(error);
   }
 
-  private setValue(value: T[]): void {
+  private setInitialValue(id: number): void {
+    logInfo(`${this.serviceUrl} => setInitialValue`, id);
+    const previous = this.byIdSource.value;
+    if (previous[id] === null) {
+      this.byIdSource.next({ ...previous, [id]: null });
+      this.allIdsSource.next([ ...this.allIdsSource.value, id ]);
+    }
+  }
+
+  setValue(value: T[]): void {
     logInfo(`${this.serviceUrl} => setValue`, value);
-    this.valueSource.next(value);
+    const next = value.reduce((acc, val: T) => {
+      const id: number = val['id'];
+      if (acc.byId[id] === null) {
+        acc.allIds.push(id);
+      }
+      acc.byId[id] = val;
+      return acc;
+    }, { allIds: this.allIdsSource.value, byId: this.byIdSource.value });
+    this.byIdSource.next(next.byId);
   }
 
   get(): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
-    this.setStatus(BaseServiceStatus.loading);
 
     if (!this.initialized) {
       this.http.get<T[]>(this.serviceUrl).subscribe(
@@ -67,12 +91,10 @@ export abstract class BaseService<T> {
           this.initialized = true;
           this.setValue(res);
           this.setError(null);
-          this.setStatus(BaseServiceStatus.success);
         },
         (err) => {
           this.setValue(null);
           this.setError(err);
-          this.setStatus(BaseServiceStatus.error);
         },
         () => {
           this.setLoading(false);
@@ -82,8 +104,9 @@ export abstract class BaseService<T> {
     return this.value$;
   }
 
-  getById(id: number): Observable<T> {
+  getById(id: number, force: boolean = true): Observable<T> {
     logInfo(`${this.serviceUrl} => getById`, id);
+    this.setInitialValue(id);
     return this.http.get<T>(`${this.serviceUrl}/${id}`);
   }
 
@@ -101,5 +124,4 @@ export abstract class BaseService<T> {
     logInfo(`${this.serviceUrl} => delete`, id);
     return this.http.delete<Confirmation>(`${this.serviceUrl}/${id}`);
   }
-
 }

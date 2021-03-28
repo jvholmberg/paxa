@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.myUser$ = this.userService
-      .getMyUser()
+      .getMy()
       .pipe(
         share(),
       );
