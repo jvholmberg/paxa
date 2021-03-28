@@ -46,6 +46,7 @@ namespace Paxa
 
             // Services
             services.AddScoped<UserService>();
+            services.AddScoped<PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -33,6 +33,13 @@ namespace Paxa.Controllers
             return Ok(res);
         }
 
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMy()
+        {
+            var res = await _UserService.GetById(1);
+            return Ok(res);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
