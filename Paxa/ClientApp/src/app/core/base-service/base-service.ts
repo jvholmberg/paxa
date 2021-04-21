@@ -1,5 +1,5 @@
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { logInfo } from '@utils/logger';
+import { logError, logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
 import { HttpClient } from '@angular/common/http';
 import { map, mergeMap, share } from 'rxjs/operators';
@@ -62,14 +62,14 @@ export abstract class BaseService<T> {
   private setInitialValue(id: number): void {
     // Validation
     if (typeof id !== 'number') {
-      logInfo(`${this.serviceUrl} => setValue`, id, 'Validation Failed');
+      logError(`${this.serviceUrl} => setValue`, id, 'Validation Failed');
       return;
     }
 
     // Execute
-    logInfo(`${this.serviceUrl} => setInitialValue`, id);
     const previousValue = this.byIdSource.value;
     if (previousValue[id] === null) {
+      logInfo(`${this.serviceUrl} => setInitialValue`, id);
       this.byIdSource.next({ ...previousValue, [id]: null });
       this.allIdsSource.next([ ...this.allIdsSource.value, id ]);
     }
@@ -78,7 +78,7 @@ export abstract class BaseService<T> {
   setValue(value: T[]): void {
     // Validation
     if (!value || !value.length) {
-      logInfo(`${this.serviceUrl} => setValue`, value, 'Validation Failed');
+      logError(`${this.serviceUrl} => setValue`, value, 'Validation Failed');
       return;
     }
 
@@ -101,11 +101,11 @@ export abstract class BaseService<T> {
     this.byIdSource.next(nextValue.byId);
   }
 
-  get(): Observable<T[]> {
+  get(force: boolean = true): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
 
-    if (!this.initialized) {
+    if (!this.initialized || force) {
       this.http.get<T[]>(this.serviceUrl).subscribe(
         (res) => {
           this.initialized = true;

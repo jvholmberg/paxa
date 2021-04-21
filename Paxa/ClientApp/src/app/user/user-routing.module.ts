@@ -9,9 +9,9 @@ const routes: Routes = [
   { path: '', component: UserComponent, pathMatch: 'full' },
   { path: 'all', component: UserListComponent },
   { path: 'create', component: UserFormComponent },
-  { path: ':id', redirectTo: ':id/view', pathMatch: 'full' },
-  { path: ':id/view', component: UserViewComponent },
-  { path: ':id/edit', component: UserFormComponent },
+  { path: ':userId', redirectTo: ':userId/view', pathMatch: 'full' },
+  { path: ':userId/view', component: UserViewComponent },
+  { path: ':userId/edit', component: UserFormComponent },
 ];
 
 @NgModule({

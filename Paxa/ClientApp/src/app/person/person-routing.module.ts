@@ -9,9 +9,9 @@ const routes: Routes = [
   { path: '', component: PersonComponent, pathMatch: 'full' },
   { path: 'all', component: PersonListComponent },
   { path: 'create', component: PersonFormComponent },
-  { path: ':id', redirectTo: ':id/view', pathMatch: 'full' },
-  { path: ':id/view', component: PersonViewComponent },
-  { path: ':id/edit', component: PersonFormComponent },
+  { path: ':personId', redirectTo: ':personId/view', pathMatch: 'full' },
+  { path: ':personId/view', component: PersonViewComponent },
+  { path: ':personId/edit', component: PersonFormComponent },
 ];
 
 @NgModule({

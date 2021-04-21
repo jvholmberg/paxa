@@ -49,6 +49,7 @@ namespace Paxa.Services
                 .Include(e => e.Bookings)
                 .Include(e => e.Followers)
                 .Include(e => e.Following)
+                .Include(e => e.Address)
                 .ToListAsync();
 
             var view = _Mapper.Map<Views.Person[]>(entities);
@@ -62,6 +63,7 @@ namespace Paxa.Services
                 .Include(e => e.Bookings)
                 .Include(e => e.Followers)
                 .Include(e => e.Following)
+                .Include(e => e.Address)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 
             var view = _Mapper.Map<Views.Person>(entity);

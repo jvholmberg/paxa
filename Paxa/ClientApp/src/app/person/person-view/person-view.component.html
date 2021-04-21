@@ -1,6 +1,19 @@
-<div>Person | Start</div>
-<h3 *ngIf="person$ | async as person">
-  {{person.firstName}} {{person.lastName}}
-</h3>
+<ng-template #empty>
+  <h3>Loading...</h3>
+  <div>
+    <p>...</p>
+    <p>... ...</p>
+    <p>...</p>
+  </div>
+</ng-template>
 
-<div>Person | End</div>
+<ng-container *ngIf="person$ | async as person; else empty">
+  <h3>{{person.firstName}} {{person.lastName}}</h3>
+  <div *ngIf="person.address as address">
+    <p>{{address.street}}</p>
+    <p>{{address.postalCode}} {{address.city}}</p>
+    <p>{{address.country}}</p>
+  </div>
+
+</ng-container>
+
