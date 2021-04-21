@@ -1,8 +1,8 @@
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
 import { HttpClient } from '@angular/common/http';
-import { map, share } from 'rxjs/operators';
+import { map, mergeMap, share } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 export abstract class BaseService<T> {
@@ -16,6 +16,8 @@ export abstract class BaseService<T> {
   public readonly error$: Observable<Error>;
   public readonly allIds$: Observable<number[]>;
   public readonly byId$: Observable<{}>;
+
+  public readonly value$: Observable<T[]>;
 
   http: HttpClient;
   serviceUrl: string;
@@ -35,10 +37,8 @@ export abstract class BaseService<T> {
     this.error$ = this.errorSource.asObservable();
     this.allIds$ = this.allIdsSource.asObservable();
     this.byId$ = this.byIdSource.asObservable();
-  }
 
-  public get value$(): Observable<T[]> {
-    return combineLatest([this.allIds$, this.byId$]).pipe(
+    this.value$ = combineLatest([this.allIds$, this.byId$]).pipe(
       map(([ids, values]) => ids.reduce((acc, id) => {
         const item: T = values[id];
         return item !== null
@@ -60,25 +60,45 @@ export abstract class BaseService<T> {
   }
 
   private setInitialValue(id: number): void {
+    // Validation
+    if (typeof id !== 'number') {
+      logInfo(`${this.serviceUrl} => setValue`, id, 'Validation Failed');
+      return;
+    }
+
+    // Execute
     logInfo(`${this.serviceUrl} => setInitialValue`, id);
-    const previous = this.byIdSource.value;
-    if (previous[id] === null) {
-      this.byIdSource.next({ ...previous, [id]: null });
+    const previousValue = this.byIdSource.value;
+    if (previousValue[id] === null) {
+      this.byIdSource.next({ ...previousValue, [id]: null });
       this.allIdsSource.next([ ...this.allIdsSource.value, id ]);
     }
   }
 
   setValue(value: T[]): void {
+    // Validation
+    if (!value || !value.length) {
+      logInfo(`${this.serviceUrl} => setValue`, value, 'Validation Failed');
+      return;
+    }
+
+    // Execute
     logInfo(`${this.serviceUrl} => setValue`, value);
-    const next = value.reduce((acc, val: T) => {
-      const id: number = val['id'];
-      if (acc.byId[id] === null) {
-        acc.allIds.push(id);
+    const initialValue = {
+      allIds: this.allIdsSource.value,
+      byId: this.byIdSource.value,
+    };
+
+    const nextValue = value.reduce((previousValue, currentValue: T) => {
+      const id: number = currentValue['id'];
+      if (previousValue.byId[id] === undefined || previousValue.byId[id] === null) {
+        previousValue.allIds.push(id);
       }
-      acc.byId[id] = val;
-      return acc;
-    }, { allIds: this.allIdsSource.value, byId: this.byIdSource.value });
-    this.byIdSource.next(next.byId);
+      previousValue.byId[id] = currentValue;
+      return previousValue;
+    }, initialValue);
+
+    this.byIdSource.next(nextValue.byId);
   }
 
   get(): Observable<T[]> {
@@ -106,8 +126,33 @@ export abstract class BaseService<T> {
 
   getById(id: number, force: boolean = true): Observable<T> {
     logInfo(`${this.serviceUrl} => getById`, id);
+
+    // Get current value
     this.setInitialValue(id);
-    return this.http.get<T>(`${this.serviceUrl}/${id}`);
+    const previousValue = this.byIdSource.value[id];
+
+    // Update existing value
+    if (!previousValue || force) {
+      this.http.get<T>(`${this.serviceUrl}/${id}`).subscribe(
+        (res) => {
+          this.initialized = true;
+          this.setValue([res]);
+          this.setError(null);
+        },
+        (err) => {
+          this.setValue(null);
+          this.setError(err);
+        },
+        () => {
+          this.setLoading(false);
+        })
+
+    }
+
+    // Return value
+    return this.byId$.pipe(
+      map((byIds) => byIds[id]),
+    );
   }
 
   create(body: {}): Observable<Confirmation> {

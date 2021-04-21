@@ -10,10 +10,6 @@ import { UserService } from './services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  loading$: Observable<boolean> = this.userService.loading$;
-  error$: Observable<Error> = this.userService.error$
-  collection$: Observable<User[]> = this.userService.persons$;
   myUser$: Observable<User>;
 
   constructor(private userService: UserService) { }
@@ -25,5 +21,4 @@ export class UserComponent implements OnInit {
         share(),
       );
   }
-
 }

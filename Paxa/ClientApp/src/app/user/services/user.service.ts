@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseService } from '@core/base-service/base-service';
 import { User } from './user.model';
@@ -33,11 +33,7 @@ export class UserService extends BaseService<User> {
   }
 
   public getMy(): Observable<User> {
-    return this.http.get<User>(`${this.serviceUrl}/my`).pipe(
-      map((user: User) => {
-        this.setValue([user]);
-        return user;
-      }),
-    );
+    console.log(123);
+    return this.getById(1, false);
   }
 }

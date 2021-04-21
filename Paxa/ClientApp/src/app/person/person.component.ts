@@ -9,10 +9,12 @@ import { PersonService } from './services/person.service';
   styleUrls: ['./person.component.css']
 })
 export class PersonComponent implements OnInit {
+  persons$: Observable<Person[]>;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
+    this.persons$ = this.personService.get();
   }
 
 }

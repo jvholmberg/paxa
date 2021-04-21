@@ -26,9 +26,8 @@ namespace Paxa
                         options => options.MapFrom(
                             source => source.Participants.Select(participant => participant.Id).ToList()
                         )
-                    );
-
-                cfg.CreateMap<Views.Booking, Entities.Booking>()
+                    )
+                    .ReverseMap()
                     .ForMember(
                         destination => destination.HostId,
                         options => options.Ignore()
@@ -39,8 +38,12 @@ namespace Paxa
                     );
 
                 // Location
-                cfg.CreateMap<Entities.Location, Views.Location>();
-                cfg.CreateMap<Views.Location, Entities.Location>();
+                cfg.CreateMap<Entities.Location, Views.Location>()
+                    .ReverseMap();
+
+                // Address
+                cfg.CreateMap<Entities.Address, Views.Address>()
+                    .ReverseMap();
 
                 // User
                 cfg.CreateMap<Entities.User, Views.User>()
@@ -49,9 +52,8 @@ namespace Paxa
                         options => options.MapFrom(
                             source => source.Bookings.Select(booking => booking.Id).ToList()
                         )
-                    );
-
-                cfg.CreateMap<Views.User, Entities.User>()
+                    )
+                    .ReverseMap()
                     .ForMember(
                         destination => destination.Bookings,
                         options => options.Ignore()
@@ -64,9 +66,8 @@ namespace Paxa
                         options => options.MapFrom(
                             source => source.Resources.Select(resource => resource.Id).ToList()
                         )
-                    );
-
-                cfg.CreateMap<Views.Organization, Entities.Organization>()
+                    )
+                    .ReverseMap()
                     .ForMember(
                         destination => destination.Resources,
                         options => options.Ignore()
@@ -91,9 +92,14 @@ namespace Paxa
                         options => options.MapFrom(
                             source => source.Following.Select(following => following.Id).ToList()
                         )
-                    );
-
-                cfg.CreateMap<Views.Person, Entities.Person>()
+                    )
+                    .ForMember(
+                        destination => destination.Address,
+                        options => options.MapFrom(
+                            source => source.Address
+                        )
+                    )
+                    .ReverseMap()
                     .ForMember(
                         destination => destination.Bookings,
                         options => options.Ignore()

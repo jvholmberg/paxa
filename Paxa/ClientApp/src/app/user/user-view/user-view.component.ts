@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { User } from '@user/services/user.model';
 import { UserService } from '@user/services/user.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-view',
@@ -11,18 +11,18 @@ import { Observable } from 'rxjs';
 })
 export class UserViewComponent implements OnInit {
 
-  user$: Observable<User>;
-  followers$: Observable<User[]>;
-  following$: Observable<User[]>;
+  @Input() userId: number;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-  ) { }
+  user$: Observable<User>;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.user$ = this.userService.getById(id, false);
+    this.user$ = this.userService
+      .getById(this.userId)
+      .pipe(
+        share(),
+      );
   }
 
 }

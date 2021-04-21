@@ -50,6 +50,18 @@ namespace Paxa.Contexts
                     new Location { Id = 2, Latitude = "99", Longitude = "99" }
                 );
 
+
+            // Address
+            modelBuilder
+                .Entity<Address>()
+                .ToTable("Address");
+            modelBuilder
+                .Entity<Address>()
+                .HasData(
+                    new Address { Id = 1, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" },
+                    new Address { Id = 2, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" }
+                );
+
             // Organization
             modelBuilder
                 .Entity<Organization>()
@@ -77,9 +89,12 @@ namespace Paxa.Contexts
                 .WithMany(per => per.Following);
             modelBuilder
                 .Entity<Person>()
+                .HasOne(per => per.Address);
+            modelBuilder
+                .Entity<Person>()
                 .HasData(
-                    new Person { Id = 1, FirstName = "Johan", LastName = "Holmberg" },
-                    new Person { Id = 2, FirstName = "Joel", LastName = "Holmberg" }
+                    new Person { Id = 1, FirstName = "Johan", LastName = "Holmberg", AddressId = 1 },
+                    new Person { Id = 2, FirstName = "Joel", LastName = "Holmberg", AddressId = 2 }
                 );
 
             // Resource

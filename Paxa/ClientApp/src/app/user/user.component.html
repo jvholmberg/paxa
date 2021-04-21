@@ -1,3 +1,8 @@
+<app-user-view
+  *ngIf="myUser$ | async as user"
+  [userId]="user.id">
+</app-user-view>
+
 <app-person-view
   *ngIf="(myUser$ | async)?.person as person"
   [personId]="person?.id">
@@ -8,4 +13,3 @@
   [organizationId]="organization.id">
 </app-organization-view>
 
-<app-user-view></app-user-view>
