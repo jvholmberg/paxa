@@ -10,6 +10,7 @@ namespace Paxa.Views
 
         public Location Location { get; set; }
         public ICollection<int> ResourceIds { get; set; } = new List<int>();
+        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
         public Organization()
         {

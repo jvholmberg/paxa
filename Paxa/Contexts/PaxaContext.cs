@@ -20,6 +20,18 @@ namespace Paxa.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            // Address
+            modelBuilder
+                .Entity<Address>()
+                .ToTable("Address");
+            modelBuilder
+                .Entity<Address>()
+                .HasData(
+                    new Address { Id = 1, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" },
+                    new Address { Id = 2, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" }
+                );
+                
             // Booking
             modelBuilder
                 .Entity<Booking>()
@@ -50,17 +62,6 @@ namespace Paxa.Contexts
                     new Location { Id = 2, Latitude = "99", Longitude = "99" }
                 );
 
-
-            // Address
-            modelBuilder
-                .Entity<Address>()
-                .ToTable("Address");
-            modelBuilder
-                .Entity<Address>()
-                .HasData(
-                    new Address { Id = 1, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" },
-                    new Address { Id = 2, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" }
-                );
 
             // Organization
             modelBuilder
@@ -96,6 +97,37 @@ namespace Paxa.Contexts
                     new Person { Id = 1, FirstName = "Johan", LastName = "Holmberg", AddressId = 1 },
                     new Person { Id = 2, FirstName = "Joel", LastName = "Holmberg", AddressId = 2 }
                 );
+
+            // Rating
+            modelBuilder
+                .Entity<Rating>()
+                .ToTable("rating");
+            modelBuilder
+                .Entity<Rating>()
+                .HasOne(res => res.Type);
+            modelBuilder
+                .Entity<Rating>()
+                .HasOne(res => res.Person);
+            modelBuilder
+                .Entity<Rating>()
+                .HasOne(res => res.Organization);
+            modelBuilder
+                .Entity<Rating>()
+                .HasData(
+                    new Rating { Id = 1, TypeId = 1, Value = 5, PersonId = 2 }
+                );
+
+            // RatingType
+            modelBuilder
+                .Entity<RatingType>()
+                .ToTable("rating_type");
+            modelBuilder
+                .Entity<RatingType>()
+                .HasData(
+                    new RatingType { Id = 1, Name = "General" }
+                );
+
+
 
             // Resource
             modelBuilder

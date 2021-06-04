@@ -15,6 +15,10 @@ namespace Paxa
             var config = new MapperConfiguration(cfg =>
             {
 
+                // Address
+                cfg.CreateMap<Entities.Address, Views.Address>()
+                    .ReverseMap();
+
                 // Booking
                 cfg.CreateMap<Entities.Booking, Views.Booking>()
                     .ForMember(
@@ -41,24 +45,6 @@ namespace Paxa
                 cfg.CreateMap<Entities.Location, Views.Location>()
                     .ReverseMap();
 
-                // Address
-                cfg.CreateMap<Entities.Address, Views.Address>()
-                    .ReverseMap();
-
-                // User
-                cfg.CreateMap<Entities.User, Views.User>()
-                    .ForMember(
-                        destination => destination.BookingIds,
-                        options => options.MapFrom(
-                            source => source.Bookings.Select(booking => booking.Id).ToList()
-                        )
-                    )
-                    .ReverseMap()
-                    .ForMember(
-                        destination => destination.Bookings,
-                        options => options.Ignore()
-                    );
-
                 // Organization
                 cfg.CreateMap<Entities.Organization, Views.Organization>()
                     .ForMember(
@@ -67,9 +53,19 @@ namespace Paxa
                             source => source.Resources.Select(resource => resource.Id).ToList()
                         )
                     )
+                    .ForMember(
+                        destination => destination.Ratings,
+                        options => options.MapFrom(
+                            source => source.Ratings.ToList()
+                        )
+                    )
                     .ReverseMap()
                     .ForMember(
                         destination => destination.Resources,
+                        options => options.Ignore()
+                    )
+                    .ForMember(
+                        destination => destination.Ratings,
                         options => options.Ignore()
                     );
 
@@ -99,6 +95,12 @@ namespace Paxa
                             source => source.Address
                         )
                     )
+                    .ForMember(
+                        destination => destination.Ratings,
+                        options => options.MapFrom(
+                            source => source.Ratings.ToList()
+                        )
+                    )
                     .ReverseMap()
                     .ForMember(
                         destination => destination.Bookings,
@@ -110,6 +112,44 @@ namespace Paxa
                     )
                     .ForMember(
                         destination => destination.Following,
+                        options => options.Ignore()
+                    )
+                    .ForMember(
+                        destination => destination.Ratings,
+                        options => options.Ignore()
+                    );
+
+                // Rating
+                cfg.CreateMap<Entities.Rating, Views.Rating>()
+                    .ForMember(
+                        destination => destination.TypeId,
+                        options => options.MapFrom(
+                            source => source.Type.Id
+                        )
+                    )
+                    .ForMember(
+                        destination => destination.Name,
+                        options => options.MapFrom(
+                            source => source.Type.Name
+                        )
+                    )
+                    .ReverseMap()
+                    .ForMember(
+                        destination => destination.Type,
+                        options => options.Ignore()
+                    );
+
+                // User
+                cfg.CreateMap<Entities.User, Views.User>()
+                    .ForMember(
+                        destination => destination.BookingIds,
+                        options => options.MapFrom(
+                            source => source.Bookings.Select(booking => booking.Id).ToList()
+                        )
+                    )
+                    .ReverseMap()
+                    .ForMember(
+                        destination => destination.Bookings,
                         options => options.Ignore()
                     );
 

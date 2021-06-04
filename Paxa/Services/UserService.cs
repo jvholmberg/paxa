@@ -47,6 +47,7 @@ namespace Paxa.Services
             var entities = await _Context.User
                 .Include(e => e.Organization).ThenInclude(e => e.Location)
                 .Include(e => e.Person)
+                .Include(e => e.Person).ThenInclude(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Person).ThenInclude(e => e.Followers)
                 .Include(e => e.Person).ThenInclude(e => e.Following)
                 .ToListAsync();
@@ -63,6 +64,7 @@ namespace Paxa.Services
                 .Include(e => e.Person).ThenInclude(e => e.Bookings)
                 .Include(e => e.Person).ThenInclude(e => e.Followers)
                 .Include(e => e.Person).ThenInclude(e => e.Following)
+                .Include(e => e.Person).ThenInclude(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Bookings)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 

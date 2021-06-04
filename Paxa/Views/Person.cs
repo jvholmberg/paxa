@@ -8,6 +8,7 @@ namespace Paxa.Views
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; set; }
+        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public ICollection<int> FollowerIds { get; set; } = new List<int>();
         public ICollection<int> FollowingIds { get; set; } = new List<int>();
         public ICollection<int> BookingIds { get; set; } = new List<int>();
