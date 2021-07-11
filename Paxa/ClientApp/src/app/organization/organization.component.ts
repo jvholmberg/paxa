@@ -11,11 +11,11 @@ import { Organization } from './services/organization.model';
 export class OrganizationComponent implements OnInit {
 
   displayedColumns = ['name', 'action'];
-  organizationCollection$: Observable<Organization[]>;
-  
+  organizations$: Observable<Organization[]>;
+
   constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {
-    this.organizationCollection$ = this.organizationService.get();
+    this.organizations$ = this.organizationService.get();
   }
 }

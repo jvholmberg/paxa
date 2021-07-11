@@ -13,10 +13,4 @@ export class OrganizationService extends BaseService<Organization> {
   constructor(http: HttpClient) {
     super(http, 'organization');
   }
-
-  public findById(id: number): Observable<Organization> {
-    return this.get().pipe(
-      map((collection) => collection.find((entity) => entity.id === id)),
-    );
-  }
 }
