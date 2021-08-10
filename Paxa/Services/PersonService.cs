@@ -19,33 +19,33 @@ namespace Paxa.Services
 
     public class PersonService : IPersonService
     {
-        private readonly PaxaContext _Context;
-        private readonly IMapper _Mapper;
+        private readonly PaxaContext _context;
+        private readonly IMapper _mapper;
 
         public PersonService(PaxaContext context, IMapper mapper)
         {
-            _Context = context;
-            _Mapper = mapper;
+            _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Views.Person> Create(Views.Person person)
         {
             // Create entity
-            var entity = _Mapper.Map<Entities.Person>(person);
-            await _Context.Person
+            var entity = _mapper.Map<Entities.Person>(person);
+            await _context.Persons
                 .AddAsync(entity);
-            await _Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             // Get entity
             var persistedEntity = await GetById(entity.Id);
-            var view = _Mapper.Map<Views.Person>(persistedEntity);
+            var view = _mapper.Map<Views.Person>(persistedEntity);
 
             return view;
         }
 
         public async Task<ICollection<Views.Person>> GetAll()
         {
-            var entities = await _Context.Person
+            var entities = await _context.Persons
                 .Include(e => e.Bookings)
                 .Include(e => e.Followers)
                 .Include(e => e.Following)
@@ -53,14 +53,14 @@ namespace Paxa.Services
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .ToListAsync();
 
-            var view = _Mapper.Map<Views.Person[]>(entities);
+            var view = _mapper.Map<Views.Person[]>(entities);
 
             return view;
         }
 
         public async Task<Views.Person> GetById(int id)
         {
-            var entity = await _Context.Person
+            var entity = await _context.Persons
                 .Include(e => e.Bookings)
                 .Include(e => e.Followers)
                 .Include(e => e.Following)
@@ -68,7 +68,7 @@ namespace Paxa.Services
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 
-            var view = _Mapper.Map<Views.Person>(entity);
+            var view = _mapper.Map<Views.Person>(entity);
 
             return view;
         }
@@ -76,17 +76,17 @@ namespace Paxa.Services
         public async Task<Views.Person> Update(int id, Views.Person person)
         {
             // Get from db
-            var entity = await _Context.Person
+            var entity = await _context.Persons
                 .Include(e => e.Following)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 
             // Make updates
-            entity.Following = await _Context.Person
+            entity.Following = await _context.Persons
                 .Where(e => person.FollowingIds.Contains(e.Id))
                 .ToListAsync();
 
             // Persist changes
-            await _Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             // Get updated from db
             var view = await GetById(id);
@@ -97,9 +97,9 @@ namespace Paxa.Services
         public async Task<Views.Confirmation> Delete(int id)
         {
             var person = new Entities.Person { Id = id };
-            _Context.Person.Attach(person);
-            _Context.Person.Remove(person);
-            await _Context.SaveChangesAsync();
+            _context.Persons.Attach(person);
+            _context.Persons.Remove(person);
+            await _context.SaveChangesAsync();
 
             var view = new Views.Confirmation();
             return view;

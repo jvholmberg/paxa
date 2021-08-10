@@ -1,19 +1,20 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using BCryptNet = BCrypt.Net.BCrypt;
 using Paxa.Entities;
 
 namespace Paxa.Contexts
 {
     public class PaxaContext : DbContext
     {
-        public DbSet<Booking> Booking { get; set; }
-        public DbSet<Location> Location { get; set; }
-        public DbSet<Organization> Organization { get; set; }
-        public DbSet<Person> Person { get; set; }
-        public DbSet<Resource> Resource { get; set; }
-        public DbSet<ResourceType> ResourceType { get; set; }
-        public DbSet<Timeslot> Timeslot { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ResourceType> ResourceTypes { get; set; }
+        public DbSet<Timeslot> Timeslots { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public PaxaContext(DbContextOptions<PaxaContext> options)
             : base(options) { }
@@ -50,7 +51,6 @@ namespace Paxa.Contexts
                     new Booking { Id = 3, TimeslotId = 3, HostId = 1 }
                 );
 
-
             // Location
             modelBuilder
                 .Entity<Location>()
@@ -61,7 +61,6 @@ namespace Paxa.Contexts
                     new Location { Id = 1, Latitude = "0", Longitude = "0" },
                     new Location { Id = 2, Latitude = "99", Longitude = "99" }
                 );
-
 
             // Organization
             modelBuilder
@@ -126,8 +125,6 @@ namespace Paxa.Contexts
                 .HasData(
                     new RatingType { Id = 1, Name = "General" }
                 );
-
-
 
             // Resource
             modelBuilder
@@ -196,11 +193,38 @@ namespace Paxa.Contexts
                 .HasOne(usr => usr.Organization);
             modelBuilder
                 .Entity<User>()
+                .OwnsMany(usr => usr.RefreshTokens);
+            modelBuilder
+                .Entity<User>()
                 .HasData(
-                    new User { Id = 1, Email = "johan.holmberg@domain.se", PersonId = 1 },
-                    new User { Id = 2, Email = "joel.holmberg@domain.se", PersonId = 2 },
-                    new User { Id = 3, Email = "owner@houseofpadel.se", OrganizationId = 1 },
-                    new User { Id = 4, Email = "owner@sanktgorans.se", OrganizationId = 2 }
+                    new User
+                    {
+                        Id = 1,
+                        Email = "johan.holmberg@domain.se",
+                        PasswordHash = BCryptNet.HashPassword("johan"),
+                        PersonId = 1,
+                    },
+                    new User
+                    {
+                        Id = 2,
+                        Email = "joel.holmberg@domain.se",
+                        PasswordHash = BCryptNet.HashPassword("joel"),
+                        PersonId = 2,
+                    },
+                    new User
+                    {
+                        Id = 3,
+                        Email = "owner@houseofpadel.se",
+                        PasswordHash = BCryptNet.HashPassword("houseofpadel"),
+                        OrganizationId = 1,
+                    },
+                    new User
+                    {
+                        Id = 4,
+                        Email = "owner@sanktgorans.se",
+                        PasswordHash = BCryptNet.HashPassword("sanktgorans"),
+                        OrganizationId = 2,
+                    }
                 );
         }
     }

@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Paxa.Contexts;
-using Paxa.Services;
 using AutoMapper;
 
 namespace Paxa
@@ -14,11 +12,11 @@ namespace Paxa
     public class Startup
     {
 
-        public IConfiguration _Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            _Configuration = configuration;
+            _configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -31,13 +29,20 @@ namespace Paxa
             });
 
             // Get connection-string from config
-            var connectionString = _Configuration.GetConnectionString("DatabaseConnection");
+            var connectionString = _configuration.GetConnectionString("DatabaseConnection");
 
             // Create connection to postgress
-            services.AddDbContext<PaxaContext>(options =>
+            services.AddDbContext<Contexts.PaxaContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
+
+            services.AddCors();
+            services.AddControllers()
+                .AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
+
+            // configure strongly typed settings object
+            services.Configure<Helpers.AppSettings>(_configuration.GetSection("AppSettings"));
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfig().CreateConfigutation();
@@ -45,9 +50,10 @@ namespace Paxa
             services.AddSingleton(mapper);
 
             // Services
-            services.AddScoped<UserService>();
-            services.AddScoped<PersonService>();
-            services.AddScoped<OrganizationService>();
+            services.AddScoped<Authorization.IJwtUtils, Authorization.JwtUtils>();
+            services.AddScoped<Services.IUserService, Services.UserService>();
+            services.AddScoped<Services.PersonService>();
+            services.AddScoped<Services.OrganizationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +78,19 @@ namespace Paxa
             }
 
             app.UseRouting();
+
+            // Global cors policy
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+            // Global error handler
+            app.UseMiddleware<Helpers.ErrorHandlerMiddleware>();
+
+            // Custom jwt auth middleware
+            app.UseMiddleware<Authorization.JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

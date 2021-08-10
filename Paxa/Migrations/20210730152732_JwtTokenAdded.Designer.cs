@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Paxa.Contexts;
@@ -9,9 +10,10 @@ using Paxa.Contexts;
 namespace Paxa.Migrations
 {
     [DbContext(typeof(PaxaContext))]
-    partial class PaxaContextModelSnapshot : ModelSnapshot
+    [Migration("20210730152732_JwtTokenAdded")]
+    partial class JwtTokenAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -414,56 +416,56 @@ namespace Paxa.Migrations
                         new
                         {
                             Id = 1,
-                            From = new DateTime(2021, 8, 10, 22, 41, 44, 592, DateTimeKind.Local).AddTicks(9850),
-                            To = new DateTime(2021, 8, 10, 23, 41, 44, 608, DateTimeKind.Local).AddTicks(1630)
+                            From = new DateTime(2021, 7, 30, 17, 27, 31, 347, DateTimeKind.Local).AddTicks(4310),
+                            To = new DateTime(2021, 7, 30, 18, 27, 31, 357, DateTimeKind.Local).AddTicks(2550)
                         },
                         new
                         {
                             Id = 2,
-                            From = new DateTime(2021, 8, 10, 23, 41, 44, 608, DateTimeKind.Local).AddTicks(2440),
-                            To = new DateTime(2021, 8, 11, 0, 41, 44, 608, DateTimeKind.Local).AddTicks(2450)
+                            From = new DateTime(2021, 7, 30, 18, 27, 31, 357, DateTimeKind.Local).AddTicks(3110),
+                            To = new DateTime(2021, 7, 30, 19, 27, 31, 357, DateTimeKind.Local).AddTicks(3120)
                         },
                         new
                         {
                             Id = 3,
-                            From = new DateTime(2021, 8, 11, 0, 41, 44, 608, DateTimeKind.Local).AddTicks(2460),
-                            To = new DateTime(2021, 8, 11, 1, 41, 44, 608, DateTimeKind.Local).AddTicks(2470)
+                            From = new DateTime(2021, 7, 30, 19, 27, 31, 357, DateTimeKind.Local).AddTicks(3130),
+                            To = new DateTime(2021, 7, 30, 20, 27, 31, 357, DateTimeKind.Local).AddTicks(3130)
                         },
                         new
                         {
                             Id = 4,
-                            From = new DateTime(2021, 8, 11, 1, 41, 44, 608, DateTimeKind.Local).AddTicks(2470),
-                            To = new DateTime(2021, 8, 11, 2, 41, 44, 608, DateTimeKind.Local).AddTicks(2480)
+                            From = new DateTime(2021, 7, 30, 20, 27, 31, 357, DateTimeKind.Local).AddTicks(3130),
+                            To = new DateTime(2021, 7, 30, 21, 27, 31, 357, DateTimeKind.Local).AddTicks(3130)
                         },
                         new
                         {
                             Id = 5,
-                            From = new DateTime(2021, 8, 11, 2, 41, 44, 608, DateTimeKind.Local).AddTicks(2480),
-                            To = new DateTime(2021, 8, 11, 3, 41, 44, 608, DateTimeKind.Local).AddTicks(2480)
+                            From = new DateTime(2021, 7, 30, 21, 27, 31, 357, DateTimeKind.Local).AddTicks(3140),
+                            To = new DateTime(2021, 7, 30, 22, 27, 31, 357, DateTimeKind.Local).AddTicks(3140)
                         },
                         new
                         {
                             Id = 6,
-                            From = new DateTime(2021, 8, 11, 3, 41, 44, 608, DateTimeKind.Local).AddTicks(2490),
-                            To = new DateTime(2021, 8, 11, 4, 41, 44, 608, DateTimeKind.Local).AddTicks(2490)
+                            From = new DateTime(2021, 7, 30, 22, 27, 31, 357, DateTimeKind.Local).AddTicks(3140),
+                            To = new DateTime(2021, 7, 30, 23, 27, 31, 357, DateTimeKind.Local).AddTicks(3140)
                         },
                         new
                         {
                             Id = 7,
-                            From = new DateTime(2021, 8, 11, 4, 41, 44, 608, DateTimeKind.Local).AddTicks(2500),
-                            To = new DateTime(2021, 8, 11, 5, 41, 44, 608, DateTimeKind.Local).AddTicks(2500)
+                            From = new DateTime(2021, 7, 30, 23, 27, 31, 357, DateTimeKind.Local).AddTicks(3150),
+                            To = new DateTime(2021, 7, 31, 0, 27, 31, 357, DateTimeKind.Local).AddTicks(3150)
                         },
                         new
                         {
                             Id = 8,
-                            From = new DateTime(2021, 8, 11, 5, 41, 44, 608, DateTimeKind.Local).AddTicks(2510),
-                            To = new DateTime(2021, 8, 11, 6, 41, 44, 608, DateTimeKind.Local).AddTicks(2510)
+                            From = new DateTime(2021, 7, 31, 0, 27, 31, 357, DateTimeKind.Local).AddTicks(3150),
+                            To = new DateTime(2021, 7, 31, 1, 27, 31, 357, DateTimeKind.Local).AddTicks(3150)
                         },
                         new
                         {
                             Id = 9,
-                            From = new DateTime(2021, 8, 11, 6, 41, 44, 608, DateTimeKind.Local).AddTicks(2510),
-                            To = new DateTime(2021, 8, 11, 7, 41, 44, 608, DateTimeKind.Local).AddTicks(2520)
+                            From = new DateTime(2021, 7, 31, 1, 27, 31, 357, DateTimeKind.Local).AddTicks(3160),
+                            To = new DateTime(2021, 7, 31, 2, 27, 31, 357, DateTimeKind.Local).AddTicks(3160)
                         });
                 });
 
@@ -499,14 +501,14 @@ namespace Paxa.Migrations
                         {
                             Id = 1,
                             Email = "johan.holmberg@domain.se",
-                            PasswordHash = "$2a$11$MWLhRydXZU9c/GBQodUAYeM/WbMcweq9ydGAQaUhMU4KPGsgQuYcG",
+                            PasswordHash = "$2a$11$V3AzBqwil4k6X72g9ONQn.7nLP1H1MNnCNVBCD1t/xvc.A5muDZVu",
                             PersonId = 1
                         },
                         new
                         {
                             Id = 2,
                             Email = "joel.holmberg@domain.se",
-                            PasswordHash = "$2a$11$HZHLFaoAvW7gGTKj8jRuUO4DWyk/xaDsdeTfx0TZ8Cr6q5AwwQSD6",
+                            PasswordHash = "$2a$11$a.5iKvQwji..o8XsuDYS1.nWGTVr/Hysx1v6ka4AbOYIjZbAc07LC",
                             PersonId = 2
                         },
                         new
@@ -514,14 +516,14 @@ namespace Paxa.Migrations
                             Id = 3,
                             Email = "owner@houseofpadel.se",
                             OrganizationId = 1,
-                            PasswordHash = "$2a$11$7U6D7YJms.JGSFY.cHVj0eqQvvsH84RGAJzIa9.ITiYlcPzSh08vW"
+                            PasswordHash = "$2a$11$QLY4VNs89Pn14D3rOzDBiOcltjiW/azVknbYMfuXK/dcR2ocfH79m"
                         },
                         new
                         {
                             Id = 4,
                             Email = "owner@sanktgorans.se",
                             OrganizationId = 2,
-                            PasswordHash = "$2a$11$6aCtspFG1YjEJTuVSgGS.uPGHRIRN96zzKOLml69w5Ui1e5GYOb2C"
+                            PasswordHash = "$2a$11$JIsRYflMzQ7/PhIyAoFe1.LVhfYBD6poS9v7ncUSfr3RZc9hRO5.u"
                         });
                 });
 
@@ -558,7 +560,7 @@ namespace Paxa.Migrations
             modelBuilder.Entity("Paxa.Entities.Booking", b =>
                 {
                     b.HasOne("Paxa.Entities.User", "Host")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("HostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -741,6 +743,11 @@ namespace Paxa.Migrations
             modelBuilder.Entity("Paxa.Entities.Timeslot", b =>
                 {
                     b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("Paxa.Entities.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Paxa.Contexts;
@@ -9,9 +10,10 @@ using Paxa.Contexts;
 namespace Paxa.Migrations
 {
     [DbContext(typeof(PaxaContext))]
-    partial class PaxaContextModelSnapshot : ModelSnapshot
+    [Migration("20210810204146_RemoveBookingsOnUser")]
+    partial class RemoveBookingsOnUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

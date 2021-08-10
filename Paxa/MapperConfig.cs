@@ -139,19 +139,13 @@ namespace Paxa
                         options => options.Ignore()
                     );
 
+                // RefreshToken
+                cfg.CreateMap<Entities.RefreshToken, Views.RefreshToken>()
+                    .ReverseMap();
+
                 // User
                 cfg.CreateMap<Entities.User, Views.User>()
-                    .ForMember(
-                        destination => destination.BookingIds,
-                        options => options.MapFrom(
-                            source => source.Bookings.Select(booking => booking.Id).ToList()
-                        )
-                    )
-                    .ReverseMap()
-                    .ForMember(
-                        destination => destination.Bookings,
-                        options => options.Ignore()
-                    );
+                    .ReverseMap();
 
             });
 

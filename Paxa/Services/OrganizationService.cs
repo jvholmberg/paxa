@@ -19,52 +19,52 @@ namespace Paxa.Services
 
     public class OrganizationService : IOrganizationService
     {
-        private readonly PaxaContext _Context;
-        private readonly IMapper _Mapper;
+        private readonly PaxaContext _context;
+        private readonly IMapper _mapper;
 
         public OrganizationService(PaxaContext context, IMapper mapper)
         {
-            _Context = context;
-            _Mapper = mapper;
+            _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Views.Organization> Create(Views.Organization Organization)
         {
             // Create entity
-            var entity = _Mapper.Map<Entities.Organization>(Organization);
-            await _Context.Organization
+            var entity = _mapper.Map<Entities.Organization>(Organization);
+            await _context.Organizations
                 .AddAsync(entity);
-            await _Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             // Get entity
             var persistedEntity = await GetById(entity.Id);
-            var view = _Mapper.Map<Views.Organization>(persistedEntity);
+            var view = _mapper.Map<Views.Organization>(persistedEntity);
 
             return view;
         }
 
         public async Task<ICollection<Views.Organization>> GetAll()
         {
-            var entities = await _Context.Organization
+            var entities = await _context.Organizations
                 .Include(e => e.Location)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
                 .ToListAsync();
 
-            var view = _Mapper.Map<Views.Organization[]>(entities);
+            var view = _mapper.Map<Views.Organization[]>(entities);
 
             return view;
         }
 
         public async Task<Views.Organization> GetById(int id)
         {
-            var entity = await _Context.Organization
+            var entity = await _context.Organizations
                 .Include(e => e.Location)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 
-            var view = _Mapper.Map<Views.Organization>(entity);
+            var view = _mapper.Map<Views.Organization>(entity);
 
             return view;
         }
@@ -72,14 +72,14 @@ namespace Paxa.Services
         public async Task<Views.Organization> Update(int id, Views.Organization organization)
         {
             
-            var updates = _Mapper.Map<Entities.Organization>(organization);
+            var updates = _mapper.Map<Entities.Organization>(organization);
             updates.Id = id;
 
             // Make updates
-            _Context.Organization.Attach(updates);
+            _context.Organizations.Attach(updates);
 
             // Persist changes
-            await _Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             // Get updated from db
             var view = await GetById(id);
@@ -90,9 +90,9 @@ namespace Paxa.Services
         public async Task<Views.Confirmation> Delete(int id)
         {
             var Organization = new Entities.Organization { Id = id };
-            _Context.Organization.Attach(Organization);
-            _Context.Organization.Remove(Organization);
-            await _Context.SaveChangesAsync();
+            _context.Organizations.Attach(Organization);
+            _context.Organizations.Remove(Organization);
+            await _context.SaveChangesAsync();
 
             var view = new Views.Confirmation();
             return view;

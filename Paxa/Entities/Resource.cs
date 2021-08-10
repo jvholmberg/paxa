@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Paxa.Entities
 {
     public class Resource
     {
+        [Key]
         public int Id { get; set; }
         public int TypeId { get; set; }
         public int OrganizationId { get; set; }
