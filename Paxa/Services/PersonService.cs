@@ -11,7 +11,7 @@ namespace Paxa.Services
     public interface IPersonService
     {
         Task<Views.Person> Create(Views.Person person);
-        Task<ICollection<Views.Person>> GetAll();
+        Task<ICollection<Entities.Person>> GetAll();
         Task<Views.Person> GetById(int id);
         Task<Views.Person> Update(int id, Views.Person person);
         Task<Views.Confirmation> Delete(int id);
@@ -43,7 +43,7 @@ namespace Paxa.Services
             return view;
         }
 
-        public async Task<ICollection<Views.Person>> GetAll()
+        public async Task<ICollection<Entities.Person>> GetAll()
         {
             var entities = await _context.Persons
                 .Include(e => e.Bookings)
@@ -53,9 +53,7 @@ namespace Paxa.Services
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .ToListAsync();
 
-            var view = _mapper.Map<Views.Person[]>(entities);
-
-            return view;
+            return entities;
         }
 
         public async Task<Views.Person> GetById(int id)

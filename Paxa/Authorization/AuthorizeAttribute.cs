@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
-using Paxa.Entities;
 
 namespace Paxa.Authorization
 {
@@ -19,7 +18,7 @@ namespace Paxa.Authorization
             }
 
             // Authorization
-            var user = (User)context.HttpContext.Items["User"];
+            var user = (Entities.User)context.HttpContext.Items["User"];
             if (user == null) {
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }

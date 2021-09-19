@@ -31,9 +31,9 @@ namespace Paxa.Authorization
             if (userId != null)
             {
                 // Attach user to context on successful jwt validation
-                var userEntity = userService.GetById(userId.Value);
+                var userEntity = await userService.GetById(userId.Value);
                 var userView = _mapper.Map<Views.User>(userEntity);
-                context.Items["User"] = userView;
+                context.Items["User"] = userEntity;
             }
 
             await _next(context);

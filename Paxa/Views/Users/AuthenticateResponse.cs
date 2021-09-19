@@ -7,16 +7,14 @@ namespace Paxa.Views
         public int? OrganizationId { get; set; }
         public string Email { get; set; }
         public string JwtToken { get; set; }
-        public string RefreshToken { get; set; }
 
-        public AuthenticateResponse(Entities.User user, string jwtToken, string refreshToken)
+        public AuthenticateResponse(Entities.User user, string jwtToken)
         {
             UserId = user.Id;
             PersonId = user.Person?.Id;
             OrganizationId = user.Organization?.Id;
             Email = user.Email;
             JwtToken = jwtToken;
-            RefreshToken = refreshToken;
         }
     }
 }

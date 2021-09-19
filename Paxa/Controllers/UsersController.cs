@@ -22,7 +22,7 @@ namespace Paxa.Controllers
 
         public UserController(
             ILogger<UserController> logger,
-            UserService userService,
+            IUserService userService,
             IMapper mapper)
         {
             _logger = logger;
@@ -54,11 +54,11 @@ namespace Paxa.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate(Views.AuthenticateRequest request)
+        public async Task<IActionResult> Authenticate(AuthenticateRequest request)
         {
-            var response = await _userService.Authenticate(request, ipAddress());
-            setTokenCookie(response.RefreshToken);
-            return Ok(response);
+            var (authenticateResponse, refreshToken) = await _userService.Authenticate(request, ipAddress());
+            setTokenCookie(refreshToken);
+            return Ok(authenticateResponse);
         }
 
         [AllowAnonymous]
@@ -66,16 +66,16 @@ namespace Paxa.Controllers
         public async Task<IActionResult> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
-            var response = await _userService.RefreshToken(refreshToken, ipAddress());
-            setTokenCookie(response.RefreshToken);
-            return Ok(response);
+            var (token, newRefreshToken) = await _userService.RefreshToken(refreshToken, ipAddress());
+            setTokenCookie(newRefreshToken);
+            return Ok(token);
         }
 
         [HttpPost("revoke-token")]
-        public IActionResult RevokeToken(RevokeTokenRequest model)
+        public IActionResult RevokeToken(RevokeTokenRequest request)
         {
             // accept refresh token in request body or cookie
-            var token = model.Token ?? Request.Cookies["refreshToken"];
+            var token = request.Token ?? Request.Cookies["refreshToken"];
 
             if (string.IsNullOrEmpty(token)) {
                 return BadRequest(new { message = "Token is required" });
@@ -88,9 +88,8 @@ namespace Paxa.Controllers
         [HttpGet("{id}/refresh-tokens")]
         public async Task<IActionResult> GetRefreshTokens(int id)
         {
-            var entity = await _userService.GetById(id);
-
-            var view = _mapper.Map<RefreshToken[]>(entity.RefreshTokens);
+            var userEntity = await _userService.GetById(id);
+            var view = _mapper.Map<RefreshToken[]>(userEntity.RefreshTokens);
             return Ok(view);
         }
 

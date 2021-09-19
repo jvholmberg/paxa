@@ -21,8 +21,8 @@ namespace Paxa.Services
         void Delete(int id);
 
         // Authentication
-        Task<Views.AuthenticateResponse> Authenticate(Views.AuthenticateRequest request, string ipAddress);
-        Task<Views.AuthenticateResponse> RefreshToken(string token, string ipAddress);
+        Task<(Views.AuthenticateResponse, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress);
+        Task<(Views.AuthenticateResponse, string)> RefreshToken(string token, string ipAddress);
         void RevokeToken(string token, string ipAddress);
     }
 
@@ -45,7 +45,7 @@ namespace Paxa.Services
         private async Task<User> getUserByRefreshToken(string token)
         {
             var user = await _context.Users
-                .SingleOrDefaultAsync(user => user.RefreshTokens
+                .FirstOrDefaultAsync(user => user.RefreshTokens
                     .Any(refreshToken => refreshToken.Token == token));
 
             if (user == null)
@@ -129,7 +129,7 @@ namespace Paxa.Services
                 .Include(e => e.Person).ThenInclude(e => e.Followers)
                 .Include(e => e.Person).ThenInclude(e => e.Following)
                 .Include(e => e.Person).ThenInclude(e => e.Ratings).ThenInclude(e => e.Type)
-                .SingleOrDefaultAsync(e => e.Id.Equals(id));
+                .FirstOrDefaultAsync(e => e.Id == id);
 
             return user;
         }
@@ -139,7 +139,7 @@ namespace Paxa.Services
             // Get from db
             var updatingUser = await _context.Users
                 .Include(e => e.Organization).ThenInclude(e => e.Location)
-                .SingleOrDefaultAsync(e => e.Id.Equals(id));
+                .FirstOrDefaultAsync(e => e.Id == id);
 
             // Make updates
             updatingUser.Email = user.Email;
@@ -160,9 +160,9 @@ namespace Paxa.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Views.AuthenticateResponse> Authenticate(Views.AuthenticateRequest request, string ipAddress)
+        public async Task<(Views.AuthenticateResponse, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == request.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
 
             // Validate
             if (user == null || !BCryptNet.Verify(request.Password, user.PasswordHash))
@@ -182,10 +182,10 @@ namespace Paxa.Services
             _context.Update(user);
             _context.SaveChanges();
 
-            return new Views.AuthenticateResponse(user, jwtToken, refreshToken.Token);
+            return (new Views.AuthenticateResponse(user, jwtToken), refreshToken.Token);
         }
 
-        public async Task<Views.AuthenticateResponse> RefreshToken(string token, string ipAddress)
+        public async Task<(Views.AuthenticateResponse, string)> RefreshToken(string token, string ipAddress)
         {
             var user = await getUserByRefreshToken(token);
             var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
@@ -217,7 +217,7 @@ namespace Paxa.Services
             // Generate new jwt-token
             var jwtToken = _jwtUtils.GenerateJwtToken(user);
 
-            return new Views.AuthenticateResponse(user, jwtToken, newRefreshToken.Token);
+            return (new Views.AuthenticateResponse(user, jwtToken), newRefreshToken.Token);
         }
 
         public async void RevokeToken(string token, string ipAddress)
