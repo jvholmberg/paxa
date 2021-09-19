@@ -10,24 +10,32 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginComponent } from './components/login/login.component';
+
+const externalLibs = [
+  CommonModule,
+  ReactiveFormsModule,
+  MatButtonModule,
+  MatIconModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatProgressBarModule,
+  MatCardModule,
+  MatListModule,
+  MatGridListModule,
+  MatFormFieldModule,
+];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoginComponent,
+  ],
   imports: [
-
+    ...externalLibs
   ],
   exports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatProgressBarModule,
-    MatCardModule,
-    MatListModule,
-    MatGridListModule,
-    MatFormFieldModule
+    ...externalLibs,
+    LoginComponent,
   ]
 })
 export class SharedModule { }

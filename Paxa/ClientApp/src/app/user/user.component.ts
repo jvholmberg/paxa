@@ -15,10 +15,5 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.myUser$ = this.userService
-      .getMy()
-      .pipe(
-        share(),
-      );
   }
 }

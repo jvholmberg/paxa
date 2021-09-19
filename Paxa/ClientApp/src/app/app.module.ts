@@ -13,6 +13,7 @@ import { NotAllowedComponent } from './not-allowed/not-allowed.component';
 import { LandingComponent } from './landing/landing.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { HttpsStatusInterceptor } from '@core/http-status/https-status.interceptor';
+import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,11 @@ import { HttpsStatusInterceptor } from '@core/http-status/https-status.intercept
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsStatusInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BearerTokenInterceptor,
       multi: true
     }
   ],
