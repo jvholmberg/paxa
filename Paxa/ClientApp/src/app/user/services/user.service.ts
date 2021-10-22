@@ -37,10 +37,11 @@ export class UserService extends BaseService<User> {
       );
   }
 
-  public refreshToken(): Observable<string> {
-    this.http
+  public refreshToken(): Observable<AuthenticateResponse> {
+    return this.http
       .post<AuthenticateResponse>(`${this.serviceUrl}/refresh-token`, {})
-      .subscribe((res) => {
+      .pipe(
+        tap((res) => {
         const user: User = {
           id: res.userId,
           personId: res.personId,
@@ -49,12 +50,12 @@ export class UserService extends BaseService<User> {
         };
         this.jwtTokenSource.next(res.jwtToken);
         this.setValue([user]);
-      });
-    return this.jwtToken$;
+      }),
+    );
   }
 
-  public revokeToken(): void {
-    this.http
+  public revokeToken(): Observable<{}> {
+    return this.http
       .post<{}>(`${this.serviceUrl}/revoke-token`, {});
   }
 }
