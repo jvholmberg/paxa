@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpsStatusService } from '@core/http-status/https-status.service';
+import { UserService } from '@user/services/user.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,11 +10,12 @@ import { HttpsStatusService } from '@core/http-status/https-status.service';
 export class NavMenuComponent {
 
   isExpanded = false;
-
   isLoading$ = this.httpsStatusService.loading$;
+  isLoggedIn$ = this.userService.loggedIn$;
 
   constructor(
     private httpsStatusService: HttpsStatusService,
+    private userService: UserService,
   ) {}
 
   collapse() {

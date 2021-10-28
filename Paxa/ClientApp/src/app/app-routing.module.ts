@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LandingComponent } from './landing/landing.component';
+import { LogoutComponent } from './logout/logout.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
     canLoad: [],
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
   },
+  { path: 'logout', component: LogoutComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

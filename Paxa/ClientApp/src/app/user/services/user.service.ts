@@ -13,7 +13,12 @@ import { AuthenticateRequest } from './authenticate-request.model';
 export class UserService extends BaseService<User> {
 
   private readonly jwtTokenSource = new BehaviorSubject<string>(null);
+
   public readonly jwtToken$ = this.jwtTokenSource.asObservable();
+  public readonly loggedIn$ = this.jwtToken$.pipe(
+    map((jwtToken) => !!jwtToken),
+  );
+
   public get jwtTokenValue(): string { return this.jwtTokenSource.value; }
 
   constructor(http: HttpClient) {
@@ -33,7 +38,7 @@ export class UserService extends BaseService<User> {
           };
           this.jwtTokenSource.next(res.jwtToken);
           this.setValue([user]);
-        })
+        }),
       );
   }
 
@@ -56,6 +61,11 @@ export class UserService extends BaseService<User> {
 
   public revokeToken(): Observable<{}> {
     return this.http
-      .post<{}>(`${this.serviceUrl}/revoke-token`, {});
+      .post<{}>(`${this.serviceUrl}/revoke-token`, {})
+      .pipe(
+        tap(() => {
+          this.jwtTokenSource.next(null);
+        }),
+      );
   }
 }

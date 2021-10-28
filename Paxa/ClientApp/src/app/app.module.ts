@@ -16,12 +16,14 @@ import { GetStartedComponent } from './get-started/get-started.component';
 import { HttpsStatusInterceptor } from '@core/http-status/https-status.interceptor';
 import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
 import { UserService } from '@user/services/user.service';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     LandingComponent,
+    LogoutComponent,
     GetStartedComponent,
     NotFoundComponent,
     NotAllowedComponent,
