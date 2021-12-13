@@ -20,10 +20,7 @@ namespace Paxa.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(
-            ILogger<UserController> logger,
-            IUserService userService,
-            IMapper mapper)
+        public UserController(ILogger<UserController> logger, IUserService userService, IMapper mapper)
         {
             _logger = logger;
             _userService = userService;
@@ -44,10 +41,12 @@ namespace Paxa.Controllers
         private string ipAddress()
         {
             // Get source ip address for the current request
-            if (Request.Headers.ContainsKey("X-Forwarded-For")) {
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
                 return Request.Headers["X-Forwarded-For"];
             }
-            else {
+            else
+            {
                 return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             }
         }
@@ -72,17 +71,22 @@ namespace Paxa.Controllers
         }
 
         [HttpPost("revoke-token")]
-        public IActionResult RevokeToken(RevokeTokenRequest request)
+        public async Task<IActionResult> RevokeToken(RevokeTokenRequest request)
         {
             // accept refresh token in request body or cookie
             var token = request.Token ?? Request.Cookies["refreshToken"];
 
-            if (string.IsNullOrEmpty(token)) {
+            if (string.IsNullOrEmpty(token))
+            {
                 return BadRequest(new { message = "Token is required" });
             }
 
-            _userService.RevokeToken(token, ipAddress());
-            return Ok(new { message = "Token revoked" });
+            var wasRevoked = await _userService.RevokeToken(token, ipAddress());
+            if (wasRevoked)
+            {
+                return Ok(new { message = "Token revoked" });
+            }
+            return BadRequest(new { message = "Token was not revoked" });
         }
 
         [HttpGet("{id}/refresh-tokens")]
@@ -132,10 +136,14 @@ namespace Paxa.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _userService.Delete(id);
-            return Ok();
+            var wasRemoved = await _userService.Delete(id);
+            if (wasRemoved)
+            {
+                return Ok(new { message = "Was removed successfully" });
+            }
+            return BadRequest(new { message = "Could not be removed" });
         }
     }
 }

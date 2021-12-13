@@ -18,12 +18,12 @@ namespace Paxa.Services
         Task<ICollection<User>> GetAll();
         Task<User> GetById(int id);
         Task<User> Update(int id, User user);
-        void Delete(int id);
+        Task<bool> Delete(int id);
 
         // Authentication
         Task<(Views.AuthenticateResponse, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress);
         Task<(Views.AuthenticateResponse, string)> RefreshToken(string token, string ipAddress);
-        void RevokeToken(string token, string ipAddress);
+        Task<bool> RevokeToken(string token, string ipAddress);
     }
 
     public class UserService : IUserService
@@ -78,11 +78,7 @@ namespace Paxa.Services
                 x.Created.AddDays(_appSettings.RefreshTokenTTL) <= DateTime.UtcNow);
         }
 
-        private void revokeDescendantRefreshTokens(
-            RefreshToken refreshToken,
-            User user,
-            string ipAddress,
-            string reason)
+        private void revokeDescendantRefreshTokens(RefreshToken refreshToken, User user, string ipAddress, string reason)
         {
             // recursively traverse the refresh token chain and ensure all descendants are revoked
             if (!string.IsNullOrEmpty(refreshToken.ReplacedByToken))
@@ -152,12 +148,20 @@ namespace Paxa.Services
             return updatedUser;
         }
 
-        public async void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var user = new User { Id = id };
-            _context.Users.Attach(user);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var user = new User { Id = id };
+                _context.Users.Attach(user);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<(Views.AuthenticateResponse, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress)
@@ -220,7 +224,7 @@ namespace Paxa.Services
             return (new Views.AuthenticateResponse(user, jwtToken), newRefreshToken.Token);
         }
 
-        public async void RevokeToken(string token, string ipAddress)
+        public async Task<bool> RevokeToken(string token, string ipAddress)
         {
             var user = await getUserByRefreshToken(token);
             var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
@@ -231,9 +235,17 @@ namespace Paxa.Services
             }
 
             // revoke token and save
-            revokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
-            _context.Update(user);
-            _context.SaveChanges();
+            try
+            {
+                revokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
+                _context.Update(user);
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
