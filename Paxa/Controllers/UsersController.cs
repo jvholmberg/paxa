@@ -27,6 +27,8 @@ namespace Paxa.Controllers
             _mapper = mapper;
         }
 
+        #region Util
+
         private void setTokenCookie(string token)
         {
             // Append cookie with refresh token to the http response
@@ -50,6 +52,10 @@ namespace Paxa.Controllers
                 return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             }
         }
+
+        #endregion
+        
+        #region Authentication
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -96,6 +102,10 @@ namespace Paxa.Controllers
             var view = _mapper.Map<RefreshToken[]>(userEntity.RefreshTokens);
             return Ok(view);
         }
+
+        #endregion
+
+        #region CRUD
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] User user)
@@ -145,5 +155,8 @@ namespace Paxa.Controllers
             }
             return BadRequest(new { message = "Could not be removed" });
         }
+    
+        #endregion
+
     }
 }

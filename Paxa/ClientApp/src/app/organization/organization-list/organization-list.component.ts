@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Organization } from '@organization/services/organization.model';
+import { OrganizationService } from '@organization/services/organization.service';
 
 @Component({
   selector: 'app-organization-list',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationListComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns = ['name', 'action'];
+  organizations$: Observable<Organization[]>;
 
-  ngOnInit() {
+  constructor(private organizationService: OrganizationService) { }
+
+  ngOnInit(): void {
+    this.organizations$ = this.organizationService.get();
   }
 
 }

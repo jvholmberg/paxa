@@ -6,12 +6,17 @@ import { OrganizationViewComponent } from './organization-view/organization-view
 import { OrganizationFormComponent } from './organization-form/organization-form.component';
 
 const routes: Routes = [
-  { path: '', component: OrganizationComponent, pathMatch: 'full' },
-  { path: 'all', component: OrganizationListComponent },
-  { path: 'create', component: OrganizationFormComponent },
-  { path: ':id', redirectTo: ':id/view', pathMatch: 'full' },
-  { path: ':id/view', component: OrganizationViewComponent },
-  { path: ':id/edit', component: OrganizationFormComponent },
+  {
+    path: '',
+    component: OrganizationComponent,
+    children: [
+      { path: '', component: OrganizationListComponent },
+      { path: 'create', component: OrganizationFormComponent },
+      { path: ':id', redirectTo: ':id/view', pathMatch: 'full' },
+      { path: ':id/view', component: OrganizationViewComponent },
+      { path: ':id/edit', component: OrganizationFormComponent },
+    ]
+  },
 ];
 
 @NgModule({
