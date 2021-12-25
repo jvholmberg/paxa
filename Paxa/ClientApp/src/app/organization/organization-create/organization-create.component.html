@@ -1,1 +1,10 @@
-<p>organization-create works!</p>
+<form #f [formGroup]="form" (ngSubmit)="onSubmit(f)">
+
+  <label>
+    Name
+    <input formControlName="name" />
+  </label>
+
+  <button mat-button color="primary" type="submit">Create</button>
+  <button mat-button color="primary" type="button" (click)="onCancel()">Cancel</button>
+</form>

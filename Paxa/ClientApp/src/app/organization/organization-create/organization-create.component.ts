@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-organization-create',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationCreateComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.form = this.initForm();
+  }
+
+  private initForm(): FormGroup {
+    return this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]]
+    });
+  }
+
+  onSubmit(f: NgForm): void {
+
+  }
+
+  onCancel(): void {
+
   }
 
 }
