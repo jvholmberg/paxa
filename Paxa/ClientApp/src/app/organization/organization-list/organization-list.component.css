@@ -1,0 +1,11 @@
+.mat-column-type {
+  padding-right: 10px;
+  width: 0;
+  cursor: pointer;
+}
+.mat-column-name {
+  cursor: pointer;
+}
+.mat-column-action {
+  width: 0;
+}

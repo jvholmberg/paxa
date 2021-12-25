@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { OrganizationViewComponent } from './organization-view/organization-view.component';
-import { OrganizationFormComponent } from './organization-form/organization-form.component';
+import { OrganizationEditComponent } from './organization-edit/organization-edit.component';
+import { OrganizationCreateComponent } from './organization-create/organization-create.component';
 
 const routes: Routes = [
   {
@@ -11,10 +12,10 @@ const routes: Routes = [
     component: OrganizationComponent,
     children: [
       { path: '', component: OrganizationListComponent },
-      { path: 'create', component: OrganizationFormComponent },
+      { path: 'create', component: OrganizationCreateComponent },
       { path: ':id', redirectTo: ':id/view', pathMatch: 'full' },
       { path: ':id/view', component: OrganizationViewComponent },
-      { path: ':id/edit', component: OrganizationFormComponent },
+      { path: ':id/edit', component: OrganizationEditComponent },
     ]
   },
 ];

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 
 const externalLibs = [
   CommonModule,
+  FontAwesomeModule,
   ReactiveFormsModule,
   MatButtonModule,
   MatIconModule,

@@ -1,17 +1,38 @@
-<table mat-table [dataSource]="organizations$ | async">
+
+<div class="mb-3">
+  <button mat-button color="primary" [routerLink]="['/', 'organization', 'create']">
+    <fa-icon [icon]="iconFaPlus"></fa-icon> Create
+  </button>
+</div>
+
+<table mat-table [dataSource]="organizations$ | async" class="w-100">
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <fa-icon [icon]="iconFaBuilding"></fa-icon>
+    </td>
+  </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [routerLink]="['/', 'organization', element.id]">
+      {{element.name}}
+    </td>
   </ng-container>
 
   <!-- Action Column -->
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <a mat-button [routerLink]="['/', 'organization', element.id]">Visit</a>
-      <a mat-button [routerLink]="['/', 'organization', element.id]">Favorite</a>
+      <button mat-button color="accent" [routerLink]="['/', 'organization', element.id, 'edit']">
+        <fa-icon [icon]="iconFaEdit"></fa-icon> Edit
+      </button>
     </td>
   </ng-container>
 
