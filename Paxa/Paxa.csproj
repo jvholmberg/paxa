@@ -34,18 +34,6 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include="ClientApp\src\app\resource\resource-form\organization-form.component.css" />
-    <None Include="ClientApp\src\app\resource\resource-form\organization-form.component.html" />
-    <None Include="ClientApp\src\app\resource\resource-form\organization-form.component.ts" />
-    <None Include="ClientApp\src\app\resource\resource-form\organization-form.component.spec.ts" />
-    <None Include="ClientApp\src\app\resource\resource-list\organization-list.component.css" />
-    <None Include="ClientApp\src\app\resource\resource-list\organization-list.component.spec.ts" />
-    <None Include="ClientApp\src\app\resource\resource-list\organization-list.component.html" />
-    <None Include="ClientApp\src\app\resource\resource-list\organization-list.component.ts" />
-    <None Include="ClientApp\src\app\resource\resource-view\organization-view.component.html" />
-    <None Include="ClientApp\src\app\resource\resource-view\organization-view.component.spec.ts" />
-    <None Include="ClientApp\src\app\resource\resource-view\organization-view.component.css" />
-    <None Include="ClientApp\src\app\resource\resource-view\organization-view.component.ts" />
   </ItemGroup>
 
   <ItemGroup>

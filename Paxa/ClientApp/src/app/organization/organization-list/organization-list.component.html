@@ -1,6 +1,6 @@
 
 <div class="mb-3">
-  <button mat-button color="primary" [routerLink]="['/', 'organization', 'create']">
+  <button mat-flat-button color="primary" [routerLink]="['/', 'organization', 'create']">
     <fa-icon [icon]="iconFaPlus"></fa-icon> Create
   </button>
 </div>
@@ -30,9 +30,22 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button color="accent" [routerLink]="['/', 'organization', element.id, 'edit']">
-        <fa-icon [icon]="iconFaEdit"></fa-icon> Edit
-      </button>
+      <div class="d-flex">
+        <button
+          mat-button
+          color="primary"
+          style="min-width: 0;"
+          [routerLink]="['/', 'organization', element.id, 'edit']">
+          <fa-icon [icon]="iconFaEdit"></fa-icon>
+        </button>
+        <button
+          mat-button
+          color="warn"
+          style="min-width: 0;"
+          [routerLink]="['/', 'organization', element.id, 'delete']">
+          <fa-icon [icon]="iconFaTrashAlt"></fa-icon>
+        </button>
+      </div>
     </td>
   </ng-container>
 

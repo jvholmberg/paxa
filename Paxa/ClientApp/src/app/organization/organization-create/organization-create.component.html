@@ -1,10 +1,13 @@
-<form #f [formGroup]="form" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
+  <mat-form-field class="d-block mb-3" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
+  </mat-form-field>
+  <mat-form-field class="d-block mb-3" appearance="fill">
+    <mat-label>Description</mat-label>
+    <input formControlName="description" matInput placeholder="Ex. We have the coolest courses">
+  </mat-form-field>
 
-  <label>
-    Name
-    <input formControlName="name" />
-  </label>
-
-  <button mat-button color="primary" type="submit">Create</button>
-  <button mat-button color="primary" type="button" (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" type="submit">Create</button>
+  <button mat-flat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
 </form>

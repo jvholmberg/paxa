@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { OrganizationService } from '@organization/services/organization.service';
 
 @Component({
   selector: 'app-organization-create',
@@ -10,7 +12,11 @@ export class OrganizationCreateComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private location: Location,
+    private formBuilder: FormBuilder,
+    private organizationService: OrganizationService,
+    ) { }
 
   ngOnInit(): void {
     this.form = this.initForm();
@@ -18,16 +24,25 @@ export class OrganizationCreateComponent implements OnInit {
 
   private initForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]]
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['']
     });
   }
 
   onSubmit(f: NgForm): void {
-
+    this.organizationService
+      .create(f.value)
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        });
   }
 
   onCancel(): void {
-
+    this.location.back();
   }
 
 }

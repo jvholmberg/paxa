@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { faBuilding, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faEdit, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Organization } from '@organization/services/organization.model';
 import { OrganizationService } from '@organization/services/organization.service';
 
@@ -17,6 +17,7 @@ export class OrganizationListComponent implements OnInit {
   iconFaPlus = faPlus;
   iconFaEdit = faEdit;
   iconFaBuilding = faBuilding;
+  iconFaTrashAlt = faTrashAlt;
 
   constructor(private organizationService: OrganizationService) { }
 

@@ -1,7 +1,7 @@
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { logError, logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, mergeMap, share } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 

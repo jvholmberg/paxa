@@ -17,7 +17,6 @@ import { HttpsStatusInterceptor } from '@core/http-status/https-status.intercept
 import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
 import { UserService } from '@user/services/user.service';
 import { LogoutComponent } from './logout/logout.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [UserService] },

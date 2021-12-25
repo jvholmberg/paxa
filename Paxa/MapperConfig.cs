@@ -60,14 +60,10 @@ namespace Paxa
                         )
                     )
                     .ReverseMap()
-                    .ForMember(
-                        destination => destination.Resources,
-                        options => options.Ignore()
-                    )
-                    .ForMember(
-                        destination => destination.Ratings,
-                        options => options.Ignore()
-                    );
+                    .ForMember(destination => destination.Resources, options => options.Ignore())
+                    .ForMember(destination => destination.Ratings, options => options.Ignore());
+                
+                cfg.CreateMap<Views.CreateOrganizationRequest, Entities.Organization>();
 
                 // Person
                 cfg.CreateMap<Entities.Person, Views.Person>()

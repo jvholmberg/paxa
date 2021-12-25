@@ -10,11 +10,11 @@ namespace Paxa.Services
 {
     public interface IOrganizationService
     {
-        Task<Views.Organization> Create(Views.Organization Organization);
-        Task<ICollection<Views.Organization>> GetAll();
-        Task<Views.Organization> GetById(int id);
-        Task<Views.Organization> Update(int id, Views.Organization Organization);
-        Task<Views.Confirmation> Delete(int id);
+        Task<Entities.Organization> Create(Entities.Organization Organization);
+        Task<ICollection<Entities.Organization>> GetAll();
+        Task<Entities.Organization> GetById(int id);
+        Task<Entities.Organization> Update(int id, Entities.Organization Organization);
+        Task<bool> Delete(int id);
     }
 
     public class OrganizationService : IOrganizationService
@@ -28,74 +28,72 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<Views.Organization> Create(Views.Organization Organization)
+        public async Task<Entities.Organization> Create(Entities.Organization Organization)
         {
-            // Create entity
-            var entity = _mapper.Map<Entities.Organization>(Organization);
-            await _context.Organizations
-                .AddAsync(entity);
+            await _context.Organizations.AddAsync(Organization);
             await _context.SaveChangesAsync();
 
-            // Get entity
-            var persistedEntity = await GetById(entity.Id);
-            var view = _mapper.Map<Views.Organization>(persistedEntity);
-
-            return view;
+            return await GetById(Organization.Id);
         }
 
-        public async Task<ICollection<Views.Organization>> GetAll()
+        public async Task<ICollection<Entities.Organization>> GetAll()
         {
-            var entities = await _context.Organizations
+            var organizations = await _context.Organizations
                 .Include(e => e.Location)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
                 .ToListAsync();
 
-            var view = _mapper.Map<Views.Organization[]>(entities);
-
-            return view;
+            return organizations;
         }
 
-        public async Task<Views.Organization> GetById(int id)
+        public async Task<Entities.Organization> GetById(int id)
         {
-            var entity = await _context.Organizations
+            var organization = await _context.Organizations
                 .Include(e => e.Location)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
-                .SingleOrDefaultAsync(e => e.Id.Equals(id));
+                .SingleOrDefaultAsync(e => e.Id == id);
 
-            var view = _mapper.Map<Views.Organization>(entity);
-
-            return view;
+            return organization;
         }
 
-        public async Task<Views.Organization> Update(int id, Views.Organization organization)
+        public async Task<Entities.Organization> Update(int id, Entities.Organization updates)
         {
-            
-            var updates = _mapper.Map<Entities.Organization>(organization);
-            updates.Id = id;
+            var organization = await _context.Organizations
+                .Include(e => e.Location)
+                .Include(e => e.Ratings).ThenInclude(e => e.Type)
+                .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
+                .SingleOrDefaultAsync(e => e.Id == id);
 
             // Make updates
-            _context.Organizations.Attach(updates);
+            organization.Name = updates.Name;
+            
+            _context.Organizations.Attach(organization);
 
             // Persist changes
             await _context.SaveChangesAsync();
 
             // Get updated from db
-            var view = await GetById(id);
-
-            return view;
+            var updatedEntity = await GetById(id);
+            return updatedEntity;
         }
 
-        public async Task<Views.Confirmation> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var Organization = new Entities.Organization { Id = id };
-            _context.Organizations.Attach(Organization);
-            _context.Organizations.Remove(Organization);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var Organization = new Entities.Organization { Id = id };
+                _context.Organizations.Attach(Organization);
+                _context.Organizations.Remove(Organization);
+                await _context.SaveChangesAsync();
 
-            var view = new Views.Confirmation();
-            return view;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

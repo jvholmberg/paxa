@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 using Paxa.Services;
 
 namespace Paxa.Controllers
@@ -12,46 +13,58 @@ namespace Paxa.Controllers
 
         private readonly ILogger<OrganizationController> _logger;
         private readonly OrganizationService _organizationService;
+        private readonly IMapper _mapper;
 
-        public OrganizationController(ILogger<OrganizationController> logger, OrganizationService OrganizationService)
+        public OrganizationController(
+            ILogger<OrganizationController> logger,
+            OrganizationService OrganizationService,
+            IMapper mapper)
         {
             _logger = logger;
             _organizationService = OrganizationService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Views.Organization Organization)
+        public async Task<IActionResult> Create([FromBody] Views.CreateOrganizationRequest view)
         {
-            var res = await _organizationService.Create(Organization);
-            return Ok(res);
+            var entity = _mapper.Map<Entities.Organization>(view);
+            var createdEntity = await _organizationService.Create(entity);
+            var createdView = _mapper.Map<Views.Organization>(createdEntity);
+            return Ok(createdView);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var res = await _organizationService.GetAll();
-            return Ok(res);
+            var entities = await _organizationService.GetAll();
+            var views = _mapper.Map<Views.Organization[]>(entities);
+            return Ok(views);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var res = await _organizationService.GetById(id);
-            return Ok(res);
+            var entity = await _organizationService.GetById(id);
+            var view = _mapper.Map<Views.Organization>(entity);
+            return Ok(view);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Views.Organization Organization)
+        public async Task<IActionResult> Update(int id, [FromBody] Views.Organization view)
         {
-            var res = await _organizationService.Update(id, Organization);
-            return Ok(res);
+            var entity = _mapper.Map<Entities.Organization>(view);
+            var updatedEntity = await _organizationService.Update(id, entity);
+            var updatedView = _mapper.Map<Views.Organization>(updatedEntity);
+            return Ok(updatedView);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var res = await _organizationService.Delete(id);
-            return Ok(res);
+            var success = await _organizationService.Delete(id);
+            var view = new Views.Confirmation();
+            return Ok(view);
         }
     }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,6 +21,7 @@ const externalLibs = [
   ReactiveFormsModule,
   MatButtonModule,
   MatIconModule,
+  MatInputModule,
   MatSidenavModule,
   MatTableModule,
   MatToolbarModule,
@@ -30,16 +32,20 @@ const externalLibs = [
   MatFormFieldModule,
 ];
 
+const components = [
+  LoginComponent
+];
+
 @NgModule({
   declarations: [
-    LoginComponent,
+    ...components
   ],
   imports: [
     ...externalLibs
   ],
   exports: [
     ...externalLibs,
-    LoginComponent,
+    ...components,
   ]
 })
 export class SharedModule { }
