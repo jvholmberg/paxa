@@ -11,7 +11,7 @@ import { Resource } from './resource.model';
 export class ResourceService extends BaseService<Resource> {
 
   constructor(http: HttpClient) {
-    super(http, 'resource');
+    super(http, 'resources');
   }
 
   public findById(id: number): Observable<Resource> {

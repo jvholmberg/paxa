@@ -11,6 +11,6 @@ import { Organization } from './organization.model';
 export class OrganizationService extends BaseService<Organization> {
 
   constructor(http: HttpClient) {
-    super(http, 'organization');
+    super(http, 'organizations');
   }
 }

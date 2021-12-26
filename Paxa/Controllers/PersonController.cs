@@ -9,17 +9,17 @@ namespace Paxa.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/persons")]
     public class PersonController : ControllerBase
     {
 
         private readonly ILogger<PersonController> _logger;
-        private readonly PersonService _personService;
+        private readonly IPersonService _personService;
         private readonly IMapper _mapper;
 
         public PersonController(
             ILogger<PersonController> logger,
-            PersonService PersonService,
+            IPersonService PersonService,
             IMapper mapper)
         {
             _logger = logger;

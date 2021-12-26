@@ -22,7 +22,7 @@ export class UserService extends BaseService<User> {
   public get jwtTokenValue(): string { return this.jwtTokenSource.value; }
 
   constructor(http: HttpClient) {
-    super(http, 'user');
+    super(http, 'users');
   }
 
   public authenticate(body: AuthenticateRequest): Observable<AuthenticateResponse> {

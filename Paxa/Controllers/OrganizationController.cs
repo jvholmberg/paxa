@@ -7,17 +7,17 @@ using Paxa.Services;
 namespace Paxa.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/organizations")]
     public class OrganizationController : ControllerBase
     {
 
         private readonly ILogger<OrganizationController> _logger;
-        private readonly OrganizationService _organizationService;
+        private readonly IOrganizationService _organizationService;
         private readonly IMapper _mapper;
 
         public OrganizationController(
             ILogger<OrganizationController> logger,
-            OrganizationService OrganizationService,
+            IOrganizationService OrganizationService,
             IMapper mapper)
         {
             _logger = logger;

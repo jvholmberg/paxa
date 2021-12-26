@@ -52,8 +52,9 @@ namespace Paxa
             // Services
             services.AddScoped<Authorization.IJwtUtils, Authorization.JwtUtils>();
             services.AddScoped<Services.IUserService, Services.UserService>();
-            services.AddScoped<Services.PersonService>();
-            services.AddScoped<Services.OrganizationService>();
+            services.AddScoped<Services.IPersonService, Services.PersonService>();
+            services.AddScoped<Services.IOrganizationService,Services.OrganizationService>();
+            services.AddScoped<Services.IResourceService, Services.ResourceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

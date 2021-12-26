@@ -12,7 +12,7 @@ namespace Paxa.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
 
@@ -20,7 +20,10 @@ namespace Paxa.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(ILogger<UserController> logger, IUserService userService, IMapper mapper)
+        public UserController(
+            ILogger<UserController> logger,
+            IUserService userService,
+            IMapper mapper)
         {
             _logger = logger;
             _userService = userService;
