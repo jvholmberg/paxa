@@ -10,8 +10,8 @@ using Paxa.Contexts;
 namespace Paxa.Migrations
 {
     [DbContext(typeof(PaxaContext))]
-    [Migration("20211225225148_LocationOptionalForOrganizations")]
-    partial class LocationOptionalForOrganizations
+    [Migration("20211228181624_NewInitialCreate")]
+    partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,7 +98,7 @@ namespace Paxa.Migrations
                     b.HasIndex("TimeslotId")
                         .IsUnique();
 
-                    b.ToTable("booking");
+                    b.ToTable("Bookings");
 
                     b.HasData(
                         new
@@ -136,7 +136,7 @@ namespace Paxa.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("location");
+                    b.ToTable("Locations");
 
                     b.HasData(
                         new
@@ -173,7 +173,7 @@ namespace Paxa.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("organization");
+                    b.ToTable("Organizations");
 
                     b.HasData(
                         new
@@ -215,7 +215,7 @@ namespace Paxa.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("person");
+                    b.ToTable("Persons");
 
                     b.HasData(
                         new
@@ -261,7 +261,7 @@ namespace Paxa.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("rating");
+                    b.ToTable("Rating");
 
                     b.HasData(
                         new
@@ -285,7 +285,7 @@ namespace Paxa.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rating_type");
+                    b.ToTable("RatingType");
 
                     b.HasData(
                         new
@@ -317,7 +317,7 @@ namespace Paxa.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("resource");
+                    b.ToTable("Resources");
 
                     b.HasData(
                         new
@@ -379,7 +379,7 @@ namespace Paxa.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("resource_type");
+                    b.ToTable("ResourceTypes");
 
                     b.HasData(
                         new
@@ -410,62 +410,62 @@ namespace Paxa.Migrations
 
                     b.HasIndex("ResourceId");
 
-                    b.ToTable("timeslot");
+                    b.ToTable("Timeslots");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            From = new DateTime(2021, 12, 25, 23, 51, 47, 227, DateTimeKind.Local).AddTicks(4980),
-                            To = new DateTime(2021, 12, 26, 0, 51, 47, 237, DateTimeKind.Local).AddTicks(3330)
+                            From = new DateTime(2021, 12, 28, 19, 16, 23, 181, DateTimeKind.Local).AddTicks(3390),
+                            To = new DateTime(2021, 12, 28, 20, 16, 23, 191, DateTimeKind.Local).AddTicks(1070)
                         },
                         new
                         {
                             Id = 2,
-                            From = new DateTime(2021, 12, 26, 0, 51, 47, 237, DateTimeKind.Local).AddTicks(3870),
-                            To = new DateTime(2021, 12, 26, 1, 51, 47, 237, DateTimeKind.Local).AddTicks(3870)
+                            From = new DateTime(2021, 12, 28, 20, 16, 23, 191, DateTimeKind.Local).AddTicks(1710),
+                            To = new DateTime(2021, 12, 28, 21, 16, 23, 191, DateTimeKind.Local).AddTicks(1720)
                         },
                         new
                         {
                             Id = 3,
-                            From = new DateTime(2021, 12, 26, 1, 51, 47, 237, DateTimeKind.Local).AddTicks(3880),
-                            To = new DateTime(2021, 12, 26, 2, 51, 47, 237, DateTimeKind.Local).AddTicks(3880)
+                            From = new DateTime(2021, 12, 28, 21, 16, 23, 191, DateTimeKind.Local).AddTicks(1720),
+                            To = new DateTime(2021, 12, 28, 22, 16, 23, 191, DateTimeKind.Local).AddTicks(1730)
                         },
                         new
                         {
                             Id = 4,
-                            From = new DateTime(2021, 12, 26, 2, 51, 47, 237, DateTimeKind.Local).AddTicks(3880),
-                            To = new DateTime(2021, 12, 26, 3, 51, 47, 237, DateTimeKind.Local).AddTicks(3880)
+                            From = new DateTime(2021, 12, 28, 22, 16, 23, 191, DateTimeKind.Local).AddTicks(1730),
+                            To = new DateTime(2021, 12, 28, 23, 16, 23, 191, DateTimeKind.Local).AddTicks(1730)
                         },
                         new
                         {
                             Id = 5,
-                            From = new DateTime(2021, 12, 26, 3, 51, 47, 237, DateTimeKind.Local).AddTicks(3880),
-                            To = new DateTime(2021, 12, 26, 4, 51, 47, 237, DateTimeKind.Local).AddTicks(3880)
+                            From = new DateTime(2021, 12, 28, 23, 16, 23, 191, DateTimeKind.Local).AddTicks(1730),
+                            To = new DateTime(2021, 12, 29, 0, 16, 23, 191, DateTimeKind.Local).AddTicks(1730)
                         },
                         new
                         {
                             Id = 6,
-                            From = new DateTime(2021, 12, 26, 4, 51, 47, 237, DateTimeKind.Local).AddTicks(3890),
-                            To = new DateTime(2021, 12, 26, 5, 51, 47, 237, DateTimeKind.Local).AddTicks(3890)
+                            From = new DateTime(2021, 12, 29, 0, 16, 23, 191, DateTimeKind.Local).AddTicks(1730),
+                            To = new DateTime(2021, 12, 29, 1, 16, 23, 191, DateTimeKind.Local).AddTicks(1730)
                         },
                         new
                         {
                             Id = 7,
-                            From = new DateTime(2021, 12, 26, 5, 51, 47, 237, DateTimeKind.Local).AddTicks(3890),
-                            To = new DateTime(2021, 12, 26, 6, 51, 47, 237, DateTimeKind.Local).AddTicks(3890)
+                            From = new DateTime(2021, 12, 29, 1, 16, 23, 191, DateTimeKind.Local).AddTicks(1740),
+                            To = new DateTime(2021, 12, 29, 2, 16, 23, 191, DateTimeKind.Local).AddTicks(1740)
                         },
                         new
                         {
                             Id = 8,
-                            From = new DateTime(2021, 12, 26, 6, 51, 47, 237, DateTimeKind.Local).AddTicks(3890),
-                            To = new DateTime(2021, 12, 26, 7, 51, 47, 237, DateTimeKind.Local).AddTicks(3890)
+                            From = new DateTime(2021, 12, 29, 2, 16, 23, 191, DateTimeKind.Local).AddTicks(1740),
+                            To = new DateTime(2021, 12, 29, 3, 16, 23, 191, DateTimeKind.Local).AddTicks(1740)
                         },
                         new
                         {
                             Id = 9,
-                            From = new DateTime(2021, 12, 26, 7, 51, 47, 237, DateTimeKind.Local).AddTicks(3900),
-                            To = new DateTime(2021, 12, 26, 8, 51, 47, 237, DateTimeKind.Local).AddTicks(3900)
+                            From = new DateTime(2021, 12, 29, 3, 16, 23, 191, DateTimeKind.Local).AddTicks(1740),
+                            To = new DateTime(2021, 12, 29, 4, 16, 23, 191, DateTimeKind.Local).AddTicks(1740)
                         });
                 });
 
@@ -494,21 +494,21 @@ namespace Paxa.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("user");
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Email = "johan.holmberg@domain.se",
-                            PasswordHash = "$2a$11$aQp0Sdfz9TQXHabPPSyove7xA1hG9DfLxgNQ7Zgg/FRnBO1D1RF7.",
+                            PasswordHash = "$2a$11$JZzb3UEmWePI1JDH/YgkIufoKZkMV/BKVyxKZ5z0IokUIRzVoIkzS",
                             PersonId = 1
                         },
                         new
                         {
                             Id = 2,
                             Email = "joel.holmberg@domain.se",
-                            PasswordHash = "$2a$11$ZhzU.iHqF.oLxz4vyqMi7.jSRLHIREQBhoECDvrHSN7ccsohqSDAy",
+                            PasswordHash = "$2a$11$DjnblTSZliRZX/DsjyKONepALMpizN/V2Srh7F5YeA3vTSDrzgzVG",
                             PersonId = 2
                         },
                         new
@@ -516,14 +516,14 @@ namespace Paxa.Migrations
                             Id = 3,
                             Email = "owner@houseofpadel.se",
                             OrganizationId = 1,
-                            PasswordHash = "$2a$11$sCAjhFfwaxq3xQTweRZWZeXvjDMfiyipeQCRHIAzYeCSiC6zt1PaC"
+                            PasswordHash = "$2a$11$5Hnu4nbeZ27RC9DgZsteveGmvfsJL5d81I91NDRnD1hBrbMMcPRPm"
                         },
                         new
                         {
                             Id = 4,
                             Email = "owner@sanktgorans.se",
                             OrganizationId = 2,
-                            PasswordHash = "$2a$11$2mmYcZqHsKdmbsszrS.ok.lzDIvrzBWWe5KUxgHnCT9iTlcNaH59."
+                            PasswordHash = "$2a$11$qgfVB/zMfenxOZCtwTYDLu7hTVqeHN9rlx4pccG9Ym//F49abhGma"
                         });
                 });
 

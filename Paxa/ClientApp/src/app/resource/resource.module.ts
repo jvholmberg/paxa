@@ -4,7 +4,8 @@ import { SharedModule } from '@shared/shared.module';
 import { ResourceComponent } from './resource.component';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceRoutingModule } from './resource-routing.module';
-import { ResourceFormComponent } from './resource-form/resource-form.component';
+import { ResourceCreateComponent } from './resource-create/resource-create.component';
+import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 import { ResourceViewComponent } from './resource-view/resource-view.component';
 
 
@@ -12,7 +13,8 @@ import { ResourceViewComponent } from './resource-view/resource-view.component';
   declarations: [
     ResourceComponent,
     ResourceListComponent,
-    ResourceFormComponent,
+    ResourceCreateComponent,
+    ResourceEditComponent,
     ResourceViewComponent,
   ],
   imports: [
