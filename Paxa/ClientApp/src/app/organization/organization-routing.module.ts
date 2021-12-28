@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', component: OrganizationListComponent },
       { path: 'create', component: OrganizationCreateComponent },
-      { path: ':id', component: OrganizationViewComponent},
+      { path: ':id', component: OrganizationViewComponent },
       { path: ':id/edit', component: OrganizationEditComponent },
     ]
   },

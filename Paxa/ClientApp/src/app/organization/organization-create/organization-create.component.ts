@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { OrganizationService } from '@organization/services/organization.service';
+import { Router } from '@angular/router';
+import { logError } from '@utils/logger';
 
 @Component({
   selector: 'app-organization-create',
@@ -14,6 +16,7 @@ export class OrganizationCreateComponent implements OnInit {
 
   constructor(
     private location: Location,
+    private router: Router,
     private formBuilder: FormBuilder,
     private organizationService: OrganizationService,
     ) { }
@@ -34,10 +37,10 @@ export class OrganizationCreateComponent implements OnInit {
       .create(f.value)
       .subscribe(
         (res) => {
-          console.log(res);
+          this.router.navigate(['/', 'organization', res.id], { replaceUrl: true });
         },
         (err) => {
-          console.log(err);
+          logError(err);
         });
   }
 

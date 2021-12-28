@@ -192,9 +192,13 @@ export abstract class BaseService<T> {
     );
   }
 
-  create(body: {}): Observable<Confirmation> {
+  create(body: {}): Observable<T> {
     logInfo(`${this.serviceUrl} => create`, body);
-    return this.http.post<Confirmation>(this.serviceUrl, body);
+    return this.http.post<T>(this.serviceUrl, body).pipe(
+      tap((e) => {
+        this.setValue([e]);
+      })
+    );
   }
 
   update(id: number, body: {}): Observable<Confirmation> {
