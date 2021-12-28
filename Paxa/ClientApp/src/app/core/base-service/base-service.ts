@@ -1,8 +1,8 @@
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { logError, logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, mergeMap, share } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map, share, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 export abstract class BaseService<T> {
@@ -101,12 +101,12 @@ export abstract class BaseService<T> {
     this.byIdSource.next(nextValue.byId);
   }
 
-  get(params: {} = null, force: boolean = true): Observable<T[]> {
+  get(force: boolean = false): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
 
     if (!this.initialized || force) {
-      this.http.get<T[]>(this.serviceUrl, { params }).subscribe(
+      this.http.get<T[]>(this.serviceUrl).subscribe(
         (res) => {
           this.initialized = true;
           this.setValue(res);
@@ -121,7 +121,45 @@ export abstract class BaseService<T> {
         }
       );
     }
+
     return this.value$;
+  }
+
+  query(params: {}): Observable<T[]> {
+    logInfo(`${this.serviceUrl} => query`);
+
+    const request = this.http.get<T[]>(this.serviceUrl, { params }).pipe(
+      tap((res) => {
+        this.setValue(res);
+      }),
+      share(),
+    );
+
+    request.subscribe(
+      (res) => {
+        this.initialized = true;
+        this.setValue(res);
+        this.setError(null);
+      },
+      (err) => {
+        this.setValue(null);
+        this.setError(err);
+      },
+      () => {
+        this.setLoading(false);
+      }
+    );
+
+    return combineLatest([
+      request.pipe(map<T[], number[]>((resources) => {
+        return resources.map((e) => e['id']);
+      })),
+      this.byId$
+    ]).pipe(
+      map<[number[], {}], T[]>(([ids, byId]) => {
+        return ids.map((id) => byId[id]);
+      }),
+    );
   }
 
   getById(id: number, force: boolean = true): Observable<T> {
@@ -135,7 +173,6 @@ export abstract class BaseService<T> {
     if (!previousValue || force) {
       this.http.get<T>(`${this.serviceUrl}/${id}`).subscribe(
         (res) => {
-          this.initialized = true;
           this.setValue([res]);
           this.setError(null);
         },

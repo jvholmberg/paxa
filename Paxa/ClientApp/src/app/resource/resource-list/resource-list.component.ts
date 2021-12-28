@@ -18,8 +18,7 @@ export class ResourceListComponent  implements OnInit {
   constructor(private resourceService: ResourceService) { }
 
   ngOnInit(): void {
-    this.resourceCollection$ = this.resourceService.get({
-      organizationId: this.organizationId,
-    });
+    const params = this.organizationId ? { organizationId: this.organizationId } : null;
+    this.resourceCollection$ = this.resourceService.query(params);
   }
 }
