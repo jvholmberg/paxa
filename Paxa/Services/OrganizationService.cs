@@ -68,6 +68,7 @@ namespace Paxa.Services
 
             // Make updates
             organization.Name = updates.Name;
+            organization.Description = updates.Description;
             
             _context.Organizations.Attach(organization);
 

@@ -28,7 +28,7 @@ export class OrganizationCreateComponent implements OnInit {
   private initForm(): FormGroup {
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['']
+      description: [''],
     });
   }
 

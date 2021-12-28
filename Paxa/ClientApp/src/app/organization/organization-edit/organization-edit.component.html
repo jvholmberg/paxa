@@ -1,1 +1,13 @@
-<p>organization-edit works!</p>
+<form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
+  <mat-form-field class="d-block mb-3" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
+  </mat-form-field>
+  <mat-form-field class="d-block mb-3" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea formControlName="description" matInput placeholder="Ex. We have the coolest courses"></textarea>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" style="margin-right: 5px;" type="submit">Update</button>
+  <button mat-flat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
+</form>

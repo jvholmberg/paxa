@@ -162,7 +162,7 @@ export abstract class BaseService<T> {
     );
   }
 
-  getById(id: number, force: boolean = true): Observable<T> {
+  getById(id: number, force: boolean = false): Observable<T> {
     logInfo(`${this.serviceUrl} => getById`, id);
 
     // Get current value
@@ -197,13 +197,17 @@ export abstract class BaseService<T> {
     return this.http.post<T>(this.serviceUrl, body).pipe(
       tap((e) => {
         this.setValue([e]);
-      })
+      }),
     );
   }
 
-  update(id: number, body: {}): Observable<Confirmation> {
+  update(id: number, body: {}): Observable<T> {
     logInfo(`${this.serviceUrl} => update`, id, body);
-    return this.http.put<Confirmation>(`${this.serviceUrl}/${id}`, body);
+    return this.http.put<T>(`${this.serviceUrl}/${id}`, body).pipe(
+      tap((e) => {
+        this.setValue([e]);
+      }),
+    );
   }
 
   delete(id: number): Observable<Confirmation> {
