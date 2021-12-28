@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,8 +9,7 @@ namespace Paxa.Services
 {
     public interface IResourceService
     {
-        Task<ICollection<Entities.Resource>> GetAll();
-        Task<ICollection<Entities.Resource>> GetByOrganizationId(int organizationId);
+        Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId);
         Task<Entities.Resource> GetById(int id);
     }
 
@@ -26,13 +24,17 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<ICollection<Entities.Resource>> GetAll()
+        public async Task<ICollection<Entities.Resource>> GetByQuery(
+            int? organizationId
+        )
         {
-            var resources = await _context.Resources
-                .Include(e => e.Type)
-                .ToListAsync();
+            var query = _context.Resources.Include(e => e.Type) as IQueryable<Entities.Resource>;
 
-            return resources;
+            if (organizationId != null) {
+                query = query.Where(x => x.OrganizationId == organizationId);
+            }
+
+            return await query.ToListAsync();;
         }
 
         public async Task<Entities.Resource> GetById(int id)
@@ -44,17 +46,6 @@ namespace Paxa.Services
                 .SingleOrDefaultAsync(e => e.Id == id);
 
             return resource;
-        }
-
-        public async Task<ICollection<Entities.Resource>> GetByOrganizationId(int organizationId)
-        {
-            var resources = await _context.Resources
-                .Include(e => e.Type)
-                .Include(e => e.Timeslots)
-                .Where(e => e.OrganizationId == organizationId)
-                .ToListAsync();
-
-            return resources;
         }
     }
 }

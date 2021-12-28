@@ -24,30 +24,30 @@
               <a class="nav-link text-dark" [routerLink]="['/']">Landing</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/get-started']">Get started</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'get-started']">Get started</a>
             </li>
           </ng-template>
           <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/organization']">Organization</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'organization']">Organization</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/resource']">Resource</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'resource']">Resource</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/user']">User</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'user']">User</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/timeslot']">Timeslot</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'timeslot']">Timeslot</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/booking']">Booking</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'booking']">Booking</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/person']">Person</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'person']">Person</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/logout']">Logout</a>
+              <a class="nav-link text-dark" [routerLink]="['/', 'logout']">Logout</a>
             </li>
           </ng-container>
 

@@ -101,12 +101,12 @@ export abstract class BaseService<T> {
     this.byIdSource.next(nextValue.byId);
   }
 
-  get(force: boolean = true): Observable<T[]> {
+  get(params: {} = null, force: boolean = true): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
 
     if (!this.initialized || force) {
-      this.http.get<T[]>(this.serviceUrl).subscribe(
+      this.http.get<T[]>(this.serviceUrl, { params }).subscribe(
         (res) => {
           this.initialized = true;
           this.setValue(res);

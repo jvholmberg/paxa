@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
+import { ResourceModule } from '@resource/resource.module';
 import { OrganizationComponent } from '../organization/organization.component';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
@@ -20,6 +21,7 @@ import { OrganizationCreateComponent } from './organization-create/organization-
     SharedModule,
     RouterModule,
     OrganizationRoutingModule,
+    ResourceModule,
   ],
   exports: [
     OrganizationViewComponent,

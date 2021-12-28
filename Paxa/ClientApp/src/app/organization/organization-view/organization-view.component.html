@@ -6,3 +6,4 @@
 </div>
 <h3>{{ (organization$ | async)?.name }}</h3>
 <p>{{ (organization$ | async)?.description }}</p>
+<app-resource-list [organizationId]="organizationId"></app-resource-list>

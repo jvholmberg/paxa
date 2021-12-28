@@ -26,16 +26,10 @@ namespace Paxa.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetByQuery(
+            [FromQuery] int? organizationId)
         {
-            var entities = await _ResourceService.GetAll();
-            return Ok(entities);
-        }
-
-        [HttpGet("organization/{id}")]
-        public async Task<IActionResult> GetByOrganizationId(int id)
-        {
-            var entities = await _ResourceService.GetByOrganizationId(id);
+            var entities = await _ResourceService.GetByQuery(organizationId);
             return Ok(entities);
         }
 
