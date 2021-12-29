@@ -57,5 +57,14 @@ namespace Paxa.Controllers
             var views = _mapper.Map<Views.ResourceType[]>(entities);
             return Ok(views);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Views.UpdateResourceRequest view)
+        {
+            var entity = _mapper.Map<Entities.Resource>(view);
+            var updatedEntity = await _ResourceService.Update(id, entity);
+            var updatedView = _mapper.Map<Views.Resource>(updatedEntity);
+            return Ok(updatedView);
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Paxa.Services
         Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId);
         Task<Entities.Resource> GetById(int id);
         Task<ICollection<Entities.ResourceType>> GetTypes();
+        Task<Entities.Resource> Update(int id, Entities.Resource resource);
     }
 
     public class ResourceService : IResourceService
@@ -61,6 +62,25 @@ namespace Paxa.Services
             var types = await _context.ResourceTypes.ToListAsync();
 
             return types;
+        }
+
+        public async Task<Entities.Resource> Update(int id, Entities.Resource updates)
+        {
+            var resource = await _context.Resources
+                .SingleOrDefaultAsync(e => e.Id == id);
+
+            // Make updates
+            resource.Name = updates.Name;
+            resource.TypeId = updates.TypeId;
+            
+            _context.Resources.Attach(resource);
+
+            // Persist changes
+            await _context.SaveChangesAsync();
+
+            // Get updated from db
+            var updatedEntity = await GetById(id);
+            return updatedEntity;
         }
     }
 }

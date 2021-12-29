@@ -51,7 +51,7 @@ namespace Paxa.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Views.Organization view)
+        public async Task<IActionResult> Update(int id, [FromBody] Views.UpdateOrganizationRequest view)
         {
             var entity = _mapper.Map<Entities.Organization>(view);
             var updatedEntity = await _organizationService.Update(id, entity);

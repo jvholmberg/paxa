@@ -1,7 +1,9 @@
+import { ResourceType } from "./resource-type.model";
+
 export interface Resource {
   id: number;
   organizationId: number;
   name: string;
-  typeId: number;
+  type: ResourceType;
   timeslotIds: number[];
 }

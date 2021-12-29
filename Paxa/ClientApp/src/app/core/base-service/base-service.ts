@@ -2,7 +2,7 @@ import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { logError, logInfo } from '@utils/logger';
 import { Confirmation } from '@shared/models/confirmation.model';
 import { HttpClient } from '@angular/common/http';
-import { map, share, tap } from 'rxjs/operators';
+import { map, share, skipWhile, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 export abstract class BaseService<T> {
@@ -189,6 +189,7 @@ export abstract class BaseService<T> {
     // Return value
     return this.byId$.pipe(
       map((byIds) => byIds[id]),
+      skipWhile((e) => !e),
     );
   }
 

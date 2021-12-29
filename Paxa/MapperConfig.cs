@@ -52,6 +52,7 @@ namespace Paxa
                     .ForMember(destination => destination.Ratings, options => options.Ignore());
                 
                 cfg.CreateMap<Views.CreateOrganizationRequest, Entities.Organization>();
+                cfg.CreateMap<Views.UpdateOrganizationRequest, Entities.Organization>();
 
                 // Resource
                 cfg.CreateMap<Entities.Resource, Views.Resource>()
@@ -61,6 +62,7 @@ namespace Paxa
                     .ReverseMap();
 
                 cfg.CreateMap<Views.CreateResourceRequest, Entities.Resource>();
+                cfg.CreateMap<Views.UpdateResourceRequest, Entities.Resource>();
 
                 // Person
                 cfg.CreateMap<Entities.Person, Views.Person>()
