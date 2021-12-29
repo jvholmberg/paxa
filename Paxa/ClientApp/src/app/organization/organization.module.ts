@@ -8,6 +8,7 @@ import { OrganizationRoutingModule } from './organization-routing.module';
 import { OrganizationEditComponent } from './organization-edit/organization-edit.component';
 import { OrganizationViewComponent } from './organization-view/organization-view.component';
 import { OrganizationCreateComponent } from './organization-create/organization-create.component';
+import { OrganizationRemoveComponent } from './organization-remove/organization-remove.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OrganizationCreateComponent } from './organization-create/organization-
     OrganizationEditComponent,
     OrganizationViewComponent,
     OrganizationCreateComponent,
+    OrganizationRemoveComponent,
   ],
   imports: [
     SharedModule,

@@ -75,6 +75,18 @@ export abstract class BaseService<T> {
     }
   }
 
+  private removeValue(id: number): void {
+
+    // Execute
+    logInfo(`${this.serviceUrl} => removeValue`, id);
+
+    const nextAllIds = this.allIdsSource.value.filter((e) => e !== id);
+    const nextById = { ...this.byIdSource.value, [id]: undefined };
+
+    this.allIdsSource.next(nextAllIds);
+    this.byIdSource.next(nextById);
+  }
+
   setValue(value: T[]): void {
     // Validation
     if (!value || !value.length) {
@@ -98,6 +110,7 @@ export abstract class BaseService<T> {
       return previousValue;
     }, initialValue);
 
+    this.allIdsSource.next(nextValue.allIds);
     this.byIdSource.next(nextValue.byId);
   }
 
@@ -213,6 +226,10 @@ export abstract class BaseService<T> {
 
   delete(id: number): Observable<Confirmation> {
     logInfo(`${this.serviceUrl} => delete`, id);
-    return this.http.delete<Confirmation>(`${this.serviceUrl}/${id}`);
+    return this.http.delete<Confirmation>(`${this.serviceUrl}/${id}`).pipe(
+      tap((e) => {
+        this.removeValue(id);
+      }),
+    );
   }
 }

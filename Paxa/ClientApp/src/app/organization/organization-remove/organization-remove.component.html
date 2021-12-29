@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Remove {{(organization$ | async)?.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" style="margin-right: 5px;" (click)="onDelete()">Remove</button>
+  <button mat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
+</div>
+

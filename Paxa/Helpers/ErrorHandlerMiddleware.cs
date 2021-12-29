@@ -37,6 +37,10 @@ namespace Paxa.Helpers
                         // Not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case InvalidOperationException e:
+                        // Invalid operation error
+                        response.StatusCode = (int)HttpStatusCode.Forbidden;
+                        break;
                     default:
                         // Unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;

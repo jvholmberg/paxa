@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
@@ -63,8 +64,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _organizationService.Delete(id);
-            var view = new Views.Confirmation();
-            return Ok(view);
+            return Ok();
         }
     }
 }

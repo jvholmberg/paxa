@@ -5,6 +5,7 @@ import { OrganizationListComponent } from './organization-list/organization-list
 import { OrganizationViewComponent } from './organization-view/organization-view.component';
 import { OrganizationEditComponent } from './organization-edit/organization-edit.component';
 import { OrganizationCreateComponent } from './organization-create/organization-create.component';
+import { OrganizationRemoveComponent } from './organization-remove/organization-remove.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'create', component: OrganizationCreateComponent },
       { path: ':id', component: OrganizationViewComponent },
       { path: ':id/edit', component: OrganizationEditComponent },
+      { path: ':id/remove', component: OrganizationRemoveComponent },
     ]
   },
 ];

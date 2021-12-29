@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -82,19 +81,18 @@ namespace Paxa.Services
 
         public async Task<bool> Delete(int id)
         {
-            try
-            {
-                var Organization = new Entities.Organization { Id = id };
-                _context.Organizations.Attach(Organization);
-                _context.Organizations.Remove(Organization);
-                await _context.SaveChangesAsync();
+            var organization = await _context.Organizations
+                .Include(x => x.Resources)
+                .SingleOrDefaultAsync(e => e.Id == id);
 
-                return true;
-            }
-            catch
+            if (organization.Resources.Count > 0)
             {
-                return false;
+                throw new InvalidOperationException("Cant remove organization with resources connected to it");
             }
+            _context.Organizations.Remove(organization);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }
