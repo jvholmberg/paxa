@@ -28,12 +28,12 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<Entities.Organization> Create(Entities.Organization Organization)
+        public async Task<Entities.Organization> Create(Entities.Organization organization)
         {
-            await _context.Organizations.AddAsync(Organization);
+            await _context.Organizations.AddAsync(organization);
             await _context.SaveChangesAsync();
 
-            return await GetById(Organization.Id);
+            return await GetById(organization.Id);
         }
 
         public async Task<ICollection<Entities.Organization>> GetAll()

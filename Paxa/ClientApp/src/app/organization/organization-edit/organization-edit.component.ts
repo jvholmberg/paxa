@@ -40,6 +40,10 @@ export class OrganizationEditComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void {
+    if (f.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     this.organizationService
       .update(this.organizationId, f.value)
       .subscribe(

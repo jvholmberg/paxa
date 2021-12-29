@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +24,7 @@ const externalLibs = [
   MatIconModule,
   MatInputModule,
   MatSidenavModule,
+  MatSelectModule,
   MatTableModule,
   MatToolbarModule,
   MatProgressBarModule,

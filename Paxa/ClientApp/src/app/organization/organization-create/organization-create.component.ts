@@ -33,6 +33,10 @@ export class OrganizationCreateComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void {
+    if (f.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     this.organizationService
       .create(f.value)
       .subscribe(

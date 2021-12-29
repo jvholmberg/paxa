@@ -9,8 +9,10 @@ namespace Paxa.Services
 {
     public interface IResourceService
     {
+        Task<Entities.Resource> Create(Entities.Resource resource);
         Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId);
         Task<Entities.Resource> GetById(int id);
+        Task<ICollection<Entities.ResourceType>> GetTypes();
     }
 
     public class ResourceService : IResourceService
@@ -24,9 +26,15 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<ICollection<Entities.Resource>> GetByQuery(
-            int? organizationId
-        )
+        public async Task<Entities.Resource> Create(Entities.Resource resource)
+        {
+            await _context.Resources.AddAsync(resource);
+            await _context.SaveChangesAsync();
+
+            return await GetById(resource.Id);
+        }
+
+        public async Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId)
         {
             var query = _context.Resources.Include(e => e.Type) as IQueryable<Entities.Resource>;
 
@@ -46,6 +54,13 @@ namespace Paxa.Services
                 .SingleOrDefaultAsync(e => e.Id == id);
 
             return resource;
+        }
+
+        public async Task<ICollection<Entities.ResourceType>> GetTypes()
+        {
+            var types = await _context.ResourceTypes.ToListAsync();
+
+            return types;
         }
     }
 }

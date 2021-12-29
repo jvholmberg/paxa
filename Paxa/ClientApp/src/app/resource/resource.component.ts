@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ResourceService } from './services/resource.service';
-import { Resource } from './services/resource.model';
 
 @Component({
   selector: 'app-resource',
@@ -10,12 +7,7 @@ import { Resource } from './services/resource.model';
 })
 export class ResourceComponent implements OnInit {
 
-  displayedColumns = ['name', 'action'];
-  resourceCollection$: Observable<Resource[]>;
-  
-  constructor(private resourceService: ResourceService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.resourceCollection$ = this.resourceService.get();
-  }
+  ngOnInit(): void {}
 }

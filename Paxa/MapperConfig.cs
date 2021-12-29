@@ -22,24 +22,12 @@ namespace Paxa
                 // Booking
                 cfg.CreateMap<Entities.Booking, Views.Booking>()
                     .ForMember(
-                        destination => destination.HostId,
-                        options => options.MapFrom(source => source.Host.Id)
-                    )
-                    .ForMember(
                         destination => destination.ParticipantIds,
                         options => options.MapFrom(
                             source => source.Participants.Select(participant => participant.Id).ToList()
                         )
                     )
-                    .ReverseMap()
-                    .ForMember(
-                        destination => destination.HostId,
-                        options => options.Ignore()
-                    )
-                    .ForMember(
-                        destination => destination.Participants,
-                        options => options.Ignore()
-                    );
+                    .ReverseMap();
 
                 // Location
                 cfg.CreateMap<Entities.Location, Views.Location>()
@@ -65,12 +53,21 @@ namespace Paxa
                 
                 cfg.CreateMap<Views.CreateOrganizationRequest, Entities.Organization>();
 
+                // Resource
+                cfg.CreateMap<Entities.Resource, Views.Resource>()
+                    .ReverseMap();
+
+                cfg.CreateMap<Entities.ResourceType, Views.ResourceType>()
+                    .ReverseMap();
+
+                cfg.CreateMap<Views.CreateResourceRequest, Entities.Resource>();
+
                 // Person
                 cfg.CreateMap<Entities.Person, Views.Person>()
                     .ForMember(
                         destination => destination.BookingIds,
                         options => options.MapFrom(
-                            source => source.Bookings.Select(person => person.Id).ToList()
+                            source => source.Bookings.Select(booking => booking.Id).ToList()
                         )
                     )
                     .ForMember(
