@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,6 +15,7 @@ namespace Paxa.Services
         Task<Entities.Resource> GetById(int id);
         Task<ICollection<Entities.ResourceType>> GetTypes();
         Task<Entities.Resource> Update(int id, Entities.Resource resource);
+        Task<bool> Delete(int id);
     }
 
     public class ResourceService : IResourceService
@@ -81,6 +83,22 @@ namespace Paxa.Services
             // Get updated from db
             var updatedEntity = await GetById(id);
             return updatedEntity;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var resource = await _context.Resources
+                .Include(x => x.Timeslots)
+                .SingleOrDefaultAsync(e => e.Id == id);
+
+            if (resource.Timeslots.Count > 0)
+            {
+                throw new InvalidOperationException("Cant remove resource with timesplots connected to it");
+            }
+            _context.Resources.Remove(resource);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

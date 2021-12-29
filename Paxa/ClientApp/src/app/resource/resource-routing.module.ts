@@ -5,6 +5,7 @@ import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceViewComponent } from './resource-view/resource-view.component';
 import { ResourceCreateComponent } from './resource-create/resource-create.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
+import { ResourceRemoveComponent } from './resource-remove/resource-remove.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'create', component: ResourceCreateComponent },
       { path: ':id', component: ResourceViewComponent },
       { path: ':id/edit', component: ResourceEditComponent },
+      { path: ':id/remove', component: ResourceRemoveComponent },
     ],
   },
 ];

@@ -12,7 +12,7 @@ namespace Paxa.Controllers
     {
 
         private readonly ILogger<ResourceController> _logger;
-        private readonly IResourceService _ResourceService;
+        private readonly IResourceService _resourceService;
         private readonly IMapper _mapper;
 
         public ResourceController(
@@ -21,7 +21,7 @@ namespace Paxa.Controllers
             IMapper mapper)
         {
             _logger = logger;
-            _ResourceService = ResourceService;
+            _resourceService = ResourceService;
             _mapper = mapper;
         }
 
@@ -29,7 +29,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> Create([FromBody] Views.CreateResourceRequest view)
         {
             var entity = _mapper.Map<Entities.Resource>(view);
-            var createdEntity = await _ResourceService.Create(entity);
+            var createdEntity = await _resourceService.Create(entity);
             var createdView = _mapper.Map<Views.Resource>(createdEntity);
             return Ok(createdView);
         }
@@ -37,7 +37,7 @@ namespace Paxa.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByQuery([FromQuery] int? organizationId)
         {
-            var entities = await _ResourceService.GetByQuery(organizationId);
+            var entities = await _resourceService.GetByQuery(organizationId);
             var views = _mapper.Map<Views.Resource[]>(entities);
             return Ok(views);
         }
@@ -45,7 +45,7 @@ namespace Paxa.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var entity = await _ResourceService.GetById(id);
+            var entity = await _resourceService.GetById(id);
             var view = _mapper.Map<Views.Resource>(entity);
             return Ok(view);
         }
@@ -53,7 +53,7 @@ namespace Paxa.Controllers
         [HttpGet("types")]
         public async Task<IActionResult> GetTypes()
         {
-            var entities = await _ResourceService.GetTypes();
+            var entities = await _resourceService.GetTypes();
             var views = _mapper.Map<Views.ResourceType[]>(entities);
             return Ok(views);
         }
@@ -62,9 +62,16 @@ namespace Paxa.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] Views.UpdateResourceRequest view)
         {
             var entity = _mapper.Map<Entities.Resource>(view);
-            var updatedEntity = await _ResourceService.Update(id, entity);
+            var updatedEntity = await _resourceService.Update(id, entity);
             var updatedView = _mapper.Map<Views.Resource>(updatedEntity);
             return Ok(updatedView);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var success = await _resourceService.Delete(id);
+            return Ok();
         }
     }
 }

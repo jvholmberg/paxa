@@ -7,6 +7,7 @@ import { ResourceRoutingModule } from './resource-routing.module';
 import { ResourceCreateComponent } from './resource-create/resource-create.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 import { ResourceViewComponent } from './resource-view/resource-view.component';
+import { ResourceRemoveComponent } from './resource-remove/resource-remove.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ResourceViewComponent } from './resource-view/resource-view.component';
     ResourceCreateComponent,
     ResourceEditComponent,
     ResourceViewComponent,
+    ResourceRemoveComponent,
   ],
   imports: [
     SharedModule,
