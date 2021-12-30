@@ -16,6 +16,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { IconsModule } from '@progress/kendo-angular-icons';
+import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { NavigationModule } from '@progress/kendo-angular-navigation';
+
 import { LoginComponent } from './components/login/login.component';
 
 const externalLibs = [
@@ -36,6 +43,12 @@ const externalLibs = [
   MatListModule,
   MatGridListModule,
   MatFormFieldModule,
+  ButtonsModule,
+  GridModule,
+  IconsModule,
+  IndicatorsModule,
+  LayoutModule,
+  NavigationModule,
 ];
 
 const components = [
