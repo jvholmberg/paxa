@@ -7,10 +7,16 @@ namespace Paxa.Contexts
 {
     public class PaxaContext : DbContext
     {
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<MembershipRole> MembershipRoles { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<RatingType> RatingTypes { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ResourceType> ResourceTypes { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
@@ -151,13 +157,53 @@ namespace Paxa.Contexts
                     new Timeslot { Id = 9, From = DateTime.Now.AddHours(8), To = DateTime.Now.AddHours(9) }
                 );
 
+            // MembershipRole
+            modelBuilder
+                .Entity<MembershipRole>()
+                .HasData(
+                    new MembershipRole
+                    {
+                        Id = 1,
+                        Code = "OWNER",
+                        Name = "Owner",
+                        Description = "Description for owner-role"
+                    },
+                    new MembershipRole
+                    {
+                        Id = 2,
+                        Code = "ADMIN",
+                        Name = "Admin",
+                        Description = "Description for admin-role"
+                    },
+                    new MembershipRole
+                    {
+                        Id = 3,
+                        Code = "MEMBER",
+                        Name = "Member",
+                        Description = "Description for member-role"
+                    },
+                    new MembershipRole
+                    {
+                        Id = 4,
+                        Code = "TRIAL",
+                        Name = "Trial",
+                        Description = "Description for trial-role"
+                    }
+                );
+
+            // Membership
+            modelBuilder
+                .Entity<Membership>()
+                .HasOne(msp => msp.Role);
+
             // User
             modelBuilder
                 .Entity<User>()
                 .HasOne(usr => usr.Person);
             modelBuilder
                 .Entity<User>()
-                .HasOne(usr => usr.Organization);
+                .HasMany(usr => usr.Memberships)
+                .WithOne(msp => msp.User);
             modelBuilder
                 .Entity<User>()
                 .OwnsMany(usr => usr.RefreshTokens);
@@ -183,14 +229,30 @@ namespace Paxa.Contexts
                         Id = 3,
                         Email = "owner@houseofpadel.se",
                         PasswordHash = BCryptNet.HashPassword("houseofpadel"),
-                        OrganizationId = 1,
                     },
                     new User
                     {
                         Id = 4,
                         Email = "owner@sanktgorans.se",
                         PasswordHash = BCryptNet.HashPassword("sanktgorans"),
+                    }
+                );
+            modelBuilder
+                .Entity<Membership>()
+                .HasData(
+                    new Membership
+                    {
+                        Id = 1,
+                        RoleId = 1,
+                        OrganizationId = 1,
+                        UserId = 1
+                    },
+                    new Membership
+                    {
+                        Id = 2,
+                        RoleId = 2,
                         OrganizationId = 2,
+                        UserId = 2
                     }
                 );
         }

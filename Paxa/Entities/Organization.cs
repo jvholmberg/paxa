@@ -13,6 +13,7 @@ namespace Paxa.Entities
         public virtual Location Location { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<Membership> Memberships { get; set; }
 
         public Organization()
         {

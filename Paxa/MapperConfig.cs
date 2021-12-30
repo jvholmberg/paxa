@@ -55,6 +55,14 @@ namespace Paxa
                 
                 cfg.CreateMap<Views.UpdateOrganizationRequest, Entities.Organization>();
 
+                // Membership
+                cfg.CreateMap<Entities.Membership, Views.Membership>()
+                    .ReverseMap();
+
+                // MembershipRole
+                cfg.CreateMap<Entities.MembershipRole, Views.MembershipRole>()
+                    .ReverseMap();
+
                 // Resource
                 cfg.CreateMap<Entities.Resource, Views.Resource>()
                     .ReverseMap();
@@ -143,6 +151,8 @@ namespace Paxa
                 // User
                 cfg.CreateMap<Entities.User, Views.User>()
                     .ReverseMap();
+
+                cfg.CreateMap<Entities.User, Views.AuthenticateResponse>();
 
             });
 

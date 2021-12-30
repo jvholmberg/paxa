@@ -64,9 +64,14 @@ namespace Paxa.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(AuthenticateRequest request)
         {
-            var (authenticateResponse, refreshToken) = await _userService.Authenticate(request, ipAddress());
+            var (user, jwtToken, refreshToken) = await _userService.Authenticate(request, ipAddress());
+
+            var view = _mapper.Map<Views.AuthenticateResponse>(user);
+            view.JwtToken = jwtToken;
+
             setTokenCookie(refreshToken);
-            return Ok(authenticateResponse);
+
+            return Ok(view);
         }
 
         [AllowAnonymous]
@@ -74,9 +79,14 @@ namespace Paxa.Controllers
         public async Task<IActionResult> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
-            var (token, newRefreshToken) = await _userService.RefreshToken(refreshToken, ipAddress());
+            var (user, jwtToken, newRefreshToken) = await _userService.RefreshToken(refreshToken, ipAddress());
+
+            var view = _mapper.Map<Views.AuthenticateResponse>(user);
+            view.JwtToken = jwtToken;
+
             setTokenCookie(newRefreshToken);
-            return Ok(token);
+
+            return Ok(view);
         }
 
         [HttpPost("revoke-token")]
