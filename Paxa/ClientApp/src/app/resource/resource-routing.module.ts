@@ -12,11 +12,16 @@ const routes: Routes = [
     path: '',
     component: ResourceComponent,
     children: [
-      { path: '', component: ResourceListComponent },
+      {
+        path: '',
+        component: ResourceListComponent,
+        children: [
+          { path: ':id/remove', component: ResourceRemoveComponent },
+        ]
+      },
       { path: 'create', component: ResourceCreateComponent },
       { path: ':id', component: ResourceViewComponent },
       { path: ':id/edit', component: ResourceEditComponent },
-      { path: ':id/remove', component: ResourceRemoveComponent },
     ],
   },
 ];

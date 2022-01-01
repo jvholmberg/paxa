@@ -25,7 +25,7 @@ export class ResourceRemoveComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceId = +this.activatedRoute.snapshot.params['id'];
-    this.resourceService.getById(this.resourceId);
+    this.resource$ = this.resourceService.getById(this.resourceId);
   }
 
   onDelete(): void {

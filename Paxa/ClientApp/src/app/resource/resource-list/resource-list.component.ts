@@ -23,6 +23,8 @@ export class ResourceListComponent  implements OnInit {
 
   ngOnInit(): void {
     const params = this.organizationId ? { organizationId: this.organizationId } : null;
-    this.resources$ = this.resourceService.query(params);
+    this.resources$ = params
+      ? this.resourceService.query(params)
+      : this.resourceService.get();
   }
 }
