@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration local",
+    "start": "ng serve",
     "build": "ng build",
     "build:ssr": "ng run Paxa:server:local",
     "test": "ng test",
@@ -58,6 +58,7 @@
     "bootstrap": "^4.6.1",
     "core-js": "^3.3.3",
     "jquery": "^3.5.1",
+    "ng-zorro-antd": "^13.0.0",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "rxjs": "^6.6.3",

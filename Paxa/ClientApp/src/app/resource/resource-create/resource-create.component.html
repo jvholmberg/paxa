@@ -1,25 +1,21 @@
 <form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Organization</mat-label>
-    <mat-select formControlName="organizationId">
-      <mat-option *ngFor="let organization of organizations$ | async" [value]="organization.id">
+    <label>Organization</label>
+    <select formControlName="organizationId">
+      <option *ngFor="let organization of organizations$ | async" [value]="organization.id">
         {{organization.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Name</mat-label>
-    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
-  </mat-form-field>
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Type</mat-label>
-    <mat-select formControlName="typeId">
-      <mat-option *ngFor="let type of resourceTypes$ | async" [value]="type.id">
-        {{type.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      </option>
+    </select>
 
-  <button mat-flat-button color="primary" style="margin-right: 5px;" type="submit">Create</button>
-  <button mat-flat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
+    <label>Name</label>
+    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
+
+    <label>Type</label>
+    <select formControlName="typeId">
+      <option *ngFor="let type of resourceTypes$ | async" [value]="type.id">
+        {{type.name}}
+      </option>
+    </select>
+
+  <button color="primary" style="margin-right: 5px;" type="submit">Create</button>
+  <button color="accent" type="button" (click)="onCancel()">Cancel</button>
 </form>
