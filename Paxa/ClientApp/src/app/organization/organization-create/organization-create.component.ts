@@ -19,7 +19,7 @@ export class OrganizationCreateComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private organizationService: OrganizationService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.form = this.initForm();
