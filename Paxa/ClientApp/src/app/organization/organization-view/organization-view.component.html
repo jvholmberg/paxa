@@ -1,9 +1,15 @@
+<ng-container *ngIf="organization$ | async as organization">
 
-<div class="mb-3">
-  <button mat-button color="primary" [routerLink]="['/', 'organization']" [queryParamsHandling]="'merge'">
-    <fa-icon [icon]="iconFaChevronLeft"></fa-icon> Back
-  </button>
-</div>
-<h3>{{ (organization$ | async)?.name }}</h3>
-<p>{{ (organization$ | async)?.description }}</p>
-<app-resource-list [organizationId]="organizationId"></app-resource-list>
+  <div class="d-flex mb-3">
+    <button kendoButton look="flat" [primary]="true" [routerLink]="['/', 'organization']" [queryParamsHandling]="'merge'">
+      <fa-icon [icon]="iconFaChevronLeft"></fa-icon> Back
+    </button>
+    <h3 class="mb-0 ml-3">{{ organization?.name }}</h3>
+  </div>
+
+  <p>{{ organization?.description }}</p>
+
+  <app-resource-list [organizationId]="organizationId"></app-resource-list>
+</ng-container>
+
+<router-outlet></router-outlet>

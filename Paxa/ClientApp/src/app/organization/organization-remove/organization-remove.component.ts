@@ -25,7 +25,7 @@ export class OrganizationRemoveComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationId = +this.activatedRoute.snapshot.params['id'];
-    this.organizationService.getById(this.organizationId);
+    this.organization$ = this.organizationService.getById(this.organizationId);
   }
 
   onDelete(): void {

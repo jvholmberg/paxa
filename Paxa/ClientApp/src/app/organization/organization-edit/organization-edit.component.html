@@ -1,13 +1,21 @@
-<form #f="ngForm" *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(f)">
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Name</mat-label>
-    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
-  </mat-form-field>
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea formControlName="description" matInput placeholder="Ex. We have the coolest courses"></textarea>
-  </mat-form-field>
+<form class="container-fluid" #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
 
-  <button mat-flat-button color="primary" style="margin-right: 5px;" type="submit">Update</button>
-  <button mat-flat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
+  <kendo-formfield class="d-block mb-3" showHints="initial" showErrors="initial">
+    <kendo-label [for]="name">Name</kendo-label>
+    <kendo-textbox class="w-100" #name formControlName="name"></kendo-textbox>
+    <kendo-formhint>Ex. Cool Padel</kendo-formhint>
+    <kendo-formerror *ngIf="form?.get('name').errors?.required">Name is required</kendo-formerror>
+    <kendo-formerror *ngIf="form?.get('name').errors?.minlength">Name too short</kendo-formerror>
+  </kendo-formfield>
+
+  <kendo-formfield class="d-block mb-3" showHints="initial" showErrors="initial">
+    <kendo-label [for]="description">Description</kendo-label>
+    <kendo-textbox class="w-100" #description formControlName="description"></kendo-textbox>
+    <kendo-formhint>Ex. We have the coolest courses</kendo-formhint>
+  </kendo-formfield>
+
+  <div class="d-flex justify-content-end">
+    <button class="mr-2" kendoButton type="button" (click)="onCancel()">Cancel</button>
+    <button kendoButton [primary]="true" type="submit">Update</button>
+  </div>
 </form>

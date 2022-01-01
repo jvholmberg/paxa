@@ -12,11 +12,16 @@ const routes: Routes = [
     path: '',
     component: OrganizationComponent,
     children: [
-      { path: '', component: OrganizationListComponent },
+      {
+        path: '',
+        component: OrganizationListComponent,
+        children: [
+          { path: ':id/remove', component: OrganizationRemoveComponent },
+        ]
+      },
       { path: 'create', component: OrganizationCreateComponent },
       { path: ':id', component: OrganizationViewComponent },
       { path: ':id/edit', component: OrganizationEditComponent },
-      { path: ':id/remove', component: OrganizationRemoveComponent },
     ]
   },
 ];

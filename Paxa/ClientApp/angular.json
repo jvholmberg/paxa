@@ -34,6 +34,28 @@
             "scripts": []
           },
           "configurations": {
+            "local": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
             "production": {
               "budgets": [
                 {
@@ -64,6 +86,9 @@
             "browserTarget": "Paxa:build"
           },
           "configurations": {
+            "local": {
+              "browserTarget": "Paxa:build:local"
+            },
             "production": {
               "browserTarget": "Paxa:build:production"
             }
@@ -102,12 +127,12 @@
             "tsConfig": "src/tsconfig.server.json"
           },
           "configurations": {
-            "dev": {
-              "optimization": true,
+            "local": {
+              "optimization": false,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false
             },
             "production": {
               "optimization": true,

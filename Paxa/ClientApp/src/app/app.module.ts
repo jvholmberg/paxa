@@ -18,6 +18,8 @@ import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.intercep
 import { UserService } from '@user/services/user.service';
 import { LogoutComponent } from './logout/logout.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

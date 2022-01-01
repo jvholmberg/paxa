@@ -16,14 +16,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+import { FormFieldModule, InputsModule, TextAreaModule, TextBoxModule } from '@progress/kendo-angular-inputs';
+import { LabelModule } from '@progress/kendo-angular-label';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 
 import { LoginComponent } from './components/login/login.component';
+
+
 
 const externalLibs = [
   CommonModule,
@@ -43,12 +49,19 @@ const externalLibs = [
   MatListModule,
   MatGridListModule,
   MatFormFieldModule,
+
   ButtonsModule,
+  DialogsModule,
+  FormFieldModule,
   GridModule,
   IconsModule,
+  InputsModule,
   IndicatorsModule,
+  LabelModule,
   LayoutModule,
   NavigationModule,
+  TextAreaModule,
+  TextBoxModule,
 ];
 
 const components = [
