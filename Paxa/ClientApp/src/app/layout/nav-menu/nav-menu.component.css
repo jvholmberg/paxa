@@ -1,18 +1,43 @@
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+:host {
+  position: sticky;
+  display: block;
+  margin-bottom: 1rem;
+  top: 0;
+  z-index: 1;
 }
 
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.title {
+  font-size: 1.25em;
+  margin: 0;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+kendo-badge-container {
+  margin-right: 8px;
+}
+
+ul {
+  font-size: 1em;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+li {
+  margin: 0 .5rem;
+}
+
+li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+li a:hover,
+li a.active {
+  cursor: pointer;
+  color: #fec000;
+}
+
+.actions .k-button {
+  padding: 0;
 }

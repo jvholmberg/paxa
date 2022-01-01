@@ -1,6 +1,6 @@
 
 <div class="mb-3">
-  <button kendoButton [routerLink]="['/', 'resource', 'create']" [primary]="true">
+  <button kendoButton [routerLink]="['/', 'resource', 'create']">
     <fa-icon [icon]="iconFaPlus"></fa-icon> Create resource
   </button>
 </div>
@@ -8,10 +8,10 @@
 <kendo-grid [data]="resources$ | async">
   <kendo-grid-column field="name" title="Name">
     <ng-template kendoGridCellTemplate let-dataItem>
-      <fa-icon [icon]="iconFaBuilding"></fa-icon> {{dataItem.name}}
+      <a [routerLink]="['/', 'resource', dataItem.id]">{{dataItem.name}}</a>
     </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column>
+  <kendo-grid-column [width]="171">
     <ng-template kendoGridCellTemplate let-dataItem>
       <button kendoButton look="flat" [routerLink]="['/', 'resource', dataItem.id, 'edit']">
         <fa-icon [icon]="iconFaEdit"></fa-icon> Edit

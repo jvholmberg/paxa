@@ -1,62 +1,86 @@
-<header class="mb-3">
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Paxa</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }">
-        <ul class="navbar-nav flex-grow">
-          <ng-template #notLoggedIn>
-            <li
-              class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link text-dark" [routerLink]="['/']">Landing</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'get-started']">Get started</a>
-            </li>
-          </ng-template>
-          <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'organization']">Organization</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'resource']">Resource</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'user']">User</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'timeslot']">Timeslot</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'booking']">Booking</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'person']">Person</a>
-            </li>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/', 'logout']">Logout</a>
-            </li>
-          </ng-container>
+<kendo-appbar [themeColor]="'dark'">
+  <kendo-appbar-section>
+    <button class="k-button k-button-clear">
+      <kendo-icon name="menu"></kendo-icon>
+    </button>
+  </kendo-appbar-section>
 
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <mat-progress-bar
-    *ngIf="isLoading$ | async"
-    mode="indeterminate">
-  </mat-progress-bar>
-</header>
+  <kendo-appbar-section>
+    <h1 class="title">Paxa</h1>
+  </kendo-appbar-section>
+
+  <kendo-appbar-spacer width="32px"></kendo-appbar-spacer>
+
+  <kendo-appbar-section>
+    <ul>
+      <ng-template #notLoggedIn>
+        <li>
+          <a
+            [routerLink]="['/']"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Landing
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'get-started']" [routerLinkActive]="['active']">Get started</a>
+        </li>
+      </ng-template>
+      <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
+        <li>
+          <a [routerLink]="['/', 'organization']" [routerLinkActive]="['active']">Organization</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'resource']" [routerLinkActive]="['active']">Resource</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'user']" [routerLinkActive]="['active']">User</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'timeslot']" [routerLinkActive]="['active']">Timeslot</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'booking']" [routerLinkActive]="['active']">Booking</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'person']" [routerLinkActive]="['active']">Person</a>
+        </li>
+        <li>
+          <a [routerLink]="['/', 'logout']" [routerLinkActive]="['active']">Logout</a>
+        </li>
+      </ng-container>
+    </ul>
+  </kendo-appbar-section>
+
+  <kendo-appbar-spacer></kendo-appbar-spacer>
+
+  <kendo-appbar-section class="actions">
+    <kendo-badge-container>
+      <button class="k-button k-button-clear">
+        <kendo-icon name="bell"></kendo-icon>
+      </button>
+      <kendo-badge
+        shape="dot"
+        themeColor="warning"
+        size="small"
+        position="inside"
+      ></kendo-badge>
+    </kendo-badge-container>
+    <span class="k-appbar-separator"></span>
+  </kendo-appbar-section>
+
+  <kendo-appbar-section>
+    <kendo-avatar
+      [imageSrc]="kendokaAvatar"
+      shape="circle"
+      width="26px"
+      height="26px"
+    ></kendo-avatar>
+  </kendo-appbar-section>
+
+</kendo-appbar>
+
+<mat-progress-bar
+  *ngIf="isLoading$ | async"
+  mode="indeterminate">
+</mat-progress-bar>
