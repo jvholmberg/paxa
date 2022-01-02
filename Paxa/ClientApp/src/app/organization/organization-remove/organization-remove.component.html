@@ -1,20 +1,28 @@
 
-<kendo-dialog
+<nz-modal
   *ngIf="organization$ | async as organization"
-  title="Remove {{organization?.name}}"
-  (close)="onCancel()"
-  [minWidth]="250"
-  [minHeight]="200"
-  [width]="450">
+  [nzVisible]="true"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="onCancel()">
+  <ng-template #modalTitle>
+    Remove {{organization?.name}}
+  </ng-template>
 
-  <p>
-    You are about to remove {{organization?.name}}.
-    Are you sure you want to continue?
-  </p>
+  <ng-template #modalContent>
+    <p>
+      You are about to remove {{organization?.name}}.
+      Are you sure you want to continue?
+    </p>
+  </ng-template>
 
-  <kendo-dialog-actions>
-    <button kendoButton (click)="onCancel()">No</button>
-    <button kendoButton (click)="onDelete()" [primary]="true">Yes</button>
-  </kendo-dialog-actions>
-
-</kendo-dialog>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="onCancel()">
+      Cancel
+    </button>
+    <button nz-button nzType="primary" nzDanger [nzLoading]="isSubmitting$ | async" [disabled]="isSubmitting$ | async" (click)="onDelete()">
+      Remove
+    </button>
+  </ng-template>
+</nz-modal>

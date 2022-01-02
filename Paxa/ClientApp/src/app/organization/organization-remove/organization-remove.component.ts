@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { logError } from '@utils/logger';
 import { OrganizationService } from '@organization/services/organization.service';
 import { Organization } from '@organization/services/organization.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-organization-remove',
@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./organization-remove.component.css']
 })
 export class OrganizationRemoveComponent implements OnInit {
+
+  private readonly isSubmittingSubject = new BehaviorSubject<boolean>(false);
+  isSubmitting$: Observable<boolean> = this.isSubmittingSubject.asObservable();
 
   organizationId: number;
   organization$: Observable<Organization>;
@@ -29,15 +32,19 @@ export class OrganizationRemoveComponent implements OnInit {
   }
 
   onDelete(): void {
+    this.isSubmittingSubject.next(true);
     this.organizationService
       .delete(this.organizationId)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
+          this.isSubmittingSubject.next(false);
           this.router.navigate(['/', 'organization'], { replaceUrl: true });
         },
-        (err) => {
+        error: (err) => {
+          this.isSubmittingSubject.next(false);
           logError(err);
-        });
+        },
+      });
   }
 
   onCancel(): void {

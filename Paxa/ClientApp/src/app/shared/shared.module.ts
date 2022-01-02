@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { IconsProviderModule } from '../icons-provider.module';
 
@@ -27,9 +31,13 @@ const externalLibs = [
   FormsModule,
   ReactiveFormsModule,
 
+  NzBreadCrumbModule,
+  NzButtonModule,
+  NzIconModule,
   NzLayoutModule,
   NzMenuModule,
-  NzBreadCrumbModule,
+  NzModalModule,
+  NzTableModule,
 
   IconsProviderModule,
 
