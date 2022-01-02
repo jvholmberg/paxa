@@ -1,41 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTableModule } from 'ng-zorro-antd/table';
+
+import { IconsProviderModule } from '../icons-provider.module';
+
 import { LoginComponent } from './components/login/login.component';
 
 const externalLibs = [
   CommonModule,
-  FontAwesomeModule,
+  FormsModule,
   ReactiveFormsModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatIconModule,
-  MatInputModule,
-  MatSidenavModule,
-  MatSelectModule,
-  MatSnackBarModule,
-  MatTableModule,
-  MatToolbarModule,
-  MatProgressBarModule,
-  MatCardModule,
-  MatListModule,
-  MatGridListModule,
-  MatFormFieldModule,
+
+  NzBreadCrumbModule,
+  NzButtonModule,
+  NzFormModule,
+  NzIconModule,
+  NzInputModule,
+  NzLayoutModule,
+  NzMenuModule,
+  NzModalModule,
+  NzPageHeaderModule,
+  NzSelectModule,
+  NzTableModule,
+
+  IconsProviderModule,
 ];
 
 const components = [

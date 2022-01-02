@@ -23,7 +23,7 @@ export class OrganizationEditComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private organizationService: OrganizationService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.organizationId = +this.activatedRoute.snapshot.params['id'];

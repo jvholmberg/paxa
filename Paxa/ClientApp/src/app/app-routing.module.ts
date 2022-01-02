@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LandingComponent } from './landing/landing.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, pathMatch: 'full' },
+
+  { path: '', pathMatch: 'full', redirectTo: 'welcome' },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'get-started', component: GetStartedComponent },
   {
     path: 'booking',
@@ -43,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

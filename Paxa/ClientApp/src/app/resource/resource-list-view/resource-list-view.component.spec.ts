@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingComponent } from './landing.component';
+import { ResourceListViewComponent } from './resource-list-view.component';
 
-describe('LandingComponent', () => {
-  let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+describe('ResourceListViewComponent', () => {
+  let component: ResourceListViewComponent;
+  let fixture: ComponentFixture<ResourceListViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingComponent ]
+      declarations: [ ResourceListViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(ResourceListViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

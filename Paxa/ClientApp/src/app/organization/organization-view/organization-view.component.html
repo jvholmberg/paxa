@@ -1,9 +1,18 @@
+<ng-container *ngIf="organization$ | async as organization">
+  <nz-page-header nzBackIcon (nzBack)="onGoBack()">
+    <nz-page-header-title>{{organization?.name}}</nz-page-header-title>
+    <nz-page-header-subtitle>{{organization?.description}}</nz-page-header-subtitle>
+    <nz-page-header-extra>
+      <button nz-button [routerLink]="['/', 'organization', organization.id, 'edit']">
+        Edit Organization
+      </button>
+      <button nz-button nzType="primary" [routerLink]="['/', 'resource', 'create']">
+        Create Resource
+      </button>
+    </nz-page-header-extra>
+  </nz-page-header>
 
-<div class="mb-3">
-  <button mat-button color="primary" [routerLink]="['/', 'organization']" [queryParamsHandling]="'merge'">
-    <fa-icon [icon]="iconFaChevronLeft"></fa-icon> Back
-  </button>
-</div>
-<h3>{{ (organization$ | async)?.name }}</h3>
-<p>{{ (organization$ | async)?.description }}</p>
-<app-resource-list [organizationId]="organizationId"></app-resource-list>
+  <app-resource-list [organizationId]="organizationId"></app-resource-list>
+</ng-container>
+
+<router-outlet></router-outlet>

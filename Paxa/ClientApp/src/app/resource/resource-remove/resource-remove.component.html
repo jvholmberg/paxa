@@ -1,9 +1,28 @@
-<h1 mat-dialog-title>Remove {{(resource$ | async)?.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button color="primary" style="margin-right: 5px;" (click)="onDelete()">Remove</button>
-  <button mat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
-</div>
 
+<nz-modal
+  *ngIf="resource$ | async as resource"
+  [nzVisible]="true"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="onCancel()">
+  <ng-template #modalTitle>
+    Remove {{resource?.name}}asdadadsad
+  </ng-template>
+
+  <ng-template #modalContent>
+    <p>
+      You are about to remove {{resource?.name}}.
+      Are you sure you want to continue?
+    </p>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="onCancel()">
+      Cancel
+    </button>
+    <button nz-button nzType="primary" nzDanger [nzLoading]="isSubmitting$ | async" [disabled]="isSubmitting$ | async" (click)="onDelete()">
+      Remove
+    </button>
+  </ng-template>
+</nz-modal>

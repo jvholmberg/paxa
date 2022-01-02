@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Organization } from '@organization/services/organization.model';
 import { OrganizationService } from '@organization/services/organization.service';
 
@@ -15,12 +14,11 @@ export class OrganizationViewComponent implements OnInit {
   @Input() organizationId: number;
   organization$: Observable<Organization>;
 
-  iconFaChevronLeft = faChevronLeft;
-
   constructor(
-    private organizationService: OrganizationService,
     private activatedRoute: ActivatedRoute,
-    ) { }
+    private router: Router,
+    private organizationService: OrganizationService,
+  ) { }
 
   ngOnInit(): void {
     // If no id was provided; Check params
@@ -29,6 +27,12 @@ export class OrganizationViewComponent implements OnInit {
     }
 
     this.organization$ = this.organizationService.getById(this.organizationId);
+  }
+
+  onGoBack(): void {
+    this.router.navigate(['/', 'organization'], {
+      queryParamsHandling: 'merge',
+    });
   }
 
 }

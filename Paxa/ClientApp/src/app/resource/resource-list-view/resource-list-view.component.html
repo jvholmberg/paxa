@@ -1,0 +1,13 @@
+<nz-page-header>
+  <nz-page-header-title>All Resources</nz-page-header-title>
+  <nz-page-header-subtitle>subtitle</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <button nz-button nzType="primary" [routerLink]="['/', 'resource', 'create']">
+      Create Resource
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+
+<app-resource-list></app-resource-list>
+
+<router-outlet></router-outlet>

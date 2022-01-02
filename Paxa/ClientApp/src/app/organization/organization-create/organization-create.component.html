@@ -1,13 +1,30 @@
-<form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Name</mat-label>
-    <input formControlName="name" matInput placeholder="Ex. Cool Padel">
-  </mat-form-field>
-  <mat-form-field class="d-block mb-3" appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea formControlName="description" matInput placeholder="Ex. We have the coolest courses"></textarea>
-  </mat-form-field>
+<form nz-form nzLayout="vertical" #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
 
-  <button mat-flat-button color="primary" style="margin-right: 5px;" type="submit">Create</button>
-  <button mat-flat-button color="accent" type="button" (click)="onCancel()">Cancel</button>
+  <nz-page-header nzBackIcon (nzBack)="onCancel()">
+    <nz-page-header-title>Create Organization</nz-page-header-title>
+    <nz-page-header-subtitle>Organization is the highest hierarchy item</nz-page-header-subtitle>
+  </nz-page-header>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Name</nz-form-label>
+    <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTip">
+      <input nz-input type="text" formControlName="name" placeholder="Ex. Cool Padel" />
+      <ng-template #nameErrorTip let-control>
+        <ng-container *ngIf="control.hasError('required')">Name is required</ng-container>
+        <ng-container *ngIf="control.hasError('minlength')">Name too short</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control>
+      <textarea formControlName="description" nz-input rows="4" placeholder="Ex. We have the coolest courses"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="d-flex justify-content-end">
+    <button type="button" class="mr-2" nz-button nzType="default" (click)="onCancel()">Cancel</button>
+    <button type="submit" nz-button nzType="primary">Create</button>
+  </div>
 </form>

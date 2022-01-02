@@ -3,26 +3,33 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SharedModule } from '@shared/shared.module';
-import { NavMenuComponent } from '@layout/nav-menu/nav-menu.component';
+import { registerLocaleData } from '@angular/common';
+import sv from '@angular/common/locales/sv';
+
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { sv_SE } from 'ng-zorro-antd/i18n';
 
 import { appInitializer } from './app-initializer';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from '@shared/shared.module';
+import { UserService } from '@user/services/user.service';
+
+import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
+import { HttpsStatusInterceptor } from '@core/http-status/https-status.interceptor';
+
+import { GetStartedComponent } from './get-started/get-started.component';
+import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAllowedComponent } from './not-allowed/not-allowed.component';
-import { LandingComponent } from './landing/landing.component';
-import { GetStartedComponent } from './get-started/get-started.component';
-import { HttpsStatusInterceptor } from '@core/http-status/https-status.interceptor';
-import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
-import { UserService } from '@user/services/user.service';
-import { LogoutComponent } from './logout/logout.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+
+registerLocaleData(sv);
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    LandingComponent,
+    WelcomeComponent,
     LogoutComponent,
     GetStartedComponent,
     NotFoundComponent,
@@ -38,7 +45,8 @@ import { LogoutComponent } from './logout/logout.component';
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [UserService] },
     { provide: HTTP_INTERCEPTORS, useClass: HttpsStatusInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true },
+    { provide: NZ_I18N, useValue: sv_SE }
   ],
   bootstrap: [AppComponent]
 })
