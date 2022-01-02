@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Organization } from '@organization/services/organization.model';
 import { OrganizationService } from '@organization/services/organization.service';
 
@@ -15,12 +14,10 @@ export class OrganizationViewComponent implements OnInit {
   @Input() organizationId: number;
   organization$: Observable<Organization>;
 
-  iconFaChevronLeft = faChevronLeft;
-
   constructor(
-    private organizationService: OrganizationService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private organizationService: OrganizationService,
   ) { }
 
   ngOnInit(): void {

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { faEdit, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@resource/services/resource.service';
 import { Resource } from '@resource/services/resource.model';
 
