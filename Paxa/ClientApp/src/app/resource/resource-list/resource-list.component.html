@@ -1,25 +1,23 @@
-
-<div class="mb-3">
-  <button kendoButton [routerLink]="['/', 'resource', 'create']">
-    <fa-icon [icon]="iconFaPlus"></fa-icon> Create resource
-  </button>
-</div>
-
-<kendo-grid [data]="resources$ | async">
-  <kendo-grid-column field="name" title="Name">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <a [routerLink]="['/', 'resource', dataItem.id]">{{dataItem.name}}</a>
-    </ng-template>
-  </kendo-grid-column>
-  <kendo-grid-column [width]="171">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoButton look="flat" [routerLink]="['/', 'resource', dataItem.id, 'edit']">
-        <fa-icon [icon]="iconFaEdit"></fa-icon> Edit
-      </button>
-      <button kendoButton look="flat" [routerLink]="['/', 'resource', dataItem.id, 'remove']">
-        <fa-icon [icon]="iconFaTrashAlt"></fa-icon> Remove
-      </button>
-    </ng-template>
-  </kendo-grid-column>
-</kendo-grid>
-<router-outlet></router-outlet>
+<nz-table #resourcesTable [nzData]="resources$ | async">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataItem of resourcesTable.data">
+      <td>
+        <a [routerLink]="['/', 'resource', dataItem.id]">{{dataItem.name}}</a>
+      </td>
+      <td>
+        <button nz-button nzType="text" [routerLink]="getUrl(dataItem.id, 'edit')">
+          Edit
+        </button>
+        <button nz-button nzType="text" nzDanger [routerLink]="getUrl(dataItem.id, 'remove')">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

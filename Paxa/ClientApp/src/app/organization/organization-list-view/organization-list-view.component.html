@@ -1,0 +1,13 @@
+<nz-page-header>
+  <nz-page-header-title>All Organizations</nz-page-header-title>
+  <nz-page-header-subtitle>subtitle</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <button nz-button nzType="primary" [routerLink]="['/', 'organization', 'create']">
+      Create Organization
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+
+<app-organization-list></app-organization-list>
+
+<router-outlet></router-outlet>

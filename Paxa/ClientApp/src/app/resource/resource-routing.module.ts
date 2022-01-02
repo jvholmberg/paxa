@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ResourceComponent } from './resource.component';
-import { ResourceListComponent } from './resource-list/resource-list.component';
+import { ResourceListViewComponent } from './resource-list-view/resource-list-view.component';
 import { ResourceViewComponent } from './resource-view/resource-view.component';
 import { ResourceCreateComponent } from './resource-create/resource-create.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ResourceListComponent,
+        component: ResourceListViewComponent,
         children: [
           { path: ':id/remove', component: ResourceRemoveComponent },
         ]

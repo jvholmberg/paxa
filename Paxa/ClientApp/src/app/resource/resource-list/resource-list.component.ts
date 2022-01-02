@@ -15,16 +15,23 @@ export class ResourceListComponent  implements OnInit {
 
   resources$: Observable<Resource[]>;
 
-  iconFaPlus = faPlus;
-  iconFaEdit = faEdit;
-  iconFaTrashAlt = faTrashAlt;
-
   constructor(private resourceService: ResourceService) { }
 
   ngOnInit(): void {
     const params = this.organizationId ? { organizationId: this.organizationId } : null;
+
     this.resources$ = params
       ? this.resourceService.query(params)
       : this.resourceService.get();
+  }
+
+  getUrl(resourceId: number, action: string): string[] {
+    return [
+      ...this.organizationId
+        ? ['/', 'organization', `${this.organizationId}`, 'resource']
+        : ['/', 'resource'],
+      `${resourceId}`,
+      action,
+    ]
   }
 }

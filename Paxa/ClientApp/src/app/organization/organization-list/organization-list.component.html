@@ -1,10 +1,4 @@
 
-<div class="mb-3">
-  <button nz-button nzType="primary" [routerLink]="['/', 'organization', 'create']">
-    Create organization
-  </button>
-</div>
-
 <nz-table #organizationsTable [nzData]="organizations$ | async">
   <thead>
     <tr>
@@ -28,5 +22,3 @@
     </tr>
   </tbody>
 </nz-table>
-
-<router-outlet></router-outlet>

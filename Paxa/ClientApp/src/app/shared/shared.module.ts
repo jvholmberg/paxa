@@ -11,6 +11,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { IconsProviderModule } from '../icons-provider.module';
@@ -41,6 +42,7 @@ const externalLibs = [
   NzLayoutModule,
   NzMenuModule,
   NzModalModule,
+  NzPageHeaderModule,
   NzTableModule,
 
   IconsProviderModule,

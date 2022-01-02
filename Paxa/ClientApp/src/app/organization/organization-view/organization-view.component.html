@@ -1,13 +1,16 @@
 <ng-container *ngIf="organization$ | async as organization">
-
-  <div class="d-flex mb-3">
-    <button kendoButton look="flat" [primary]="true" [routerLink]="['/', 'organization']" [queryParamsHandling]="'merge'">
-      <fa-icon [icon]="iconFaChevronLeft"></fa-icon> Back
-    </button>
-    <h3 class="mb-0 ml-3">{{ organization?.name }}</h3>
-  </div>
-
-  <p>{{ organization?.description }}</p>
+  <nz-page-header nzBackIcon (nzBack)="onGoBack()">
+    <nz-page-header-title>{{organization?.name}}</nz-page-header-title>
+    <nz-page-header-subtitle>{{organization?.description}}</nz-page-header-subtitle>
+    <nz-page-header-extra>
+      <button nz-button [routerLink]="['/', 'organization', organization.id, 'edit']">
+        Edit Organization
+      </button>
+      <button nz-button nzType="primary" [routerLink]="['/', 'resource', 'create']">
+        Create Resource
+      </button>
+    </nz-page-header-extra>
+  </nz-page-header>
 
   <app-resource-list [organizationId]="organizationId"></app-resource-list>
 </ng-container>
