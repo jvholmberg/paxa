@@ -11,6 +11,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
@@ -32,6 +33,7 @@ const externalLibs = [
   NzMenuModule,
   NzModalModule,
   NzPageHeaderModule,
+  NzResultModule,
   NzSelectModule,
   NzTableModule,
 
