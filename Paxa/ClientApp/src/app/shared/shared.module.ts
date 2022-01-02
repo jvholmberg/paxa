@@ -5,7 +5,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -33,7 +35,9 @@ const externalLibs = [
 
   NzBreadCrumbModule,
   NzButtonModule,
+  NzFormModule,
   NzIconModule,
+  NzInputModule,
   NzLayoutModule,
   NzMenuModule,
   NzModalModule,
