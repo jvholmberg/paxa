@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { OrganizationGuard } from '@organization/organization.guard';
+import { ResourceGuard } from '@resource/resource.guard';
+
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAllowedComponent } from './not-allowed/not-allowed.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LoginComponent } from './login/login.component';
 import { GetStartedComponent } from './get-started/get-started.component';
-import { OrganizationGuard } from '@organization/organization.guard';
-import { ResourceGuard } from '@resource/resource.guard';
 
 const routes: Routes = [
 
@@ -44,6 +47,7 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
   },
   { path: 'logout', component: LogoutComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'not-allowed', component: NotAllowedComponent },
   { path: '**', component: NotFoundComponent },
 ];

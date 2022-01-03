@@ -20,6 +20,7 @@ import { HttpsStatusInterceptor } from '@core/http-status/https-status.intercept
 
 import { GetStartedComponent } from './get-started/get-started.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAllowedComponent } from './not-allowed/not-allowed.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -31,6 +32,7 @@ registerLocaleData(sv);
     AppComponent,
     WelcomeComponent,
     LogoutComponent,
+    LoginComponent,
     GetStartedComponent,
     NotFoundComponent,
     NotAllowedComponent,

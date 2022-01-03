@@ -9,6 +9,9 @@
         <li nz-menu-item nzMatchRouter>
           <a [routerLink]="['/', 'get-started']">Get started</a>
         </li>
+        <li nz-menu-item nzMatchRouter>
+          <a [routerLink]="['/', 'login']">Login</a>
+        </li>
       </ng-template>
       <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
         <li nz-menu-item nzMatchRouter>

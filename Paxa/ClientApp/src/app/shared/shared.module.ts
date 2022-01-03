@@ -17,8 +17,6 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { IconsProviderModule } from '../icons-provider.module';
 
-import { LoginComponent } from './components/login/login.component';
-
 const externalLibs = [
   CommonModule,
   FormsModule,
@@ -41,7 +39,7 @@ const externalLibs = [
 ];
 
 const components = [
-  LoginComponent
+
 ];
 
 @NgModule({
