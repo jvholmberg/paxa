@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Paxa.Entities
 {
-    public class MembershipRole
+    public class FriendshipType
     {
         [Key]
         public int Id { get; set; }
@@ -11,9 +11,9 @@ namespace Paxa.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Membership> Memberships { get; set; }
+        public virtual ICollection<Friendship> Friendships { get; set; }
 
-        public MembershipRole()
+        public FriendshipType()
         {
         }
     }

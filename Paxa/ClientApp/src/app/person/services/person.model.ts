@@ -5,7 +5,5 @@ export interface Person {
   firstName: string;
   lastName: string;
   address: Address;
-  followerIds: number[];
-  followingIds: number[];
   bookingIds: number[];
 }

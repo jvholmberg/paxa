@@ -3,16 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Paxa.Entities
 {
-    public class Booking
+    public class ParticipantType
     {
         [Key]
         public int Id { get; set; }
-        public int TimeslotId { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
-        public virtual Timeslot Timeslot { get; set; }
         public virtual ICollection<Participant> Participants { get; set; }
 
-        public Booking()
+        public ParticipantType()
         {
         }
     }

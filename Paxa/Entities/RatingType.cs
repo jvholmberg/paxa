@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Paxa.Entities
@@ -7,6 +8,8 @@ namespace Paxa.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
 
         public RatingType()
         {

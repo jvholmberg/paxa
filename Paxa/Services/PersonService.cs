@@ -47,8 +47,6 @@ namespace Paxa.Services
         {
             var entities = await _context.Persons
                 .Include(e => e.Bookings)
-                .Include(e => e.Followers)
-                .Include(e => e.Following)
                 .Include(e => e.Address)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .ToListAsync();
@@ -60,8 +58,6 @@ namespace Paxa.Services
         {
             var entity = await _context.Persons
                 .Include(e => e.Bookings)
-                .Include(e => e.Followers)
-                .Include(e => e.Following)
                 .Include(e => e.Address)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
@@ -75,13 +71,7 @@ namespace Paxa.Services
         {
             // Get from db
             var entity = await _context.Persons
-                .Include(e => e.Following)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
-
-            // Make updates
-            entity.Following = await _context.Persons
-                .Where(e => person.FollowingIds.Contains(e.Id))
-                .ToListAsync();
 
             // Persist changes
             await _context.SaveChangesAsync();

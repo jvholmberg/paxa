@@ -9,6 +9,8 @@ namespace Paxa.Entities
         public string Longitude { get; set; }
         public string Latitude { get; set; }
 
+        public virtual Organization Organization { get; set; }
+
         public Location()
         {
         }

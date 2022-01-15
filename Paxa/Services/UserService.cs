@@ -112,8 +112,6 @@ namespace Paxa.Services
                 .Include(e => e.Memberships).ThenInclude(e => e.Role)
                 .Include(e => e.Person)
                 .Include(e => e.Person).ThenInclude(e => e.Ratings).ThenInclude(e => e.Type)
-                .Include(e => e.Person).ThenInclude(e => e.Followers)
-                .Include(e => e.Person).ThenInclude(e => e.Following)
                 .ToListAsync();
 
             return users;
@@ -125,8 +123,6 @@ namespace Paxa.Services
                 .Include(e => e.Memberships).ThenInclude(e => e.Organization).ThenInclude(e => e.Location)
                 .Include(e => e.Memberships).ThenInclude(e => e.Role)
                 .Include(e => e.Person).ThenInclude(e => e.Bookings)
-                .Include(e => e.Person).ThenInclude(e => e.Followers)
-                .Include(e => e.Person).ThenInclude(e => e.Following)
                 .Include(e => e.Person).ThenInclude(e => e.Ratings).ThenInclude(e => e.Type)
                 .FirstOrDefaultAsync(e => e.Id == id);
 

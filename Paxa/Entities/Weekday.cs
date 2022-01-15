@@ -3,17 +3,16 @@ using System.Collections.Generic;
 
 namespace Paxa.Entities
 {
-    public class MembershipRole
+    public class Weekday
     {
         [Key]
         public int Id { get; set; }
-        public string Code { get; set; }
+        public int Number { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
 
-        public virtual ICollection<Membership> Memberships { get; set; }
+        public virtual ICollection<TimeslotSchema> TimeslotSchemas { get; set; }
 
-        public MembershipRole()
+        public Weekday()
         {
         }
     }

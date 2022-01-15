@@ -11,6 +11,8 @@ namespace Paxa.Entities
         public string PostalCode { get; set; }
         public string Country { get; set; }
 
+        public virtual Person Person { get; set; }
+        
         public Address()
         {
         }

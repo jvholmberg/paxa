@@ -83,18 +83,6 @@ namespace Paxa
                         )
                     )
                     .ForMember(
-                        destination => destination.FollowerIds,
-                        options => options.MapFrom(
-                            source => source.Followers.Select(follower => follower.Id).ToList()
-                        )
-                    )
-                    .ForMember(
-                        destination => destination.FollowingIds,
-                        options => options.MapFrom(
-                            source => source.Following.Select(following => following.Id).ToList()
-                        )
-                    )
-                    .ForMember(
                         destination => destination.Address,
                         options => options.MapFrom(
                             source => source.Address
@@ -109,14 +97,6 @@ namespace Paxa
                     .ReverseMap()
                     .ForMember(
                         destination => destination.Bookings,
-                        options => options.Ignore()
-                    )
-                    .ForMember(
-                        destination => destination.Followers,
-                        options => options.Ignore()
-                    )
-                    .ForMember(
-                        destination => destination.Following,
                         options => options.Ignore()
                     )
                     .ForMember(
