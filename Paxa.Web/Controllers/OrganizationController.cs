@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Paxa.Services;
+using Paxa.Common.Entities;
+using Paxa.Common.Views;
 
 namespace Paxa.Controllers
 {
@@ -27,11 +29,11 @@ namespace Paxa.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Views.CreateOrganizationRequest view)
+        public async Task<IActionResult> Create([FromBody] CreateOrganizationRequest view)
         {
-            var entity = _mapper.Map<Entities.Organization>(view);
+            var entity = _mapper.Map<Organization>(view);
             var createdEntity = await _organizationService.Create(entity);
-            var createdView = _mapper.Map<Views.Organization>(createdEntity);
+            var createdView = _mapper.Map<OrganizationDto>(createdEntity);
             return Ok(createdView);
         }
 
@@ -39,7 +41,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetAll()
         {
             var entities = await _organizationService.GetAll();
-            var views = _mapper.Map<Views.Organization[]>(entities);
+            var views = _mapper.Map<OrganizationDto[]>(entities);
             return Ok(views);
         }
 
@@ -47,16 +49,16 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var entity = await _organizationService.GetById(id);
-            var view = _mapper.Map<Views.Organization>(entity);
+            var view = _mapper.Map<OrganizationDto>(entity);
             return Ok(view);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Views.UpdateOrganizationRequest view)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateOrganizationRequest view)
         {
-            var entity = _mapper.Map<Entities.Organization>(view);
+            var entity = _mapper.Map<Organization>(view);
             var updatedEntity = await _organizationService.Update(id, entity);
-            var updatedView = _mapper.Map<Views.Organization>(updatedEntity);
+            var updatedView = _mapper.Map<OrganizationDto>(updatedEntity);
             return Ok(updatedView);
         }
 

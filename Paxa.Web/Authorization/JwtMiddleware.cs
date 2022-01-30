@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Paxa.Helpers;
 using Paxa.Services;
+using Paxa.Common.Views;
 
 namespace Paxa.Authorization
 {
@@ -32,7 +33,7 @@ namespace Paxa.Authorization
             {
                 // Attach user to context on successful jwt validation
                 var userEntity = await userService.GetById(userId.Value);
-                var userView = _mapper.Map<Views.User>(userEntity);
+                var userView = _mapper.Map<UserDto>(userEntity);
                 context.Items["User"] = userEntity;
             }
 

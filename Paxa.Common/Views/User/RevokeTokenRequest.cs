@@ -1,4 +1,4 @@
-namespace Paxa.Views
+namespace Paxa.Common.Views
 {
     public class RevokeTokenRequest
     {

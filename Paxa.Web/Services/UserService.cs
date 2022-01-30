@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
+using Paxa.Common.Views;
 using Paxa.Helpers;
 using Paxa.Authorization;
 
@@ -21,7 +22,7 @@ namespace Paxa.Services
         Task<bool> Delete(int id);
 
         // Authentication
-        Task<(User, string, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress);
+        Task<(User, string, string)> Authenticate(AuthenticateRequest request, string ipAddress);
         Task<(User, string, string)> RefreshToken(string token, string ipAddress);
         Task<bool> RevokeToken(string token, string ipAddress);
     }
@@ -164,7 +165,7 @@ namespace Paxa.Services
             }
         }
 
-        public async Task<(User, string, string)> Authenticate(Views.AuthenticateRequest request, string ipAddress)
+        public async Task<(User, string, string)> Authenticate(AuthenticateRequest request, string ipAddress)
         {
             var user = await _context.Users
                 .Include(user => user.Memberships).ThenInclude(membership => membership.Role)

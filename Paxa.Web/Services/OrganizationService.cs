@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
+using Paxa.Common.Entities;
 
 namespace Paxa.Services
 {
     public interface IOrganizationService
     {
-        Task<Entities.Organization> Create(Entities.Organization Organization);
-        Task<ICollection<Entities.Organization>> GetAll();
-        Task<Entities.Organization> GetById(int id);
-        Task<Entities.Organization> Update(int id, Entities.Organization Organization);
+        Task<Organization> Create(Organization Organization);
+        Task<ICollection<Organization>> GetAll();
+        Task<Organization> GetById(int id);
+        Task<Organization> Update(int id, Organization Organization);
         Task<bool> Delete(int id);
     }
 
@@ -27,7 +28,7 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<Entities.Organization> Create(Entities.Organization organization)
+        public async Task<Organization> Create(Organization organization)
         {
             await _context.Organizations.AddAsync(organization);
             await _context.SaveChangesAsync();
@@ -35,7 +36,7 @@ namespace Paxa.Services
             return await GetById(organization.Id);
         }
 
-        public async Task<ICollection<Entities.Organization>> GetAll()
+        public async Task<ICollection<Organization>> GetAll()
         {
             var organizations = await _context.Organizations
                 .Include(e => e.Location)
@@ -46,7 +47,7 @@ namespace Paxa.Services
             return organizations;
         }
 
-        public async Task<Entities.Organization> GetById(int id)
+        public async Task<Organization> GetById(int id)
         {
             var organization = await _context.Organizations
                 .Include(e => e.Location)
@@ -57,7 +58,7 @@ namespace Paxa.Services
             return organization;
         }
 
-        public async Task<Entities.Organization> Update(int id, Entities.Organization updates)
+        public async Task<Organization> Update(int id, Organization updates)
         {
             var organization = await _context.Organizations
                 .Include(e => e.Location)

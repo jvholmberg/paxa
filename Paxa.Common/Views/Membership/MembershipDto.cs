@@ -1,13 +1,13 @@
-﻿namespace Paxa.Views
+﻿namespace Paxa.Common.Views
 {
-    public class Membership
+    public class MembershipDto
     {
         public int Id { get; set; }
         public int UserId { get; set; }
         public int OrganizationId { get; set; }
-        public MembershipRole Role { get; set; }
+        public MembershipRoleDto Role { get; set; }
 
-        public Membership()
+        public MembershipDto()
         {
         }
     }

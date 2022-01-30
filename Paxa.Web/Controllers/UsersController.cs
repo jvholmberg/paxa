@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Paxa.Authorization;
 using Paxa.Services;
-using Paxa.Views;
+using Paxa.Common.Entities;
+using Paxa.Common.Views;
 
 namespace Paxa.Controllers
 {
@@ -66,7 +67,7 @@ namespace Paxa.Controllers
         {
             var (user, jwtToken, refreshToken) = await _userService.Authenticate(request, ipAddress());
 
-            var view = _mapper.Map<Views.AuthenticateResponse>(user);
+            var view = _mapper.Map<AuthenticateResponse>(user);
             view.JwtToken = jwtToken;
 
             setTokenCookie(refreshToken);
@@ -81,7 +82,7 @@ namespace Paxa.Controllers
             var refreshToken = Request.Cookies["refreshToken"];
             var (user, jwtToken, newRefreshToken) = await _userService.RefreshToken(refreshToken, ipAddress());
 
-            var view = _mapper.Map<Views.AuthenticateResponse>(user);
+            var view = _mapper.Map<AuthenticateResponse>(user);
             view.JwtToken = jwtToken;
 
             setTokenCookie(newRefreshToken);
@@ -112,7 +113,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetRefreshTokens(int id)
         {
             var userEntity = await _userService.GetById(id);
-            var view = _mapper.Map<RefreshToken[]>(userEntity.RefreshTokens);
+            var view = _mapper.Map<RefreshTokenDto[]>(userEntity.RefreshTokens);
             return Ok(view);
         }
 
@@ -121,12 +122,12 @@ namespace Paxa.Controllers
         #region CRUD
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] UserDto user)
         {
-            var entity = _mapper.Map<Entities.User>(user);
+            var entity = _mapper.Map<User>(user);
             entity = await _userService.Create(entity);
 
-            var view = _mapper.Map<User>(user);
+            var view = _mapper.Map<UserDto>(user);
             return Ok(view);
         }
 
@@ -135,7 +136,7 @@ namespace Paxa.Controllers
         {
             var entities = await _userService.GetAll();
 
-            var views = _mapper.Map<User[]>(entities);
+            var views = _mapper.Map<UserDto[]>(entities);
             return Ok(views);
         }
 
@@ -144,17 +145,17 @@ namespace Paxa.Controllers
         {
             var entity = await _userService.GetById(id);
 
-            var view = _mapper.Map<User[]>(entity);
+            var view = _mapper.Map<UserDto>(entity);
             return Ok(view);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] User user)
         {
-            var entity = _mapper.Map<Entities.User>(user);
+            var entity = _mapper.Map<User>(user);
             entity = await _userService.Update(id, entity);
 
-            var view = _mapper.Map<User>(user);
+            var view = _mapper.Map<UserDto>(user);
             return Ok(view);
         }
 

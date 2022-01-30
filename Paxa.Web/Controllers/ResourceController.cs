@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Paxa.Services;
+using Paxa.Common.Entities;
+using Paxa.Common.Views;
 
 namespace Paxa.Controllers
 {
@@ -26,11 +28,11 @@ namespace Paxa.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Views.CreateResourceRequest view)
+        public async Task<IActionResult> Create([FromBody] CreateResourceRequest view)
         {
-            var entity = _mapper.Map<Entities.Resource>(view);
+            var entity = _mapper.Map<Resource>(view);
             var createdEntity = await _resourceService.Create(entity);
-            var createdView = _mapper.Map<Views.Resource>(createdEntity);
+            var createdView = _mapper.Map<ResourceDto>(createdEntity);
             return Ok(createdView);
         }
 
@@ -38,7 +40,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetByQuery([FromQuery] int? organizationId)
         {
             var entities = await _resourceService.GetByQuery(organizationId);
-            var views = _mapper.Map<Views.Resource[]>(entities);
+            var views = _mapper.Map<ResourceDto[]>(entities);
             return Ok(views);
         }
 
@@ -46,7 +48,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var entity = await _resourceService.GetById(id);
-            var view = _mapper.Map<Views.Resource>(entity);
+            var view = _mapper.Map<ResourceDto>(entity);
             return Ok(view);
         }
 
@@ -54,16 +56,16 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetTypes()
         {
             var entities = await _resourceService.GetTypes();
-            var views = _mapper.Map<Views.ResourceType[]>(entities);
+            var views = _mapper.Map<ResourceTypeDto[]>(entities);
             return Ok(views);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Views.UpdateResourceRequest view)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateResourceRequest view)
         {
-            var entity = _mapper.Map<Entities.Resource>(view);
+            var entity = _mapper.Map<Resource>(view);
             var updatedEntity = await _resourceService.Update(id, entity);
-            var updatedView = _mapper.Map<Views.Resource>(updatedEntity);
+            var updatedView = _mapper.Map<ResourceDto>(updatedEntity);
             return Ok(updatedView);
         }
 

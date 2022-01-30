@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
+using Paxa.Common.Entities;
 
 namespace Paxa.Services
 {
     public interface IResourceService
     {
-        Task<Entities.Resource> Create(Entities.Resource resource);
-        Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId);
-        Task<Entities.Resource> GetById(int id);
-        Task<ICollection<Entities.ResourceType>> GetTypes();
-        Task<Entities.Resource> Update(int id, Entities.Resource resource);
+        Task<Resource> Create(Resource resource);
+        Task<ICollection<Resource>> GetByQuery(int? organizationId);
+        Task<Resource> GetById(int id);
+        Task<ICollection<ResourceType>> GetTypes();
+        Task<Resource> Update(int id, Resource resource);
         Task<bool> Delete(int id);
     }
 
@@ -29,7 +30,7 @@ namespace Paxa.Services
             _mapper = mapper;
         }
 
-        public async Task<Entities.Resource> Create(Entities.Resource resource)
+        public async Task<Resource> Create(Resource resource)
         {
             await _context.Resources.AddAsync(resource);
             await _context.SaveChangesAsync();
@@ -37,9 +38,9 @@ namespace Paxa.Services
             return await GetById(resource.Id);
         }
 
-        public async Task<ICollection<Entities.Resource>> GetByQuery(int? organizationId)
+        public async Task<ICollection<Resource>> GetByQuery(int? organizationId)
         {
-            var query = _context.Resources.Include(e => e.Type) as IQueryable<Entities.Resource>;
+            var query = _context.Resources.Include(e => e.Type) as IQueryable<Resource>;
 
             if (organizationId != null) {
                 query = query.Where(x => x.OrganizationId == organizationId);
@@ -48,7 +49,7 @@ namespace Paxa.Services
             return await query.ToListAsync();;
         }
 
-        public async Task<Entities.Resource> GetById(int id)
+        public async Task<Resource> GetById(int id)
         {
             var resource = await _context.Resources
                 .Include(e => e.Type)
@@ -59,14 +60,14 @@ namespace Paxa.Services
             return resource;
         }
 
-        public async Task<ICollection<Entities.ResourceType>> GetTypes()
+        public async Task<ICollection<ResourceType>> GetTypes()
         {
             var types = await _context.ResourceTypes.ToListAsync();
 
             return types;
         }
 
-        public async Task<Entities.Resource> Update(int id, Entities.Resource updates)
+        public async Task<Resource> Update(int id, Resource updates)
         {
             var resource = await _context.Resources
                 .SingleOrDefaultAsync(e => e.Id == id);

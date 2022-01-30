@@ -1,12 +1,12 @@
-namespace Paxa.Views
+namespace Paxa.Common.Views
 {
-    public class ResourceType
+    public class ResourceTypeDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ResourceType()
+        public ResourceTypeDto()
         {
         }
     }

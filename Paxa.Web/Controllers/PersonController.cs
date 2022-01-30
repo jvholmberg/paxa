@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Paxa.Authorization;
 using Paxa.Services;
+using Paxa.Common.Views;
 
 namespace Paxa.Controllers
 {
@@ -28,9 +29,9 @@ namespace Paxa.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Views.Person Person)
+        public async Task<IActionResult> Create([FromBody] PersonDto person)
         {
-            var res = await _personService.Create(Person);
+            var res = await _personService.Create(person);
             return Ok(res);
         }
 
@@ -38,7 +39,7 @@ namespace Paxa.Controllers
         public async Task<IActionResult> GetAll()
         {
             var entities = await _personService.GetAll();
-            var views = _mapper.Map<Views.Person[]>(entities);
+            var views = _mapper.Map<PersonDto[]>(entities);
             return Ok(views);
         }
 
@@ -50,9 +51,9 @@ namespace Paxa.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Views.Person Person)
+        public async Task<IActionResult> Update(int id, [FromBody] PersonDto person)
         {
-            var res = await _personService.Update(id, Person);
+            var res = await _personService.Update(id, person);
             return Ok(res);
         }
 

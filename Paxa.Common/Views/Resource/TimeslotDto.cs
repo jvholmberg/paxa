@@ -1,14 +1,14 @@
 using System;
 
-namespace Paxa.Views
+namespace Paxa.Common.Views
 {
-    public class Timeslot
+    public class TimeslotDto
     {
         public int Id { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
 
-        public Timeslot()
+        public TimeslotDto()
         {
         }
     }

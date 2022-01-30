@@ -11,5 +11,9 @@
     <Folder Include="Enums\" />
     <Folder Include="Extensions\" />
     <Folder Include="Views\" />
+    <Folder Include="Views\Membership\" />
+    <Folder Include="Views\Organization\" />
+    <Folder Include="Views\Resource\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
 </Project>

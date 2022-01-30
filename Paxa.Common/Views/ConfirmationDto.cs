@@ -1,11 +1,11 @@
-﻿namespace Paxa.Views
+﻿namespace Paxa.Common.Views
 {
-    public class Confirmation
+    public class ConfirmationDto
     {
         public string Title { get; set; }
         public string Message { get; set; }
 
-        public Confirmation()
+        public ConfirmationDto()
         {
         }
     }

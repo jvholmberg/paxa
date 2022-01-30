@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Paxa.Views
+namespace Paxa.Common.Views
 {
     public class AuthenticateRequest
     {

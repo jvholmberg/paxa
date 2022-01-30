@@ -1,6 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using AutoMapper;
+using Paxa.Common.Entities;
+using Paxa.Common.Views;
 
 namespace Paxa
 {
@@ -16,11 +17,11 @@ namespace Paxa
             {
 
                 // Address
-                cfg.CreateMap<Entities.Address, Views.Address>()
+                cfg.CreateMap<Address, AddressDto>()
                     .ReverseMap();
 
                 // Booking
-                cfg.CreateMap<Entities.Booking, Views.Booking>()
+                cfg.CreateMap<Booking, BookingDto>()
                     .ForMember(
                         destination => destination.ParticipantIds,
                         options => options.MapFrom(
@@ -30,11 +31,11 @@ namespace Paxa
                     .ReverseMap();
 
                 // Location
-                cfg.CreateMap<Entities.Location, Views.Location>()
+                cfg.CreateMap<Location, LocationDto>()
                     .ReverseMap();
 
                 // Organization
-                cfg.CreateMap<Entities.Organization, Views.Organization>()
+                cfg.CreateMap<Organization, OrganizationDto>()
                     .ForMember(
                         destination => destination.ResourceIds,
                         options => options.MapFrom(
@@ -51,31 +52,31 @@ namespace Paxa
                     .ForMember(destination => destination.Resources, options => options.Ignore())
                     .ForMember(destination => destination.Ratings, options => options.Ignore());
                 
-                cfg.CreateMap<Views.CreateOrganizationRequest, Entities.Organization>();
+                cfg.CreateMap<CreateOrganizationRequest, Organization>();
                 
-                cfg.CreateMap<Views.UpdateOrganizationRequest, Entities.Organization>();
+                cfg.CreateMap<UpdateOrganizationRequest, Organization>();
 
                 // Membership
-                cfg.CreateMap<Entities.Membership, Views.Membership>()
+                cfg.CreateMap<Membership, MembershipDto>()
                     .ReverseMap();
 
                 // MembershipRole
-                cfg.CreateMap<Entities.MembershipRole, Views.MembershipRole>()
+                cfg.CreateMap<MembershipRole, MembershipRoleDto>()
                     .ReverseMap();
 
                 // Resource
-                cfg.CreateMap<Entities.Resource, Views.Resource>()
+                cfg.CreateMap<Resource, ResourceDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<Entities.ResourceType, Views.ResourceType>()
+                cfg.CreateMap<ResourceType, ResourceTypeDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<Views.CreateResourceRequest, Entities.Resource>();
+                cfg.CreateMap<CreateResourceRequest, Resource>();
 
-                cfg.CreateMap<Views.UpdateResourceRequest, Entities.Resource>();
+                cfg.CreateMap<UpdateResourceRequest, Resource>();
 
                 // Person
-                cfg.CreateMap<Entities.Person, Views.Person>()
+                cfg.CreateMap<Person, PersonDto>()
                     .ForMember(
                         destination => destination.BookingIds,
                         options => options.MapFrom(
@@ -105,7 +106,7 @@ namespace Paxa
                     );
 
                 // Rating
-                cfg.CreateMap<Entities.Rating, Views.Rating>()
+                cfg.CreateMap<Rating, RatingDto>()
                     .ForMember(
                         destination => destination.TypeId,
                         options => options.MapFrom(
@@ -125,14 +126,14 @@ namespace Paxa
                     );
 
                 // RefreshToken
-                cfg.CreateMap<Entities.RefreshToken, Views.RefreshToken>()
+                cfg.CreateMap<RefreshToken, RefreshTokenDto>()
                     .ReverseMap();
 
                 // User
-                cfg.CreateMap<Entities.User, Views.User>()
+                cfg.CreateMap<User, UserDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<Entities.User, Views.AuthenticateResponse>();
+                cfg.CreateMap<User, AuthenticateResponse>();
 
             });
 

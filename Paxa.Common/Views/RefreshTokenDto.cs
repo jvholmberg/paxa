@@ -1,8 +1,8 @@
 using System;
 
-namespace Paxa.Views
+namespace Paxa.Common.Views
 {
-    public class RefreshToken
+    public class RefreshTokenDto
     {
         public string Token { get; set; }
         public DateTime Expires { get; set; }
