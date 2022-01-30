@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Paxa.Entities
+namespace Paxa.Common.Entities
 {
     public class Address
     {

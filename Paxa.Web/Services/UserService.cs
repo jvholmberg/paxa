@@ -6,7 +6,7 @@ using BCryptNet = BCrypt.Net.BCrypt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Paxa.Contexts;
-using Paxa.Entities;
+using Paxa.Common.Entities;
 using Paxa.Helpers;
 using Paxa.Authorization;
 

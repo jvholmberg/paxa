@@ -22,7 +22,7 @@ namespace Paxa.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Paxa.Entities.Address", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Booking", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Booking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Friendship", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Friendship", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +134,7 @@ namespace Paxa.Migrations
                     b.ToTable("Friendships");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.FriendshipType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.FriendshipType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace Paxa.Migrations
                     b.ToTable("FriendshipTypes");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Location", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +189,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Membership", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Membership", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -233,7 +233,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.MembershipRole", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.MembershipRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,7 +285,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Organization", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Organization", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -326,7 +326,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Participant", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Participant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -354,7 +354,7 @@ namespace Paxa.Migrations
                     b.ToTable("Participants");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ParticipantType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ParticipantType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -376,7 +376,7 @@ namespace Paxa.Migrations
                     b.ToTable("ParticipantTypes");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Person", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -420,7 +420,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Rating", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Rating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -460,7 +460,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.RatingType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.RatingType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -498,7 +498,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Resource", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Resource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -573,7 +573,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ResourceSchema", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ResourceSchema", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -606,7 +606,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ResourceType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ResourceType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -657,7 +657,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Timeslot", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Timeslot", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -746,7 +746,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.TimeslotSchema", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.TimeslotSchema", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -815,7 +815,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Timestamp", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Timestamp", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -895,7 +895,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.User", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -948,7 +948,7 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Weekday", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Weekday", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1011,36 +1011,36 @@ namespace Paxa.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Booking", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Booking", b =>
                 {
-                    b.HasOne("Paxa.Entities.Person", null)
+                    b.HasOne("Paxa.Common.Entities.Person", null)
                         .WithMany("Bookings")
                         .HasForeignKey("PersonId");
 
-                    b.HasOne("Paxa.Entities.Timeslot", "Timeslot")
+                    b.HasOne("Paxa.Common.Entities.Timeslot", "Timeslot")
                         .WithOne("Booking")
-                        .HasForeignKey("Paxa.Entities.Booking", "TimeslotId")
+                        .HasForeignKey("Paxa.Common.Entities.Booking", "TimeslotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Timeslot");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Friendship", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Friendship", b =>
                 {
-                    b.HasOne("Paxa.Entities.Person", "FromPerson")
+                    b.HasOne("Paxa.Common.Entities.Person", "FromPerson")
                         .WithMany("FromFriendships")
                         .HasForeignKey("FromPersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.Person", "ToPerson")
+                    b.HasOne("Paxa.Common.Entities.Person", "ToPerson")
                         .WithMany("ToFriendships")
                         .HasForeignKey("ToPersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.FriendshipType", "Type")
+                    b.HasOne("Paxa.Common.Entities.FriendshipType", "Type")
                         .WithMany("Friendships")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1053,21 +1053,21 @@ namespace Paxa.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Membership", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Membership", b =>
                 {
-                    b.HasOne("Paxa.Entities.Organization", "Organization")
+                    b.HasOne("Paxa.Common.Entities.Organization", "Organization")
                         .WithMany("Memberships")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.MembershipRole", "Role")
+                    b.HasOne("Paxa.Common.Entities.MembershipRole", "Role")
                         .WithMany("Memberships")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.User", "User")
+                    b.HasOne("Paxa.Common.Entities.User", "User")
                         .WithMany("Memberships")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1080,30 +1080,30 @@ namespace Paxa.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Organization", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Organization", b =>
                 {
-                    b.HasOne("Paxa.Entities.Location", "Location")
+                    b.HasOne("Paxa.Common.Entities.Location", "Location")
                         .WithOne("Organization")
-                        .HasForeignKey("Paxa.Entities.Organization", "LocationId");
+                        .HasForeignKey("Paxa.Common.Entities.Organization", "LocationId");
 
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Participant", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Participant", b =>
                 {
-                    b.HasOne("Paxa.Entities.Booking", "Booking")
+                    b.HasOne("Paxa.Common.Entities.Booking", "Booking")
                         .WithMany("Participants")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.Person", "Person")
+                    b.HasOne("Paxa.Common.Entities.Person", "Person")
                         .WithMany("Participating")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.ParticipantType", "Type")
+                    b.HasOne("Paxa.Common.Entities.ParticipantType", "Type")
                         .WithMany("Participants")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1116,28 +1116,28 @@ namespace Paxa.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Person", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Person", b =>
                 {
-                    b.HasOne("Paxa.Entities.Address", "Address")
+                    b.HasOne("Paxa.Common.Entities.Address", "Address")
                         .WithOne("Person")
-                        .HasForeignKey("Paxa.Entities.Person", "AddressId")
+                        .HasForeignKey("Paxa.Common.Entities.Person", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Rating", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Rating", b =>
                 {
-                    b.HasOne("Paxa.Entities.Organization", "Organization")
+                    b.HasOne("Paxa.Common.Entities.Organization", "Organization")
                         .WithMany("Ratings")
                         .HasForeignKey("OrganizationId");
 
-                    b.HasOne("Paxa.Entities.Person", "Person")
+                    b.HasOne("Paxa.Common.Entities.Person", "Person")
                         .WithMany("Ratings")
                         .HasForeignKey("PersonId");
 
-                    b.HasOne("Paxa.Entities.RatingType", "Type")
+                    b.HasOne("Paxa.Common.Entities.RatingType", "Type")
                         .WithMany("Ratings")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1150,19 +1150,19 @@ namespace Paxa.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Resource", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Resource", b =>
                 {
-                    b.HasOne("Paxa.Entities.Organization", "Organization")
+                    b.HasOne("Paxa.Common.Entities.Organization", "Organization")
                         .WithMany("Resources")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.ResourceSchema", "ResourceSchema")
+                    b.HasOne("Paxa.Common.Entities.ResourceSchema", "ResourceSchema")
                         .WithMany("Resources")
                         .HasForeignKey("ResourceSchemaId");
 
-                    b.HasOne("Paxa.Entities.ResourceType", "Type")
+                    b.HasOne("Paxa.Common.Entities.ResourceType", "Type")
                         .WithMany("Resources")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1175,9 +1175,9 @@ namespace Paxa.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ResourceSchema", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ResourceSchema", b =>
                 {
-                    b.HasOne("Paxa.Entities.Organization", "Organization")
+                    b.HasOne("Paxa.Common.Entities.Organization", "Organization")
                         .WithMany("ResourceSchemas")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1186,9 +1186,9 @@ namespace Paxa.Migrations
                     b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Timeslot", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Timeslot", b =>
                 {
-                    b.HasOne("Paxa.Entities.Resource", "Resource")
+                    b.HasOne("Paxa.Common.Entities.Resource", "Resource")
                         .WithMany("Timeslots")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,27 +1197,27 @@ namespace Paxa.Migrations
                     b.Navigation("Resource");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.TimeslotSchema", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.TimeslotSchema", b =>
                 {
-                    b.HasOne("Paxa.Entities.Timestamp", "FromTimestamp")
+                    b.HasOne("Paxa.Common.Entities.Timestamp", "FromTimestamp")
                         .WithOne("FromTimeslotSchema")
-                        .HasForeignKey("Paxa.Entities.TimeslotSchema", "FromTimestampId")
+                        .HasForeignKey("Paxa.Common.Entities.TimeslotSchema", "FromTimestampId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.ResourceSchema", "ResourceSchema")
+                    b.HasOne("Paxa.Common.Entities.ResourceSchema", "ResourceSchema")
                         .WithMany("TimeslotSchemas")
                         .HasForeignKey("ResourceSchemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.Timestamp", "ToTimestamp")
+                    b.HasOne("Paxa.Common.Entities.Timestamp", "ToTimestamp")
                         .WithOne("ToTimeslotSchema")
-                        .HasForeignKey("Paxa.Entities.TimeslotSchema", "ToTimestampId")
+                        .HasForeignKey("Paxa.Common.Entities.TimeslotSchema", "ToTimestampId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Paxa.Entities.Weekday", "Weekday")
+                    b.HasOne("Paxa.Common.Entities.Weekday", "Weekday")
                         .WithMany("TimeslotSchemas")
                         .HasForeignKey("WeekdayId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1232,13 +1232,13 @@ namespace Paxa.Migrations
                     b.Navigation("Weekday");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.User", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.User", b =>
                 {
-                    b.HasOne("Paxa.Entities.Person", "Person")
+                    b.HasOne("Paxa.Common.Entities.Person", "Person")
                         .WithOne("User")
-                        .HasForeignKey("Paxa.Entities.User", "PersonId");
+                        .HasForeignKey("Paxa.Common.Entities.User", "PersonId");
 
-                    b.OwnsMany("Paxa.Entities.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("Paxa.Common.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
@@ -1290,32 +1290,32 @@ namespace Paxa.Migrations
                     b.Navigation("RefreshTokens");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Address", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Address", b =>
                 {
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Booking", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Booking", b =>
                 {
                     b.Navigation("Participants");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.FriendshipType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.FriendshipType", b =>
                 {
                     b.Navigation("Friendships");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Location", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Location", b =>
                 {
                     b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.MembershipRole", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.MembershipRole", b =>
                 {
                     b.Navigation("Memberships");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Organization", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Organization", b =>
                 {
                     b.Navigation("Memberships");
 
@@ -1326,12 +1326,12 @@ namespace Paxa.Migrations
                     b.Navigation("Resources");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ParticipantType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ParticipantType", b =>
                 {
                     b.Navigation("Participants");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Person", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Person", b =>
                 {
                     b.Navigation("Bookings");
 
@@ -1346,46 +1346,46 @@ namespace Paxa.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.RatingType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.RatingType", b =>
                 {
                     b.Navigation("Ratings");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Resource", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Resource", b =>
                 {
                     b.Navigation("Timeslots");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ResourceSchema", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ResourceSchema", b =>
                 {
                     b.Navigation("Resources");
 
                     b.Navigation("TimeslotSchemas");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.ResourceType", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.ResourceType", b =>
                 {
                     b.Navigation("Resources");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Timeslot", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Timeslot", b =>
                 {
                     b.Navigation("Booking");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Timestamp", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Timestamp", b =>
                 {
                     b.Navigation("FromTimeslotSchema");
 
                     b.Navigation("ToTimeslotSchema");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.User", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.User", b =>
                 {
                     b.Navigation("Memberships");
                 });
 
-            modelBuilder.Entity("Paxa.Entities.Weekday", b =>
+            modelBuilder.Entity("Paxa.Common.Entities.Weekday", b =>
                 {
                     b.Navigation("TimeslotSchemas");
                 });

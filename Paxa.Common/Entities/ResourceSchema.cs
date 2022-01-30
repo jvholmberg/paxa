@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace Paxa.Entities
+namespace Paxa.Common.Entities
 {
     public class ResourceSchema
     {

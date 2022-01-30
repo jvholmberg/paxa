@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace Paxa.Entities
+namespace Paxa.Common.Entities
 {
     public class Timeslot
     {

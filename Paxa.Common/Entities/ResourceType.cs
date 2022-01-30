@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Paxa.Entities
+namespace Paxa.Common.Entities
 {
-    public class ParticipantType
+    public class ResourceType
     {
         [Key]
         public int Id { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
 
-        public ParticipantType()
+        public ResourceType()
         {
         }
     }

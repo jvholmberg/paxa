@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using BCryptNet = BCrypt.Net.BCrypt;
-using Paxa.Entities;
+using Paxa.Common.Entities;
 
 namespace Paxa.Contexts
 {

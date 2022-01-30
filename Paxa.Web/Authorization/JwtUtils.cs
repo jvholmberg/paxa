@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Paxa.Entities;
+using Paxa.Common.Entities;
 using Paxa.Helpers;
 
 namespace Paxa.Authorization

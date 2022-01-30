@@ -6,4 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Paxa.Common\Paxa.Common.csproj" />
+  </ItemGroup>
 </Project>
