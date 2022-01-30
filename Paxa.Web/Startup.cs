@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 using AutoMapper;
 
 namespace Paxa
@@ -39,7 +40,7 @@ namespace Paxa
 
             services.AddCors();
             services.AddControllers()
-                .AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
+                .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
 
             // configure strongly typed settings object
             services.Configure<Helpers.AppSettings>(_configuration.GetSection("AppSettings"));

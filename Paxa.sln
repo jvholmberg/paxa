@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.808.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Web", "Paxa\Paxa.Web.csproj", "{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Web", "Paxa.Web\Paxa.Web.csproj", "{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Scheduled", "Paxa.Scheduled\Paxa.Scheduled.csproj", "{7C64D83D-D434-465D-8532-E298218ECCAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Data", "Paxa.Data\Paxa.Data.csproj", "{0E5A871B-38F0-43FB-9E04-F2552C5BF7E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Common", "Paxa.Common\Paxa.Common.csproj", "{A3428C81-10C1-4582-B923-56B1DB81EF36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0E5A871B-38F0-43FB-9E04-F2552C5BF7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E5A871B-38F0-43FB-9E04-F2552C5BF7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E5A871B-38F0-43FB-9E04-F2552C5BF7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3428C81-10C1-4582-B923-56B1DB81EF36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3428C81-10C1-4582-B923-56B1DB81EF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3428C81-10C1-4582-B923-56B1DB81EF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3428C81-10C1-4582-B923-56B1DB81EF36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
