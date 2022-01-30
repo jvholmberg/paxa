@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.808.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa", "Paxa\Paxa.csproj", "{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paxa.Scheduled", "Paxa.Scheduled\Paxa.Scheduled.csproj", "{7C64D83D-D434-465D-8532-E298218ECCAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1C4A2F6-3AFB-4B24-9C18-1A548E7D12F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C64D83D-D434-465D-8532-E298218ECCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C64D83D-D434-465D-8532-E298218ECCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C64D83D-D434-465D-8532-E298218ECCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C64D83D-D434-465D-8532-E298218ECCAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
