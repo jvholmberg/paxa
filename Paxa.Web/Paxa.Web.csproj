@@ -39,8 +39,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\utils\" />
-    <Folder Include="Contexts\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Paxa.Common\Paxa.Common.csproj">

@@ -10,10 +10,13 @@
     <Folder Include="Entities\" />
     <Folder Include="Enums\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Views\" />
-    <Folder Include="Views\Membership\" />
-    <Folder Include="Views\Organization\" />
-    <Folder Include="Views\Resource\" />
-    <Folder Include="Views\User\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Membership\" />
+    <Folder Include="Models\Organization\" />
+    <Folder Include="Models\Resource\" />
+    <Folder Include="Models\User\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Requests\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 </Project>
