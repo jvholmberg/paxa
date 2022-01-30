@@ -1,5 +1,10 @@
 <form nz-form nzLayout="vertical" #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
 
+  <nz-page-header nzBackIcon (nzBack)="onCancel()">
+    <nz-page-header-title>Create Resource</nz-page-header-title>
+    <nz-page-header-subtitle>Resource is the second highest hierarchy item</nz-page-header-subtitle>
+  </nz-page-header>
+
   <nz-form-item>
     <nz-form-label>Organization</nz-form-label>
     <nz-form-control nzHasFeedback>
