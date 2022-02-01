@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BCryptNet = BCrypt.Net.BCrypt;
 using Paxa.Common.Entities;
 
-namespace Paxa.Contexts
+namespace Paxa.Data.Contexts
 {
     public sealed class ModelData
     {

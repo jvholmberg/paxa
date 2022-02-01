@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Paxa.Contexts;
+using Paxa.Data.Contexts;
 using Paxa.Common.Entities;
 
 namespace Paxa.Data.Services

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Paxa.Common.Entities;
 
-namespace Paxa.Contexts
+namespace Paxa.Data.Contexts
 {
     public class PaxaContext : DbContext
     {

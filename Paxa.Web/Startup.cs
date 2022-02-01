@@ -11,6 +11,8 @@ using Paxa.Common.Authorization;
 using Paxa.Common.Helpers;
 using Paxa.Web.Authorization;
 using Paxa.Web.Helpers;
+using Paxa.Data.Contexts;
+using Paxa.Data.Services;
 
 namespace Paxa
 {
@@ -37,7 +39,7 @@ namespace Paxa
             var connectionString = _configuration.GetConnectionString("DatabaseConnection");
 
             // Create connection to postgress
-            services.AddDbContext<Contexts.PaxaContext>(options =>
+            services.AddDbContext<PaxaContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
@@ -56,10 +58,10 @@ namespace Paxa
 
             // Services
             services.AddScoped<IJwtUtils, JwtUtils>();
-            services.AddScoped<Services.IUserService, Services.UserService>();
-            services.AddScoped<Services.IPersonService, Services.PersonService>();
-            services.AddScoped<Services.IOrganizationService,Services.OrganizationService>();
-            services.AddScoped<Services.IResourceService, Services.ResourceService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
+            services.AddScoped<IResourceService,  ResourceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
