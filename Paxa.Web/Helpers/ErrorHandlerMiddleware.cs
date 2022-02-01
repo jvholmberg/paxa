@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Paxa.Common.Helpers;
 
-namespace Paxa.Helpers
+namespace Paxa.Web.Helpers
 {
     public class ErrorHandlerMiddleware
     {

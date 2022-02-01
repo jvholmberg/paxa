@@ -3,8 +3,8 @@ using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Paxa.Helpers;
 using Paxa.Services;
+using Paxa.Common.Helpers;
 using Paxa.Common.Views;
 
 namespace Paxa.Authorization

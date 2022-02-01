@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
-using Paxa.Helpers;
+using Paxa.Common.Helpers;
 using Paxa.Authorization;
 
 namespace Paxa.Services
@@ -195,7 +195,12 @@ namespace Paxa.Services
         public async Task<(User, string, string)> RefreshToken(string token, string ipAddress)
         {
             var user = await getUserByRefreshToken(token);
-            var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
+            var refreshToken = user.RefreshTokens.SingleOrDefault(x => x.Token == token);
+
+            if (refreshToken == null)
+            {
+                throw new KeyNotFoundException("Could not find requested token");
+            }
 
             if (refreshToken.IsRevoked)
             {
@@ -230,7 +235,12 @@ namespace Paxa.Services
         public async Task<bool> RevokeToken(string token, string ipAddress)
         {
             var user = await getUserByRefreshToken(token);
-            var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
+            var refreshToken = user.RefreshTokens.SingleOrDefault(x => x.Token == token);
+
+            if (refreshToken == null)
+            {
+                throw new KeyNotFoundException("Could not find requested token");
+            }
 
             if (!refreshToken.IsActive)
             {

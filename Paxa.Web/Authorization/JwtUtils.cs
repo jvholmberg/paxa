@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Paxa.Common.Entities;
-using Paxa.Helpers;
+using Paxa.Common.Helpers;
 
 namespace Paxa.Authorization
 {

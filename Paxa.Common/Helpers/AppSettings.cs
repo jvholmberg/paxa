@@ -1,4 +1,4 @@
-namespace Paxa.Helpers
+namespace Paxa.Common.Helpers
 {
     public class AppSettings
     {
