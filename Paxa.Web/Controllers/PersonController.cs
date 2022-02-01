@@ -5,6 +5,7 @@ using AutoMapper;
 using Paxa.Authorization;
 using Paxa.Services;
 using Paxa.Common.Views;
+using Paxa.Common.Entities;
 
 namespace Paxa.Controllers
 {
@@ -29,10 +30,12 @@ namespace Paxa.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PersonDto person)
+        public async Task<IActionResult> Create([FromBody] PersonDto view)
         {
-            var res = await _personService.Create(person);
-            return Ok(res);
+            var entity = _mapper.Map<Person>(view);
+            var createdEntity = await _personService.Create(entity);
+            var createdView = _mapper.Map<PersonDto>(createdEntity);
+            return Ok(createdView);
         }
 
         [HttpGet]
@@ -46,22 +49,25 @@ namespace Paxa.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var res = await _personService.GetById(id);
-            return Ok(res);
+            var entity = await _personService.GetById(id);
+            var view = _mapper.Map<PersonDto>(entity);
+            return Ok(view);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] PersonDto person)
+        public async Task<IActionResult> Update(int id, [FromBody] PersonDto view)
         {
-            var res = await _personService.Update(id, person);
-            return Ok(res);
+            var entity = _mapper.Map<Person>(view);
+            var updatedEntity = await _personService.Update(id, entity);
+            var updatedView = _mapper.Map<PersonDto>(updatedEntity);
+            return Ok(updatedView);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var res = await _personService.Delete(id);
-            return Ok(res);
+            _personService.Delete(id);
+            return Ok();
         }
     }
 }

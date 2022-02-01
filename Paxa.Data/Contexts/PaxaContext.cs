@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using BCryptNet = BCrypt.Net.BCrypt;
 using Paxa.Common.Entities;
 
 namespace Paxa.Contexts
@@ -39,7 +38,6 @@ namespace Paxa.Contexts
             ModelConfiguration.Setup(modelBuilder);
             ModelData.Setup(modelBuilder);
             ModelData.SetupDevelopment(modelBuilder);
-
         }
     }
 }

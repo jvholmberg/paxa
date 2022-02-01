@@ -63,9 +63,9 @@ namespace Paxa.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var success = await _organizationService.Delete(id);
+            _organizationService.Delete(id);
             return Ok();
         }
     }

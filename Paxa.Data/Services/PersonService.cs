@@ -2,97 +2,92 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
-using Paxa.Common.Views;
 
 namespace Paxa.Services
 {
     public interface IPersonService
     {
-        Task<PersonDto> Create(PersonDto person);
+        Task<Person> Create(Person person);
         Task<ICollection<Person>> GetAll();
-        Task<PersonDto> GetById(int id);
-        Task<PersonDto> Update(int id, PersonDto person);
-        Task<ConfirmationDto> Delete(int id);
+        Task<Person> GetById(int id);
+        Task<Person> Update(int id, Person person);
+        void Delete(int id);
     }
 
     public class PersonService : IPersonService
     {
         private readonly PaxaContext _context;
-        private readonly IMapper _mapper;
 
-        public PersonService(PaxaContext context, IMapper mapper)
+        public PersonService(PaxaContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public async Task<PersonDto> Create(PersonDto person)
+        public async Task<Person> Create(Person person)
         {
             // Create entity
-            var entity = _mapper.Map<Person>(person);
-            await _context.Persons
-                .AddAsync(entity);
+            await _context.Persons.AddAsync(person);
             await _context.SaveChangesAsync();
-
-            // Get entity
-            var persistedEntity = await GetById(entity.Id);
-            var view = _mapper.Map<PersonDto>(persistedEntity);
-
-            return view;
+            var persistedPerson = await GetById(person.Id);
+            return persistedPerson;
         }
 
         public async Task<ICollection<Person>> GetAll()
         {
-            var entities = await _context.Persons
+            var persons = await _context.Persons
                 .Include(e => e.Bookings)
                 .Include(e => e.Address)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .ToListAsync();
 
-            return entities;
+            return persons;
         }
 
-        public async Task<PersonDto> GetById(int id)
+        public async Task<Person> GetById(int id)
         {
-            var entity = await _context.Persons
+            var person = await _context.Persons
                 .Include(e => e.Bookings)
                 .Include(e => e.Address)
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
 
-            var view = _mapper.Map<PersonDto>(entity);
+            if (person == null)
+            {
+                throw new InvalidOperationException("Could not find requested person");
+            }
 
-            return view;
+            return person;
         }
 
-        public async Task<PersonDto> Update(int id, PersonDto person)
+        public async Task<Person> Update(int id, Person updates)
         {
-            // Get from db
-            var entity = await _context.Persons
+            var person = await _context.Persons
                 .SingleOrDefaultAsync(e => e.Id.Equals(id));
+            
+            if (person == null)
+            {
+                throw new InvalidOperationException("Could not find requested person");
+            }
 
-            // Persist changes
             await _context.SaveChangesAsync();
-
-            // Get updated from db
-            var view = await GetById(id);
-
-            return view;
+            var updatedPerson = await GetById(id);
+            return updatedPerson;
         }
 
-        public async Task<ConfirmationDto> Delete(int id)
+        public void Delete(int id)
         {
-            var person = new Person { Id = id };
-            _context.Persons.Attach(person);
-            _context.Persons.Remove(person);
-            await _context.SaveChangesAsync();
+            var person = _context.Persons
+                .SingleOrDefault(e => e.Id == id);
 
-            var view = new ConfirmationDto();
-            return view;
+            if (person == null)
+            {
+                throw new InvalidOperationException("Could not find requested person");
+            }
+            _context.Persons.Remove(person);
+            _context.SaveChanges();
         }
     }
 }

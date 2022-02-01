@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
@@ -16,18 +15,16 @@ namespace Paxa.Services
         Task<Resource> GetById(int id);
         Task<ICollection<ResourceType>> GetTypes();
         Task<Resource> Update(int id, Resource resource);
-        Task<bool> Delete(int id);
+        void Delete(int id);
     }
 
     public class ResourceService : IResourceService
     {
         private readonly PaxaContext _context;
-        private readonly IMapper _mapper;
 
-        public ResourceService(PaxaContext context, IMapper mapper)
+        public ResourceService(PaxaContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<Resource> Create(Resource resource)
@@ -42,7 +39,8 @@ namespace Paxa.Services
         {
             var query = _context.Resources.Include(e => e.Type) as IQueryable<Resource>;
 
-            if (organizationId != null) {
+            if (organizationId != null)
+            {
                 query = query.Where(x => x.OrganizationId == organizationId);
             }
 
@@ -56,6 +54,11 @@ namespace Paxa.Services
                 .Include(e => e.Timeslots)
                 .Include(e => e.Organization)
                 .SingleOrDefaultAsync(e => e.Id == id);
+            
+            if (resource == null)
+            {
+                throw new KeyNotFoundException("Could not find requested resource");
+            }
 
             return resource;
         }
@@ -72,6 +75,11 @@ namespace Paxa.Services
             var resource = await _context.Resources
                 .SingleOrDefaultAsync(e => e.Id == id);
 
+            if (resource == null)
+            {
+                throw new KeyNotFoundException("Could not find requested resource");
+            }
+
             // Make updates
             resource.Name = updates.Name;
             resource.TypeId = updates.TypeId;
@@ -86,20 +94,22 @@ namespace Paxa.Services
             return updatedEntity;
         }
 
-        public async Task<bool> Delete(int id)
+        public void Delete(int id)
         {
-            var resource = await _context.Resources
+            var resource = _context.Resources
                 .Include(x => x.Timeslots)
-                .SingleOrDefaultAsync(e => e.Id == id);
+                .SingleOrDefault(e => e.Id == id);
 
+            if (resource == null)
+            {
+                throw new KeyNotFoundException("Could not find requested resource");
+            }
             if (resource.Timeslots.Count > 0)
             {
                 throw new InvalidOperationException("Cant remove resource with timesplots connected to it");
             }
             _context.Resources.Remove(resource);
-            await _context.SaveChangesAsync();
-
-            return true;
+            _context.SaveChanges();
         }
     }
 }

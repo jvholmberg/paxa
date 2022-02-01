@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
@@ -14,18 +13,16 @@ namespace Paxa.Services
         Task<ICollection<Organization>> GetAll();
         Task<Organization> GetById(int id);
         Task<Organization> Update(int id, Organization Organization);
-        Task<bool> Delete(int id);
+        void Delete(int id);
     }
 
     public class OrganizationService : IOrganizationService
     {
         private readonly PaxaContext _context;
-        private readonly IMapper _mapper;
 
-        public OrganizationService(PaxaContext context, IMapper mapper)
+        public OrganizationService(PaxaContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<Organization> Create(Organization organization)
@@ -55,6 +52,11 @@ namespace Paxa.Services
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
                 .SingleOrDefaultAsync(e => e.Id == id);
 
+            if (organization == null)
+            {
+                throw new KeyNotFoundException("Could not find requested organization");
+            }
+            
             return organization;
         }
 
@@ -65,6 +67,11 @@ namespace Paxa.Services
                 .Include(e => e.Ratings).ThenInclude(e => e.Type)
                 .Include(e => e.Resources).ThenInclude(e => e.Timeslots).ThenInclude(e => e.Booking)
                 .SingleOrDefaultAsync(e => e.Id == id);
+
+            if (organization == null)
+            {
+                throw new KeyNotFoundException("Could not find requested organization");
+            }
 
             // Make updates
             organization.Name = updates.Name;
@@ -80,20 +87,24 @@ namespace Paxa.Services
             return updatedEntity;
         }
 
-        public async Task<bool> Delete(int id)
+        public void Delete(int id)
         {
-            var organization = await _context.Organizations
+            var organization = _context.Organizations
                 .Include(x => x.Resources)
-                .SingleOrDefaultAsync(e => e.Id == id);
+                .SingleOrDefault(e => e.Id == id);
 
+            if (organization == null)
+            {
+                throw new KeyNotFoundException("Could not find requested organization");
+            }
             if (organization.Resources.Count > 0)
             {
                 throw new InvalidOperationException("Cant remove organization with resources connected to it");
             }
-            _context.Organizations.Remove(organization);
-            await _context.SaveChangesAsync();
 
-            return true;
+            _context.Organizations.Remove(organization);
+            _context.SaveChanges();
+
         }
     }
 }
