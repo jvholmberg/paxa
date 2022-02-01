@@ -5,7 +5,7 @@ using AutoMapper;
 using Paxa.Web.Authorization;
 using Paxa.Common.Views;
 using Paxa.Common.Entities;
-using Paxa.Services;
+using Paxa.Data.Services;
 
 namespace Paxa.Web.Controllers
 {

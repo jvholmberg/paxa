@@ -11,7 +11,7 @@ using Paxa.Common.Entities;
 using Paxa.Common.Views;
 using Paxa.Common.Helpers;
 
-namespace Paxa.Services
+namespace Paxa.Data.Services
 {
     public interface IUserService
     {

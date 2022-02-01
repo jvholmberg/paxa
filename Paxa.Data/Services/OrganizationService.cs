@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Paxa.Contexts;
 using Paxa.Common.Entities;
 
-namespace Paxa.Services
+namespace Paxa.Data.Services
 {
     public interface IOrganizationService
     {

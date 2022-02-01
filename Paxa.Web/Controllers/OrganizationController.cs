@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
-using Paxa.Services;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
+using Paxa.Data.Services;
 
 namespace Paxa.Web.Controllers
 {

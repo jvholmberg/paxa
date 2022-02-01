@@ -8,7 +8,7 @@ using Paxa.Web.Authorization;
 using Paxa.Common.Authorization;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
-using Paxa.Services;
+using Paxa.Data.Services;
 
 namespace Paxa.Web.Controllers
 {
