@@ -3,7 +3,7 @@ using AutoMapper;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
 
-namespace Paxa
+namespace Paxa.Web
 {
     public class MapperConfig {
 

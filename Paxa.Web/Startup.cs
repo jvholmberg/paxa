@@ -14,7 +14,7 @@ using Paxa.Web.Helpers;
 using Paxa.Data.Contexts;
 using Paxa.Data.Services;
 
-namespace Paxa
+namespace Paxa.Web
 {
     public class Startup
     {
