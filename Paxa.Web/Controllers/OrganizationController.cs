@@ -7,7 +7,7 @@ using Paxa.Services;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
 
-namespace Paxa.Controllers
+namespace Paxa.Web.Controllers
 {
     [ApiController]
     [Route("api/organizations")]

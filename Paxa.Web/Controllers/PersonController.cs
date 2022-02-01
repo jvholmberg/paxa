@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
-using Paxa.Authorization;
-using Paxa.Services;
+using Paxa.Web.Authorization;
 using Paxa.Common.Views;
 using Paxa.Common.Entities;
+using Paxa.Services;
 
-namespace Paxa.Controllers
+namespace Paxa.Web.Controllers
 {
     [Authorize]
     [ApiController]

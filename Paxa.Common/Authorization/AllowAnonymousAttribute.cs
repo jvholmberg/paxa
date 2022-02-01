@@ -1,6 +1,6 @@
 using System;
 
-namespace Paxa.Authorization
+namespace Paxa.Common.Authorization
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class AllowAnonymousAttribute : Attribute

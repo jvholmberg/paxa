@@ -9,7 +9,7 @@ using System.Text;
 using Paxa.Common.Entities;
 using Paxa.Common.Helpers;
 
-namespace Paxa.Authorization
+namespace Paxa.Common.Authorization
 {
     public interface IJwtUtils
     {

@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 using AutoMapper;
+using Paxa.Common.Authorization;
+using Paxa.Common.Helpers;
+using Paxa.Web.Authorization;
+using Paxa.Web.Helpers;
 
 namespace Paxa
 {
@@ -43,7 +47,7 @@ namespace Paxa
                 .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
 
             // configure strongly typed settings object
-            services.Configure<Helpers.AppSettings>(_configuration.GetSection("AppSettings"));
+            services.Configure<AppSettings>(_configuration.GetSection("AppSettings"));
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfig().CreateConfigutation();
@@ -51,7 +55,7 @@ namespace Paxa
             services.AddSingleton(mapper);
 
             // Services
-            services.AddScoped<Authorization.IJwtUtils, Authorization.JwtUtils>();
+            services.AddScoped<IJwtUtils, JwtUtils>();
             services.AddScoped<Services.IUserService, Services.UserService>();
             services.AddScoped<Services.IPersonService, Services.PersonService>();
             services.AddScoped<Services.IOrganizationService,Services.OrganizationService>();
@@ -89,10 +93,10 @@ namespace Paxa
                 .AllowCredentials());
 
             // Global error handler
-            app.UseMiddleware<Helpers.ErrorHandlerMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             // Custom jwt auth middleware
-            app.UseMiddleware<Authorization.JwtMiddleware>();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

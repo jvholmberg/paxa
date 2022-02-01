@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Paxa.Services;
+using Paxa.Common.Authorization;
 using Paxa.Common.Helpers;
 using Paxa.Common.Views;
 
-namespace Paxa.Authorization
+namespace Paxa.Web.Authorization
 {
     public class JwtMiddleware
     {

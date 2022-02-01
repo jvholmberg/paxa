@@ -19,4 +19,7 @@
     <Folder Include="Requests\" />
     <Folder Include="Responses\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+  </ItemGroup>
 </Project>

@@ -6,10 +6,10 @@ using BCryptNet = BCrypt.Net.BCrypt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Paxa.Contexts;
+using Paxa.Common.Authorization;
 using Paxa.Common.Entities;
 using Paxa.Common.Views;
 using Paxa.Common.Helpers;
-using Paxa.Authorization;
 
 namespace Paxa.Services
 {
