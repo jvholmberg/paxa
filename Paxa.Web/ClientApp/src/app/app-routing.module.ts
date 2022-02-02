@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren: () => import('./resource/resource.module').then(m => m.ResourceModule),
   },
   {
+    path: 'schema',
+    canLoad: [],
+    loadChildren: () => import('./schema/schema.module').then(m => m.SchemaModule),
+  },
+  {
     path: 'timeslot',
     canLoad: [],
     loadChildren: () => import('./timeslot/timeslot.module').then(m => m.TimeslotModule),

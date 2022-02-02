@@ -16,11 +16,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { IconsProviderModule } from '../icons-provider.module';
+import { RouterModule } from '@angular/router';
 
 const externalLibs = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
+  RouterModule,
 
   NzBreadCrumbModule,
   NzButtonModule,

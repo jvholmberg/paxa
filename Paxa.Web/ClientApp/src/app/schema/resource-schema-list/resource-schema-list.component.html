@@ -1,0 +1,23 @@
+<nz-table #resourcesTable [nzData]="resources$ | async">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataItem of resourcesTable.data">
+      <td>
+        <a [routerLink]="['/', 'schema', dataItem.id]">{{dataItem.name}}</a>
+      </td>
+      <td>
+        <button nz-button nzType="text" [routerLink]="['/', 'schema', dataItem.id, 'edit']">
+          Edit
+        </button>
+        <button nz-button nzType="text" nzDanger [routerLink]="getUrl(dataItem.id, 'remove')">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
