@@ -29,6 +29,7 @@
       "@person/*": [ "src/app/person/*" ],
       "@resource/*": [ "src/app/resource/*" ],
       "@user/*": [ "src/app/user/*" ],
+      "@schema/*": [ "src/app/schema/*" ],
       "@timeslot/*": [ "src/app/timeslot/*" ]
     }
   }

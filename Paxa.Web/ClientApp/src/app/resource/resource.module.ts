@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
+import { SchemaModule } from '@schema/schema.module';
 import { ResourceComponent } from './resource.component';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceListViewComponent } from './resource-list-view/resource-list-view.component';
@@ -22,6 +23,7 @@ import { ResourceRemoveComponent } from './resource-remove/resource-remove.compo
   ],
   imports: [
     SharedModule,
+    SchemaModule,
     RouterModule,
     ResourceRoutingModule,
   ],

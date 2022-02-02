@@ -2,6 +2,9 @@
   <nz-page-header-title>All Resources</nz-page-header-title>
   <nz-page-header-subtitle>subtitle</nz-page-header-subtitle>
   <nz-page-header-extra>
+    <button nz-button [routerLink]="['/', 'resource', 'schema', 'create']">
+      Create Schema
+    </button>
     <button nz-button nzType="primary" [routerLink]="['/', 'resource', 'create']">
       Create Resource
     </button>

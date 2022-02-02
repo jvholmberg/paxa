@@ -1,0 +1,49 @@
+<form nz-form nzLayout="vertical" #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
+
+  <nz-page-header nzBackIcon (nzBack)="onCancel()">
+    <nz-page-header-title>Create Resource schema</nz-page-header-title>
+    <nz-page-header-subtitle>Resource is the second highest hierarchy item</nz-page-header-subtitle>
+  </nz-page-header>
+
+  <nz-form-item>
+    <nz-form-label>Organization</nz-form-label>
+    <nz-form-control nzHasFeedback>
+      <nz-select formControlName="organizationId">
+        <nz-option
+          *ngFor="let organization of organizations$ | async"
+          [nzValue]="organization.id"
+          [nzLabel]="organization.name">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Name</nz-form-label>
+    <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTip">
+      <input nz-input type="text" formControlName="name" placeholder="Ex. Cool Padel" />
+      <ng-template #nameErrorTip let-control>
+        <ng-container *ngIf="control.hasError('required')">Name is required</ng-container>
+        <ng-container *ngIf="control.hasError('minlength')">Name too short</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Type</nz-form-label>
+    <nz-form-control nzHasFeedback>
+      <nz-select formControlName="typeId">
+        <nz-option
+          *ngFor="let type of resourceTypes$ | async"
+          [nzValue]="type.id"
+          [nzLabel]="type.name">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="d-flex justify-content-end">
+    <button type="button" class="mr-2" nz-button nzType="default" (click)="onCancel()">Cancel</button>
+    <button type="submit" nz-button nzType="primary">Create</button>
+  </div>
+</form>
