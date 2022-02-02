@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Paxa.Data.Contexts;
@@ -11,9 +12,10 @@ using Paxa.Data.Contexts;
 namespace Paxa.Data.Migrations
 {
     [DbContext(typeof(PaxaContext))]
-    partial class PaxaContextModelSnapshot : ModelSnapshot
+    [Migration("20220202134709_RefreshToken_RevokedByIP_allow_null")]
+    partial class RefreshToken_RevokedByIP_allow_null
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
