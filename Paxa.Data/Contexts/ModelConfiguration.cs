@@ -31,7 +31,8 @@ namespace Paxa.Data.Contexts
             modelBuilder.Entity<Timeslot>()
                 .HasOne(timeslot => timeslot.Booking)
                 .WithOne(booking => booking.Timeslot)
-                .HasForeignKey<Booking>(booking => booking.TimeslotId);
+                .HasForeignKey<Booking>(booking => booking.TimeslotId)
+                .IsRequired(false);
 
             // Resource
             modelBuilder.Entity<Resource>()
@@ -41,7 +42,8 @@ namespace Paxa.Data.Contexts
             modelBuilder.Entity<Resource>()
                 .HasMany(res => res.Timeslots)
                 .WithOne(timeslot => timeslot.Resource)
-                .HasForeignKey(timeslot => timeslot.ResourceId);
+                .HasForeignKey(timeslot => timeslot.ResourceId)
+                .IsRequired(false);
 
             // TimeslotSchema
             modelBuilder.Entity<TimeslotSchema>()
@@ -65,11 +67,13 @@ namespace Paxa.Data.Contexts
             modelBuilder.Entity<ResourceSchema>()
                 .HasMany(resourceSchema => resourceSchema.Resources)
                 .WithOne(resource => resource.ResourceSchema)
-                .HasForeignKey(resource => resource.ResourceSchemaId);
+                .HasForeignKey(resource => resource.ResourceSchemaId)
+                .IsRequired(false);
             modelBuilder.Entity<ResourceSchema>()
                 .HasMany(resourceSchema => resourceSchema.TimeslotSchemas)
                 .WithOne(timeslotSchema => timeslotSchema.ResourceSchema)
-                .HasForeignKey(resourceSchema => resourceSchema.ResourceSchemaId);
+                .HasForeignKey(resourceSchema => resourceSchema.ResourceSchemaId)
+                .IsRequired(false);
 
             // Rating
             modelBuilder.Entity<Rating>()
@@ -81,15 +85,18 @@ namespace Paxa.Data.Contexts
             modelBuilder.Entity<Organization>()
                 .HasOne(organization => organization.Location)
                 .WithOne(location => location.Organization)
-                .HasForeignKey<Organization>(organization => organization.LocationId);
+                .HasForeignKey<Organization>(organization => organization.LocationId)
+                .IsRequired(false);
             modelBuilder.Entity<Organization>()
                 .HasMany(organization => organization.Ratings)
                 .WithOne(rating => rating.Organization)
-                .HasForeignKey(rating => rating.OrganizationId);
+                .HasForeignKey(rating => rating.OrganizationId)
+                .IsRequired(false);
             modelBuilder.Entity<Organization>()
                 .HasMany(organization => organization.Resources)
                 .WithOne(resource => resource.Organization)
-                .HasForeignKey(resource => resource.OrganizationId);
+                .HasForeignKey(resource => resource.OrganizationId)
+                .IsRequired(false);
 
             // Membership
             modelBuilder.Entity<Membership>()
@@ -109,15 +116,18 @@ namespace Paxa.Data.Contexts
             modelBuilder.Entity<Person>()
                 .HasOne(person => person.Address)
                 .WithOne(address => address.Person)
-                .HasForeignKey<Person>(person => person.AddressId);
+                .HasForeignKey<Person>(person => person.AddressId)
+                .IsRequired(false);
             modelBuilder.Entity<Person>()
                 .HasMany(person => person.Ratings)
                 .WithOne(rating => rating.Person)
-                .HasForeignKey(rating => rating.PersonId);
+                .HasForeignKey(rating => rating.PersonId)
+                .IsRequired(false);
             modelBuilder.Entity<Person>()
                 .HasMany(person => person.Participating)
                 .WithOne(par => par.Person)
-                .HasForeignKey(par => par.PersonId);
+                .HasForeignKey(par => par.PersonId)
+                .IsRequired(false);
 
             // Friendship
             modelBuilder.Entity<Friendship>()

@@ -50,8 +50,8 @@ namespace Paxa.Data.Contexts
                     new ResourceType { Id = 1, Name = "Padel", Description = "Description" },
                     new ResourceType { Id = 2, Name = "Tennis", Description = "Description" },
                     new ResourceType { Id = 3, Name = "Badminton", Description = "Description" },
-                    new ResourceType { Id = 4, Name = "Bordtennis", Description = "Description" },
-                    new ResourceType { Id = 5, Name = "Ridning", Description = "Description" }
+                    new ResourceType { Id = 4, Name = "Table tennis", Description = "Description" },
+                    new ResourceType { Id = 5, Name = "Riding", Description = "Description" }
                 );  
 
         }
@@ -62,8 +62,10 @@ namespace Paxa.Data.Contexts
             modelBuilder
                 .Entity<Address>()
                 .HasData(
-                    new Address { Id = 1, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" },
-                    new Address { Id = 2, Street = "Femlingehult 2384", City = "Älmhult", PostalCode = "34391", Country = "Sweden" }
+                    new Address { Id = 1, Street = "Cool road 1", City = "Test city", PostalCode = "73574", Country = "Sweden" },
+                    new Address { Id = 2, Street = "Not so cool road 4", City = "Test city", PostalCode = "73574", Country = "Sweden" },
+                    new Address { Id = 3, Street = "Regular road 21", City = "Some city", PostalCode = "43715", Country = "Sweden" },
+                    new Address { Id = 4, Street = "Unregular road 2", City = "Some city", PostalCode = "43715", Country = "Sweden" }
                 );
 
             // Booking
@@ -87,8 +89,9 @@ namespace Paxa.Data.Contexts
             modelBuilder
                 .Entity<Organization>()
                 .HasData(
-                    new Organization { Id = 1, Name = "House of Padel", Description = "Description 1", LocationId = 1 },
-                    new Organization { Id = 2, Name = "Sankt Jörgens", Description = "Description 2", LocationId = 2 }
+                    new Organization { Id = 1, Name = "Valid Inc", Description = "Description 1", LocationId = 1 },
+                    new Organization { Id = 2, Name = "Correct Inc", Description = "Description 2", LocationId = 2 },
+                    new Organization { Id = 3, Name = "Hard to find", Description = "Description 2" }
                 );
 
             // Person
@@ -96,7 +99,9 @@ namespace Paxa.Data.Contexts
                 .Entity<Person>()
                 .HasData(
                     new Person { Id = 1, FirstName = "Johan", LastName = "Holmberg", AddressId = 1 },
-                    new Person { Id = 2, FirstName = "Joel", LastName = "Holmberg", AddressId = 2 }
+                    new Person { Id = 2, FirstName = "Joel", LastName = "Holmberg", AddressId = 2 },
+                    new Person { Id = 3, FirstName = "Sam", LastName = "Samson", AddressId = 3 },
+                    new Person { Id = 4, FirstName = "John", LastName = "Doe", AddressId = 4 }
                 );
 
             // Rating
@@ -140,16 +145,17 @@ namespace Paxa.Data.Contexts
                 .HasData(
                     new User { Id = 1, Email = "johan.holmberg@domain.se", PasswordHash = BCryptNet.HashPassword("johan"), PersonId = 1 },
                     new User { Id = 2, Email = "joel.holmberg@domain.se", PasswordHash = BCryptNet.HashPassword("joel"), PersonId = 2 },
-                    new User { Id = 3, Email = "owner@houseofpadel.se", PasswordHash = BCryptNet.HashPassword("houseofpadel") },
-                    new User { Id = 4, Email = "owner@sanktgorans.se", PasswordHash = BCryptNet.HashPassword("sanktgorans") }
+                    new User { Id = 3, Email = "owner@houseofpadel.se", PasswordHash = BCryptNet.HashPassword("houseofpadel"), PersonId = 3 },
+                    new User { Id = 4, Email = "owner@sanktgorans.se", PasswordHash = BCryptNet.HashPassword("sanktgorans"), PersonId = 4 }
                 );
 
             // Memberships
             modelBuilder
                 .Entity<Membership>()
                 .HasData(
-                    new Membership { Id = 1, RoleId = 1, OrganizationId = 1, UserId = 1 },
-                    new Membership { Id = 2, RoleId = 2, OrganizationId = 2, UserId = 2 }
+                    new Membership { Id = 1, RoleId = 1, OrganizationId = 1, UserId = 3 },
+                    new Membership { Id = 2, RoleId = 1, OrganizationId = 2, UserId = 4 },
+                    new Membership { Id = 3, RoleId = 2, OrganizationId = 2, UserId = 1 }
                 );
 
             // ResourceSchema
