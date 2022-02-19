@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '@user/services/user.service';
+import { AuthorizationService } from '@shared/services/authorization-service/authorization.service';
 
 @Component({
   selector: 'app-logout',
@@ -8,10 +8,10 @@ import { UserService } from '@user/services/user.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
-    this.userService
+    this.authorizationService
       .revokeToken()
       .subscribe(() => {
         // TODO: Prevent user from backtracking

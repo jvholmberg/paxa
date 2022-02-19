@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseService } from '@core/base-service/base-service';
+import { BaseService } from '@core/base-service/base.service';
 import { Booking } from './booking.model';
 
 @Injectable({

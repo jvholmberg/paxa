@@ -6,14 +6,13 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, finalize, map, switchMap, take } from 'rxjs/operators';
-import { UserService } from '@user/services/user.service';
 import { environment } from '@environments/environment';
+import { AuthorizationService } from '@shared/services/authorization-service/authorization.service';
 
 @Injectable()
 export class BearerTokenInterceptor implements HttpInterceptor {
 
-  constructor(private userService: UserService) {}
+  constructor(private authorizationService: AuthorizationService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -23,7 +22,7 @@ export class BearerTokenInterceptor implements HttpInterceptor {
     if (request.url.startsWith(environment.apiUrl)) {
       const authorizedRequest = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.userService.jwtTokenValue}`,
+          Authorization: `Bearer ${this.authorizationService.jwtTokenValue}`,
         }
       });
       return next.handle(authorizedRequest);

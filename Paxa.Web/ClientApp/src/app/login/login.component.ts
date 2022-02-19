@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { UserService } from '@user/services/user.service';
+import { AuthorizationService } from '@shared/services/authorization-service/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private authorizationService: AuthorizationService,
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void {
-    this.userService.authenticate(f.value).subscribe();
+    this.authorizationService.authenticate(f.value).subscribe();
   }
 
 }

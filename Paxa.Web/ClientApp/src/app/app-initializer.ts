@@ -1,8 +1,8 @@
-import { UserService } from "@user/services/user.service";
+import { AuthorizationService } from "@shared/services/authorization-service/authorization.service";
 
-export const appInitializer = (userService: UserService) => () => new Promise((resolve) => {
+export const appInitializer = (authorizationService: AuthorizationService) => () => new Promise((resolve) => {
   // attempt to refresh token on app start up to auto authenticate
-  userService.refreshToken()
+  authorizationService.refreshToken()
     .subscribe()
     .add(resolve);
 });

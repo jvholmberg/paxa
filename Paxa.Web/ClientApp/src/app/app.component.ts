@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '@user/services/user.service';
+import { AuthorizationService } from '@shared/services/authorization-service/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { UserService } from '@user/services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLoggedIn$ = this.userService.loggedIn$;
+  isLoggedIn$ = this.authorizationService.loggedIn$;
 
-  constructor(private userService: UserService) {}
+  constructor(private authorizationService: AuthorizationService) {}
 }
