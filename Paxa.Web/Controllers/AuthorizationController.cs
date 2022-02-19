@@ -88,8 +88,8 @@ namespace Paxa.Web.Controllers
         public async Task<IActionResult> RevokeToken(RevokeTokenRequest request)
         {
             // accept refresh token in request body or cookie
-            var token = request.Token != null
-                ? request.Token
+            var token = request.RefreshToken != null
+                ? request.RefreshToken
                 : Request.Cookies["refreshToken"];
 
             if (string.IsNullOrEmpty(token))

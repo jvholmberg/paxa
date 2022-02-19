@@ -6,6 +6,7 @@ import { BaseService } from '@core/base-service/base.service';
 import { User } from '@user/services/user.model';
 import { AuthenticateResponse } from '@shared/models/authenticate-response.model';
 import { AuthenticateRequest } from '@shared/models/authenticate-request.model';
+import { RevokeTokenRequest } from '@shared/models/revoke-token-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +61,9 @@ export class AuthorizationService extends BaseService<User> {
   }
 
   public revokeToken(): Observable<{}> {
+    const body: RevokeTokenRequest = {};
     return this.http
-      .post<{}>(`${this.serviceUrl}/revoke-token`, { })
+      .post<{}>(`${this.serviceUrl}/revoke-token`, body)
       .pipe(
         tap(() => {
           this.jwtTokenSource.next(null);
