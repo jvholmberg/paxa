@@ -27,7 +27,7 @@ export class AuthorizationService extends BaseService<User> {
 
   public authenticate(body: AuthenticateRequest): Observable<AuthenticateResponse> {
     return this.http
-      .post<AuthenticateResponse>(`${this.serviceUrl}/authenticate`, body)
+      .post<AuthenticateResponse>(`${this.serviceUrl}/get-token`, body)
       .pipe(
         tap((res) => {
           const user: User = {
@@ -61,7 +61,7 @@ export class AuthorizationService extends BaseService<User> {
 
   public revokeToken(): Observable<{}> {
     return this.http
-      .post<{}>(`${this.serviceUrl}/revoke-token`, {})
+      .post<{}>(`${this.serviceUrl}/revoke-token`, { })
       .pipe(
         tap(() => {
           this.jwtTokenSource.next(null);
