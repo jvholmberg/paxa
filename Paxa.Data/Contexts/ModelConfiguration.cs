@@ -45,34 +45,34 @@ namespace Paxa.Data.Contexts
                 .HasForeignKey(timeslot => timeslot.ResourceId)
                 .IsRequired(false);
 
-            // TimeslotSchema
-            modelBuilder.Entity<TimeslotSchema>()
-                .HasOne(timeslotSchema => timeslotSchema.FromTimestamp)
-                .WithOne(timestamp => timestamp.FromTimeslotSchema)
-                .HasForeignKey<TimeslotSchema>(timeslotSchema => timeslotSchema.FromTimestampId);
-            modelBuilder.Entity<TimeslotSchema>()
-                .HasOne(timeslotSchema => timeslotSchema.ToTimestamp)
-                .WithOne(timestamp => timestamp.ToTimeslotSchema)
-                .HasForeignKey<TimeslotSchema>(timeslotSchema => timeslotSchema.ToTimestampId);
-            modelBuilder.Entity<TimeslotSchema>()
-                .HasOne(timeslotSchema => timeslotSchema.Weekday)
-                .WithMany(weekday => weekday.TimeslotSchemas)
-                .HasForeignKey(timeslotSchema => timeslotSchema.WeekdayId);
+            // SchemaEntry
+            modelBuilder.Entity<SchemaEntry>()
+                .HasOne(schemaEntry => schemaEntry.FromTimestamp)
+                .WithOne(timestamp => timestamp.SchemaEntryFromTimestamp)
+                .HasForeignKey<SchemaEntry>(schemaEntry => schemaEntry.FromTimestampId);
+            modelBuilder.Entity<SchemaEntry>()
+                .HasOne(schemaEntry => schemaEntry.ToTimestamp)
+                .WithOne(timestamp => timestamp.SchemaEntryToTimestamp)
+                .HasForeignKey<SchemaEntry>(schemaEntry => schemaEntry.ToTimestampId);
+            modelBuilder.Entity<SchemaEntry>()
+                .HasOne(schemaEntry => schemaEntry.Weekday)
+                .WithMany(weekday => weekday.SchemaEntries)
+                .HasForeignKey(schemaEntry => schemaEntry.WeekdayId);
 
-            // ResourceSchema
-            modelBuilder.Entity<ResourceSchema>()
-                .HasOne(resourceSchema => resourceSchema.Organization)
-                .WithMany(organization => organization.ResourceSchemas)
-                .HasForeignKey(resourceSchema => resourceSchema.OrganizationId);
-            modelBuilder.Entity<ResourceSchema>()
-                .HasMany(resourceSchema => resourceSchema.Resources)
-                .WithOne(resource => resource.ResourceSchema)
-                .HasForeignKey(resource => resource.ResourceSchemaId)
+            // Schema
+            modelBuilder.Entity<Schema>()
+                .HasOne(schema => schema.Organization)
+                .WithMany(organization => organization.Schemas)
+                .HasForeignKey(schema => schema.OrganizationId);
+            modelBuilder.Entity<Schema>()
+                .HasMany(schema => schema.Resources)
+                .WithOne(resource => resource.Schema)
+                .HasForeignKey(resource => resource.SchemaId)
                 .IsRequired(false);
-            modelBuilder.Entity<ResourceSchema>()
-                .HasMany(resourceSchema => resourceSchema.TimeslotSchemas)
-                .WithOne(timeslotSchema => timeslotSchema.ResourceSchema)
-                .HasForeignKey(resourceSchema => resourceSchema.ResourceSchemaId)
+            modelBuilder.Entity<Schema>()
+                .HasMany(schema => schema.SchemaEntries)
+                .WithOne(schemaEntry => schemaEntry.Schema)
+                .HasForeignKey(schemaEntry => schemaEntry.SchemaId)
                 .IsRequired(false);
 
             // Rating

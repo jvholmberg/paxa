@@ -17,10 +17,10 @@ namespace Paxa.Data.Contexts
         public DbSet<RatingType> RatingTypes { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Resource> Resources { get; set; }
-        public DbSet<ResourceSchema> ResourceSchemas { get; set; }
         public DbSet<ResourceType> ResourceTypes { get; set; }
+        public DbSet<Schema> Schemas { get; set; }
+        public DbSet<SchemaEntry> SchemaEntries { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
-        public DbSet<TimeslotSchema> TimeslotSchemas { get; set; }
         public DbSet<Timestamp> Timestamps { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Friendship> Friendships { get; set; }

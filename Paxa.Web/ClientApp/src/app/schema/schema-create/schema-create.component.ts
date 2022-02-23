@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { logError } from '@utils/logger';
-import { ResourceService } from '@resource/services/resource.service';
-import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
+import { logError } from '@utils/logger';
+import { SchemaService } from '@schema/services/schema.service';
+import { OrganizationService } from '@organization/services/organization.service';
 import { ResourceType } from '@resource/services/resource-type.model';
 import { Organization } from '@organization/services/organization.model';
-import { OrganizationService } from '@organization/services/organization.service';
 
 @Component({
-  selector: 'app-resource-schema-create',
-  templateUrl: './resource-schema-create.component.html',
-  styleUrls: ['./resource-schema-create.component.css']
+  selector: 'app-schema-create',
+  templateUrl: './schema-create.component.html',
+  styleUrls: ['./schema-create.component.css']
 })
-export class ResourceSchemaCreateComponent implements OnInit {
+export class SchemaCreateComponent implements OnInit {
 
   organizations$: Observable<Organization[]>;
   resourceTypes$: Observable<ResourceType[]>;
@@ -26,12 +26,11 @@ export class ResourceSchemaCreateComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private organziationService: OrganizationService,
-    private resourceService: ResourceService,
+    private schemaService: SchemaService,
   ) { }
 
   ngOnInit(): void {
     this.organizations$ = this.organziationService.get();
-    this.resourceTypes$ = this.resourceService.getTypes();
 
     this.form = this.initForm();
   }
@@ -40,7 +39,6 @@ export class ResourceSchemaCreateComponent implements OnInit {
     return this.formBuilder.group({
       organizationId: [null, Validators.required],
       name: ['', [Validators.required, Validators.minLength(2)]],
-      typeId: [null, Validators.required],
     });
   }
 
@@ -49,11 +47,11 @@ export class ResourceSchemaCreateComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    this.resourceService
+    this.schemaService
       .create(f.value)
       .subscribe(
         (res) => {
-          this.router.navigate(['/', 'resource', res.id], { replaceUrl: true });
+          this.router.navigate(['/', 'schemas', res.id], { replaceUrl: true });
         },
         (err) => {
           logError(err);

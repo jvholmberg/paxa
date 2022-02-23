@@ -10,7 +10,7 @@ namespace Paxa.Common.Entities
         public int Number { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<TimeslotSchema> TimeslotSchemas { get; set; }
+        public virtual ICollection<SchemaEntry> SchemaEntries { get; set; }
 
         public Weekday()
         {

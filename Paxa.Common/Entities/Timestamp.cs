@@ -10,8 +10,8 @@ namespace Paxa.Common.Entities
         public int Minutes { get; set; }
         public int Seconds { get; set; }
 
-        public virtual TimeslotSchema FromTimeslotSchema { get; set; }
-        public virtual TimeslotSchema ToTimeslotSchema { get; set; }
+        public virtual SchemaEntry SchemaEntryFromTimestamp { get; set; }
+        public virtual SchemaEntry SchemaEntryToTimestamp { get; set; }
 
         public Timestamp()
         {

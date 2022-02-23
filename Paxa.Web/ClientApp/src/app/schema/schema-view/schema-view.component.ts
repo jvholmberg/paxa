@@ -5,11 +5,11 @@ import { Resource } from '@resource/services/resource.model';
 import { ResourceService } from '@resource/services/resource.service';
 
 @Component({
-  selector: 'app-resource-schema-view',
-  templateUrl: './resource-schema-view.component.html',
-  styleUrls: ['./resource-schema-view.component.css']
+  selector: 'app-schema-view',
+  templateUrl: './schema-view.component.html',
+  styleUrls: ['./schema-view.component.css']
 })
-export class ResourceSchemaViewComponent implements OnInit {
+export class SchemaViewComponent implements OnInit {
 
   @Input() resourceId: number;
   resource$: Observable<Resource>;

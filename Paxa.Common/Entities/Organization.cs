@@ -15,7 +15,7 @@ namespace Paxa.Common.Entities
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
-        public virtual ICollection<ResourceSchema> ResourceSchemas { get; set; }
+        public virtual ICollection<Schema> Schemas { get; set; }
 
         public Organization()
         {

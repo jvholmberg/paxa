@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceSchemaEditComponent } from './resource-schema-edit.component';
+import { SchemaViewComponent } from './schema-view.component';
 
-describe('ResourceSchemaEditComponent', () => {
-  let component: ResourceSchemaEditComponent;
-  let fixture: ComponentFixture<ResourceSchemaEditComponent>;
+describe('SchemaViewComponent', () => {
+  let component: SchemaViewComponent;
+  let fixture: ComponentFixture<SchemaViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResourceSchemaEditComponent ]
+      declarations: [ SchemaViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceSchemaEditComponent);
+    fixture = TestBed.createComponent(SchemaViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

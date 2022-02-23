@@ -149,7 +149,7 @@ namespace Paxa.Data.Contexts
                     new User { Id = 4, Email = "owner@sanktgorans.se", PasswordHash = BCryptNet.HashPassword("sanktgorans"), PersonId = 4 }
                 );
 
-            // Memberships
+            // Membership
             modelBuilder
                 .Entity<Membership>()
                 .HasData(
@@ -158,14 +158,24 @@ namespace Paxa.Data.Contexts
                     new Membership { Id = 3, RoleId = 2, OrganizationId = 2, UserId = 1 }
                 );
 
-            // ResourceSchema
+            // Schema
             modelBuilder
-                .Entity<ResourceSchema>()
+                .Entity<Schema>()
                 .HasData(
-                    new ResourceSchema { Id = 1, Active = true, Name = "Default Schema", OrganizationId = 1 }
+                    new Schema { Id = 1, Active = true, Name = "Default Schema", OrganizationId = 1 }
                 );
 
-            // Time
+            // SchemaEntry
+            modelBuilder
+                .Entity<SchemaEntry>()
+                .HasData(
+                    new SchemaEntry { Id = 1, FromTimestampId = 1, ToTimestampId = 2, SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 2, FromTimestampId = 3, ToTimestampId = 4, SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 3, FromTimestampId = 5, ToTimestampId = 6, SchemaId = 1, WeekdayId = 7 },
+                    new SchemaEntry { Id = 4, FromTimestampId = 7, ToTimestampId = 8, SchemaId = 1, WeekdayId = 7 }
+                );
+
+            // Timestamp
             modelBuilder
                 .Entity<Timestamp>()
                 .HasData(
@@ -177,16 +187,6 @@ namespace Paxa.Data.Contexts
                     new Timestamp { Id = 6, Hours = 11, Minutes = 0, Seconds = 0 },
                     new Timestamp { Id = 7, Hours = 11, Minutes = 0, Seconds = 0 },
                     new Timestamp { Id = 8, Hours = 12, Minutes = 0, Seconds = 0 }
-                );
-
-            // TimeslotSchema
-            modelBuilder
-                .Entity<TimeslotSchema>()
-                .HasData(
-                    new TimeslotSchema { Id = 1, FromTimestampId = 1, ToTimestampId = 2, ResourceSchemaId = 1, WeekdayId = 1 },
-                    new TimeslotSchema { Id = 2, FromTimestampId = 3, ToTimestampId = 4, ResourceSchemaId = 1, WeekdayId = 1 },
-                    new TimeslotSchema { Id = 3, FromTimestampId = 5, ToTimestampId = 6, ResourceSchemaId = 1, WeekdayId = 7 },
-                    new TimeslotSchema { Id = 4, FromTimestampId = 7, ToTimestampId = 8, ResourceSchemaId = 1, WeekdayId = 7 }
                 );
         }
     }

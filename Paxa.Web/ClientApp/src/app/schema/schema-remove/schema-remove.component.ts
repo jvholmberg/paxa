@@ -7,14 +7,14 @@ import { ResourceService } from '@resource/services/resource.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-resource-schema-remove',
-  templateUrl: './resource-schema-remove.component.html',
-  styleUrls: ['./resource-schema-remove.component.css']
+  selector: 'app-schema-remove',
+  templateUrl: './schema-remove.component.html',
+  styleUrls: ['./schema-remove.component.css']
 })
-export class ResourceSchemaRemoveComponent implements OnInit {
+export class SchemaRemoveComponent implements OnInit {
 
   resourceId: number;
-  resource$: Observable<Resource>;
+  schema$: Observable<Resource>;
 
   constructor(
     private location: Location,
@@ -25,7 +25,7 @@ export class ResourceSchemaRemoveComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceId = +this.activatedRoute.snapshot.params['id'];
-    this.resource$ = this.resourceService.getById(this.resourceId);
+    this.schema$ = this.resourceService.getById(this.resourceId);
   }
 
   onDelete(): void {

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ResourceSchemaListComponent } from './resource-schema-list.component';
+import { SchemaListComponent } from './schema-list.component';
 
-describe('ResourceSchemaListComponent', () => {
-  let component: ResourceSchemaListComponent;
-  let fixture: ComponentFixture<ResourceSchemaListComponent>;
+describe('SchemaListComponent', () => {
+  let component: SchemaListComponent;
+  let fixture: ComponentFixture<SchemaListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceSchemaListComponent ]
+      declarations: [ SchemaListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceSchemaListComponent);
+    fixture = TestBed.createComponent(SchemaListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

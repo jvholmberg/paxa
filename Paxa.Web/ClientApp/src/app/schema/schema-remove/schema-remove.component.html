@@ -1,18 +1,18 @@
 
 <nz-modal
-  *ngIf="resource$ | async as resource"
+  *ngIf="schema$ | async as schema"
   [nzVisible]="true"
   [nzTitle]="modalTitle"
   [nzContent]="modalContent"
   [nzFooter]="modalFooter"
   (nzOnCancel)="onCancel()">
   <ng-template #modalTitle>
-    Remove {{resource?.name}}
+    Remove {{schema?.name}}
   </ng-template>
 
   <ng-template #modalContent>
     <p>
-      You are about to remove {{resource?.name}}.
+      You are about to remove {{schema?.name}}.
       Are you sure you want to continue?
     </p>
   </ng-template>

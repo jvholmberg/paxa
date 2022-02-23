@@ -4,11 +4,11 @@ import { ResourceService } from '@resource/services/resource.service';
 import { Resource } from '@resource/services/resource.model';
 
 @Component({
-  selector: 'app-resource-schema-list',
-  templateUrl: './resource-schema-list.component.html',
-  styleUrls: ['./resource-schema-list.component.css']
+  selector: 'app-schema-list',
+  templateUrl: './schema-list.component.html',
+  styleUrls: ['./schema-list.component.css']
 })
-export class ResourceSchemaListComponent  implements OnInit {
+export class SchemaListComponent  implements OnInit {
 
   @Input() organizationId: number;
 

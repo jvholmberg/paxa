@@ -10,11 +10,11 @@ namespace Paxa.Common.Entities
         public string Name { get; set; }
         public int TypeId { get; set; }
         public int OrganizationId { get; set; }
-        public int? ResourceSchemaId { get; set; }
+        public int? SchemaId { get; set; }
 
         public virtual ResourceType Type { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual ResourceSchema ResourceSchema { get; set; }
+        public virtual Schema Schema { get; set; }
         public virtual ICollection<Timeslot> Timeslots { get; set; }
 
         public Resource()

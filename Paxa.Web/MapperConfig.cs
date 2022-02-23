@@ -42,12 +42,6 @@ namespace Paxa.Web
                             source => source.Resources.Select(resource => resource.Id).ToList()
                         )
                     )
-                    .ForMember(
-                        destination => destination.Ratings,
-                        options => options.MapFrom(
-                            source => source.Ratings.ToList()
-                        )
-                    )
                     .ReverseMap()
                     .ForMember(destination => destination.Resources, options => options.Ignore())
                     .ForMember(destination => destination.Ratings, options => options.Ignore());
@@ -81,18 +75,6 @@ namespace Paxa.Web
                         destination => destination.BookingIds,
                         options => options.MapFrom(
                             source => source.Bookings.Select(booking => booking.Id).ToList()
-                        )
-                    )
-                    .ForMember(
-                        destination => destination.Address,
-                        options => options.MapFrom(
-                            source => source.Address
-                        )
-                    )
-                    .ForMember(
-                        destination => destination.Ratings,
-                        options => options.MapFrom(
-                            source => source.Ratings.ToList()
                         )
                     )
                     .ReverseMap()
@@ -134,6 +116,32 @@ namespace Paxa.Web
                     .ReverseMap();
 
                 cfg.CreateMap<User, AuthenticateResponse>();
+
+                // Schema
+                cfg.CreateMap<Schema, SchemaDto>()
+                    .ForMember(
+                        destination => destination.ResourceIds,
+                        options => options.MapFrom(
+                            source => source.Resources.Select(resource => resource.Id).ToList()
+                        )
+                    )
+                    .ReverseMap();
+
+                // SchemaEntry
+                cfg.CreateMap<SchemaEntry, SchemaEntryDto>()
+                    .ReverseMap();
+
+                // Timeslot
+                cfg.CreateMap<Timeslot, TimeslotDto>()
+                    .ReverseMap();
+
+                // Weekday
+                cfg.CreateMap<Weekday, WeekdayDto>()
+                    .ReverseMap();
+
+                // Timestamp
+                cfg.CreateMap<Timestamp, TimestampDto>()
+                    .ReverseMap();
 
             });
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Paxa.Common.Entities
 {
-    public class ResourceSchema
+    public class Schema
     {
         [Key]
         public int Id { get; set; }
@@ -13,9 +13,9 @@ namespace Paxa.Common.Entities
         
         public virtual Organization Organization { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
-        public virtual ICollection<TimeslotSchema> TimeslotSchemas { get; set; }
+        public virtual ICollection<SchemaEntry> SchemaEntries { get; set; }
 
-        public ResourceSchema()
+        public Schema()
         {
         }
     }
