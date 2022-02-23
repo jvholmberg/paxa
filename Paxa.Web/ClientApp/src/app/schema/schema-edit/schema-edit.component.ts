@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { logError } from '@utils/logger';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
-import { ResourceService } from '@resource/services/resource.service';
-import { ResourceType } from '@resource/services/resource-type.model';
 import { Organization } from '@organization/services/organization.model';
 import { OrganizationService } from '@organization/services/organization.service';
+import { SchemaService } from '@schema/services/schema.service';
+import { Schema } from '@schema/services/schema.model';
 
 @Component({
   selector: 'app-schema-edit',
@@ -17,30 +17,32 @@ import { OrganizationService } from '@organization/services/organization.service
 export class SchemaEditComponent implements OnInit {
 
   organizations$: Observable<Organization[]>;
-  resourceTypes$: Observable<ResourceType[]>;
 
+  schemaId: number;
   form: FormGroup;
 
   constructor(
     private location: Location,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private organziationService: OrganizationService,
-    private resourceService: ResourceService,
+    private schemaService: SchemaService,
   ) { }
 
   ngOnInit(): void {
     this.organizations$ = this.organziationService.get();
-    this.resourceTypes$ = this.resourceService.getTypes();
 
-    this.form = this.initForm();
+    this.schemaId = +this.activatedRoute.snapshot.params['id'];
+    this.schemaService.getById(this.schemaId).subscribe((schema) => {
+      this.form = this.initForm(schema);
+    });
   }
 
-  private initForm(): FormGroup {
+  private initForm(schema: Schema): FormGroup {
     return this.formBuilder.group({
       organizationId: [null, Validators.required],
       name: ['', [Validators.required, Validators.minLength(2)]],
-      typeId: [null, Validators.required],
     });
   }
 
@@ -49,11 +51,11 @@ export class SchemaEditComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    this.resourceService
-      .create(f.value)
+    this.schemaService
+      .update(this.schemaId, f.value)
       .subscribe(
         (res) => {
-          this.router.navigate(['/', 'resource', res.id], { replaceUrl: true });
+          this.router.navigate(['/', 'schemas', res.id], { replaceUrl: true });
         },
         (err) => {
           logError(err);

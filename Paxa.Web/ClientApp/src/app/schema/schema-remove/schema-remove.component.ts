@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Resource } from '@resource/services/resource.model';
-import { logError } from '@utils/logger';
-import { ResourceService } from '@resource/services/resource.service';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
+import { logError } from '@utils/logger';
+import { SchemaService } from '@schema/services/schema.service';
+import { Schema } from '@schema/services/schema.model';
 
 @Component({
   selector: 'app-schema-remove',
@@ -13,27 +13,27 @@ import { Location } from '@angular/common';
 })
 export class SchemaRemoveComponent implements OnInit {
 
-  resourceId: number;
-  schema$: Observable<Resource>;
+  schemaId: number;
+  schema$: Observable<Schema>;
 
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private resourceService: ResourceService,
+    private schemaService: SchemaService,
     ) { }
 
   ngOnInit(): void {
-    this.resourceId = +this.activatedRoute.snapshot.params['id'];
-    this.schema$ = this.resourceService.getById(this.resourceId);
+    this.schemaId = +this.activatedRoute.snapshot.params['id'];
+    this.schema$ = this.schemaService.getById(this.schemaId);
   }
 
   onDelete(): void {
-    this.resourceService
-      .delete(this.resourceId)
+    this.schemaService
+      .delete(this.schemaId)
       .subscribe(
         () => {
-          this.router.navigate(['/', 'resource'], { replaceUrl: true });
+          this.router.navigate(['/', 'schemas'], { replaceUrl: true });
         },
         (err) => {
           logError(err);

@@ -34,7 +34,7 @@ export class ResourceEditComponent implements OnInit {
     this.resourceId = +this.activatedRoute.snapshot.params['id'];
     this.resourceService.getById(this.resourceId).subscribe((resource) => {
       this.form = this.initForm(resource);
-    })
+    });
   }
 
   private initForm(resource: Resource): FormGroup {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ResourceService } from '@resource/services/resource.service';
-import { Resource } from '@resource/services/resource.model';
+import { Schema } from '@schema/services/schema.model';
+import { SchemaService } from '@schema/services/schema.service';
 
 @Component({
   selector: 'app-schema-list',
@@ -12,23 +12,23 @@ export class SchemaListComponent  implements OnInit {
 
   @Input() organizationId: number;
 
-  resources$: Observable<Resource[]>;
+  schemas$: Observable<Schema[]>;
 
-  constructor(private resourceService: ResourceService) { }
+  constructor(private schemaService: SchemaService) { }
 
   ngOnInit(): void {
     const params = this.organizationId ? { organizationId: this.organizationId } : null;
 
-    this.resources$ = params
-      ? this.resourceService.query(params)
-      : this.resourceService.get();
+    this.schemas$ = params
+      ? this.schemaService.query(params)
+      : this.schemaService.get();
   }
 
   getUrl(resourceId: number, action: string): string[] {
     return [
       ...this.organizationId
-        ? ['/', 'organization', `${this.organizationId}`, 'resource']
-        : ['/', 'resource'],
+        ? ['/', 'organization', `${this.organizationId}`, 'schemas']
+        : ['/', 'schemas'],
       `${resourceId}`,
       action,
     ]

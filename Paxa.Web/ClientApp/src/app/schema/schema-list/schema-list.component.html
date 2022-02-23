@@ -1,4 +1,4 @@
-<nz-table #resourcesTable [nzData]="resources$ | async">
+<nz-table #schemasTable [nzData]="schemas$ | async">
   <thead>
     <tr>
       <th>Name</th>
@@ -6,12 +6,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let dataItem of resourcesTable.data">
+    <tr *ngFor="let dataItem of schemasTable.data">
       <td>
-        <a [routerLink]="['/', 'schema', dataItem.id]">{{dataItem.name}}</a>
+        <a [routerLink]="['/', 'schemas', dataItem.id]">{{dataItem.name}}</a>
       </td>
       <td>
-        <button nz-button nzType="text" [routerLink]="['/', 'schema', dataItem.id, 'edit']">
+        <button nz-button nzType="text" [routerLink]="['/', 'schemas', dataItem.id, 'edit']">
           Edit
         </button>
         <button nz-button nzType="text" nzDanger [routerLink]="getUrl(dataItem.id, 'remove')">

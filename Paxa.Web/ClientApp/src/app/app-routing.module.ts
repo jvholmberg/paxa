@@ -37,7 +37,7 @@ const routes: Routes = [
     loadChildren: () => import('./resource/resource.module').then(m => m.ResourceModule),
   },
   {
-    path: 'schema',
+    path: 'schemas',
     canLoad: [],
     loadChildren: () => import('./schema/schema.module').then(m => m.SchemaModule),
   },

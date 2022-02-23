@@ -1,13 +1,10 @@
-<ng-container *ngIf="resource$ | async as resource">
+<ng-container *ngIf="schema$ | async as schema">
   <nz-page-header nzBackIcon (nzBack)="onGoBack()">
-    <nz-page-header-title>{{resource?.name}}</nz-page-header-title>
-    <nz-page-header-subtitle>{{resource?.description}}</nz-page-header-subtitle>
+    <nz-page-header-title>{{schema?.name}}</nz-page-header-title>
+    <nz-page-header-subtitle>{{schema?.description}}</nz-page-header-subtitle>
     <nz-page-header-extra>
-      <button nz-button [routerLink]="['/', 'resource', resource.id, 'edit']">
-        Edit Resource
-      </button>
-      <button nz-button nzType="primary">
-        Manage Timeslots
+      <button nz-button [routerLink]="['/', 'schemas', schema.id, 'edit']">
+        Edit Schema
       </button>
     </nz-page-header-extra>
   </nz-page-header>

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Resource } from '@resource/services/resource.model';
-import { ResourceService } from '@resource/services/resource.service';
+import { Schema } from '@schema/services/schema.model';
+import { SchemaService } from '@schema/services/schema.service';
 
 @Component({
   selector: 'app-schema-view',
@@ -11,26 +11,26 @@ import { ResourceService } from '@resource/services/resource.service';
 })
 export class SchemaViewComponent implements OnInit {
 
-  @Input() resourceId: number;
-  resource$: Observable<Resource>;
+  @Input() schemaId: number;
+  schema$: Observable<Schema>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private resourceService: ResourceService,
+    private schemaService: SchemaService,
   ) { }
 
   ngOnInit(): void {
     // If no id was provided; Check params
-    if (this.resourceId === undefined || this.resourceId === null) {
-      this.resourceId = +this.activatedRoute.snapshot.params['id'];
+    if (this.schemaId === undefined || this.schemaId === null) {
+      this.schemaId = +this.activatedRoute.snapshot.params['id'];
     }
 
-    this.resource$ = this.resourceService.getById(this.resourceId);
+    this.schema$ = this.schemaService.getById(this.schemaId);
   }
 
   onGoBack(): void {
-    this.router.navigate(['/', 'resource'], {
+    this.router.navigate(['/', 'schemas'], {
       queryParamsHandling: 'merge',
     });
   }

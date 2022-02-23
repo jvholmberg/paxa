@@ -17,7 +17,6 @@ import { Organization } from '@organization/services/organization.model';
 export class SchemaCreateComponent implements OnInit {
 
   organizations$: Observable<Organization[]>;
-  resourceTypes$: Observable<ResourceType[]>;
 
   form: FormGroup;
 
