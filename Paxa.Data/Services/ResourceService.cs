@@ -44,7 +44,7 @@ namespace Paxa.Data.Services
                 query = query.Where(x => x.OrganizationId == organizationId);
             }
 
-            return await query.ToListAsync();;
+            return await query.ToListAsync();
         }
 
         public async Task<Resource> GetById(int id)

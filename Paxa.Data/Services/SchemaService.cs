@@ -27,59 +27,50 @@ namespace Paxa.Data.Services
             _context = context;
         }
 
-        public async Task<Schema> Create(Schema schema)
-        {
-            await _context.Schemas.AddAsync(schema);
-            await _context.SaveChangesAsync();
-
-            return await GetById(schema.Id);
-        }
-
-        public async Task<ICollection<Schema>> GetAll()
-        {
-            var schemas = await _context.Schemas
-                .Include(x => x.Organization)
-                .Include(x => x.Resources)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.Weekday)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.FromTimestamp)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.ToTimestamp)
-                .ToListAsync();
-
-            return schemas;
-        }
-
-        public async Task<ICollection<Schema>> GetByQuery(int? organizationId)
-        {
-            var query = _context.Schemas
+        private IQueryable<Schema> AllData() {
+            return _context.Schemas
                 .Include(x => x.Organization)
                 .Include(x => x.Resources)
                 .Include(x => x.SchemaEntries).ThenInclude(x => x.Weekday)
                 .Include(x => x.SchemaEntries).ThenInclude(x => x.FromTimestamp)
                 .Include(x => x.SchemaEntries).ThenInclude(x => x.ToTimestamp) as IQueryable<Schema>;
+        }
 
+        private IQueryable<Schema> SlimData() {
+            return _context.Schemas
+                .Include(x => x.Organization)
+                .Include(x => x.Resources) as IQueryable<Schema>;
+        }
+
+        public async Task<Schema> Create(Schema schema)
+        {
+            await _context.Schemas.AddAsync(schema);
+            await _context.SaveChangesAsync();
+            return await GetById(schema.Id);
+        }
+
+        public async Task<ICollection<Schema>> GetAll()
+        {
+            return await AllData().ToListAsync();
+        }
+
+        public async Task<ICollection<Schema>> GetByQuery(int? organizationId)
+        {
+            var query = AllData();
             if (organizationId != null)
             {
                 query = query.Where(x => x.OrganizationId == organizationId);
             }
-
             return await query.ToListAsync();;
         }
 
         public async Task<Schema> GetById(int id)
         {
-            var schema = await _context.Schemas
-                .Include(x => x.Organization)
-                .Include(x => x.Resources)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.Weekday)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.FromTimestamp)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.ToTimestamp)
-                .SingleOrDefaultAsync(e => e.Id == id);
-            
+            var schema = await AllData().SingleOrDefaultAsync(e => e.Id == id);
             if (schema == null)
             {
                 throw new KeyNotFoundException("Could not find requested schema");
             }
-
             return schema;
         }
 

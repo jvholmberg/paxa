@@ -18,7 +18,7 @@ export class SchemaListComponent  implements OnInit {
 
   ngOnInit(): void {
     const params = this.organizationId ? { organizationId: this.organizationId } : null;
-
+    console.log(params);
     this.schemas$ = params
       ? this.schemaService.query(params)
       : this.schemaService.get();

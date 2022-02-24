@@ -6,7 +6,6 @@ namespace Paxa.Common.Views
     {
         public int Id { get; set; }
         public int TimeslotId { get; set; }
-        public int HostId { get; set; }
         public ICollection<int> ParticipantIds { get; set; }
 
         public BookingDto()

@@ -118,7 +118,7 @@ export abstract class BaseService<T> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
 
-    if (!this.initialized || force) {
+    if (!this.initialized || force) {
       this.http.get<T[]>(this.serviceUrl).subscribe(
         (res) => {
           this.initialized = true;

@@ -46,9 +46,24 @@ namespace Paxa.Web
                     .ForMember(destination => destination.Resources, options => options.Ignore())
                     .ForMember(destination => destination.Ratings, options => options.Ignore());
                 
-                cfg.CreateMap<CreateOrganizationRequest, Organization>();
+                cfg.CreateMap<CreateOrganizationRequest, Organization>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.LocationId, options => options.Ignore())
+                    .ForMember(destination => destination.Location, options => options.Ignore())
+                    .ForMember(destination => destination.Ratings, options => options.Ignore())
+                    .ForMember(destination => destination.Resources, options => options.Ignore())
+                    .ForMember(destination => destination.Memberships, options => options.Ignore())
+                    .ForMember(destination => destination.Schemas,options => options.Ignore());
+
                 
-                cfg.CreateMap<UpdateOrganizationRequest, Organization>();
+                cfg.CreateMap<UpdateOrganizationRequest, Organization>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.LocationId, options => options.Ignore())
+                    .ForMember(destination => destination.Location, options => options.Ignore())
+                    .ForMember(destination => destination.Ratings, options => options.Ignore())
+                    .ForMember(destination => destination.Resources, options => options.Ignore())
+                    .ForMember(destination => destination.Memberships, options => options.Ignore())
+                    .ForMember(destination => destination.Schemas,options => options.Ignore());
 
                 // Membership
                 cfg.CreateMap<Membership, MembershipDto>()
@@ -65,9 +80,22 @@ namespace Paxa.Web
                 cfg.CreateMap<ResourceType, ResourceTypeDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<CreateResourceRequest, Resource>();
+                cfg.CreateMap<CreateResourceRequest, Resource>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.SchemaId, options => options.Ignore())
+                    .ForMember(destination => destination.Type, options => options.Ignore())
+                    .ForMember(destination => destination.Organization, options => options.Ignore())
+                    .ForMember(destination => destination.Schema, options => options.Ignore())
+                    .ForMember(destination => destination.Timeslots, options => options.Ignore());
 
-                cfg.CreateMap<UpdateResourceRequest, Resource>();
+                cfg.CreateMap<UpdateResourceRequest, Resource>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.OrganizationId, options => options.Ignore())
+                    .ForMember(destination => destination.SchemaId, options => options.Ignore())
+                    .ForMember(destination => destination.Type, options => options.Ignore())
+                    .ForMember(destination => destination.Organization, options => options.Ignore())
+                    .ForMember(destination => destination.Schema, options => options.Ignore())
+                    .ForMember(destination => destination.Timeslots, options => options.Ignore());;
 
                 // Person
                 cfg.CreateMap<Person, PersonDto>()
@@ -78,14 +106,8 @@ namespace Paxa.Web
                         )
                     )
                     .ReverseMap()
-                    .ForMember(
-                        destination => destination.Bookings,
-                        options => options.Ignore()
-                    )
-                    .ForMember(
-                        destination => destination.Ratings,
-                        options => options.Ignore()
-                    );
+                    .ForMember(destination => destination.Bookings, options => options.Ignore())
+                    .ForMember(destination => destination.Ratings, options => options.Ignore());
 
                 // Rating
                 cfg.CreateMap<Rating, RatingDto>()
@@ -102,10 +124,7 @@ namespace Paxa.Web
                         )
                     )
                     .ReverseMap()
-                    .ForMember(
-                        destination => destination.Type,
-                        options => options.Ignore()
-                    );
+                    .ForMember(destination => destination.Type, options => options.Ignore());
 
                 // RefreshToken
                 cfg.CreateMap<RefreshToken, RefreshTokenDto>()
@@ -115,7 +134,14 @@ namespace Paxa.Web
                 cfg.CreateMap<User, UserDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<User, AuthenticateResponse>();
+                cfg.CreateMap<User, AuthenticateResponse>()
+                    .ForMember(
+                        destination => destination.UserId,
+                        options => options.MapFrom(
+                            source => source.Id
+                        )
+                    )
+                    .ForMember(destination => destination.JwtToken, options => options.Ignore());
 
                 // Schema
                 cfg.CreateMap<Schema, SchemaDto>()
@@ -144,6 +170,8 @@ namespace Paxa.Web
                     .ReverseMap();
 
             });
+
+            config.AssertConfigurationIsValid();
 
             return config;
         }

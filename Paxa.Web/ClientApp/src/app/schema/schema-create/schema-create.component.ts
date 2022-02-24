@@ -38,6 +38,8 @@ export class SchemaCreateComponent implements OnInit {
     return this.formBuilder.group({
       organizationId: [null, Validators.required],
       name: ['', [Validators.required, Validators.minLength(2)]],
+      resourceIds: [[], Validators.minLength(0)],
+      schemaEntries: [[], Validators.minLength(0)],
     });
   }
 
