@@ -25,7 +25,7 @@ export class ResourceService extends BaseService<Resource> {
 
   getTypes(force: boolean = false): Observable<ResourceType[]> {
     const previousValue = this.typesValue;
-    if (previousValue?.length === 0 || force) {
+    if (previousValue?.length === 0 || force) {
       this.loadingTypesSubject.next(true);
       this.http.get<ResourceType[]>(`${this.serviceUrl}/types`).subscribe({
         next: (types) => {

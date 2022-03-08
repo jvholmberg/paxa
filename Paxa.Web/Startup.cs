@@ -58,6 +58,7 @@ namespace Paxa.Web
 
             // Services
             services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<ILookupService, LookupService>();
             services.AddScoped<IOrganizationService, OrganizationService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IResourceService, ResourceService>();

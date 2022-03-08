@@ -14,6 +14,8 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 import { IconsProviderModule } from '../icons-provider.module';
 import { RouterModule } from '@angular/router';
@@ -36,6 +38,8 @@ const externalLibs = [
   NzResultModule,
   NzSelectModule,
   NzTableModule,
+  NzTabsModule,
+  NzTimePickerModule,
 
   IconsProviderModule,
 ];

@@ -171,6 +171,7 @@ namespace Paxa.Web
 
             });
 
+            // Make sure mapping is valid
             config.AssertConfigurationIsValid();
 
             return config;
