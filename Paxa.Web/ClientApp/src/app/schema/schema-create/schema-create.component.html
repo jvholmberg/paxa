@@ -29,8 +29,18 @@
     </nz-form-control>
   </nz-form-item>
 
+  <nz-tabset *ngIf="weekdays$ | async as weekdays">
+    <nz-tab *ngFor="let weekday of weekdays" [nzTitle]="weekday.name">
+      <app-schema-entry-list-edit
+        [weekday]="weekday.number"
+        [schemaEntries]="schemaEntries">
+      </app-schema-entry-list-edit>
+    </nz-tab>
+  </nz-tabset>
+
+
   <div class="d-flex justify-content-end">
-    <button type="button" class="mr-2" nz-button nzType="default" (click)="onCancel()">Cancel</button>
+    <button type="button" class="me-2" nz-button nzType="default" (click)="onCancel()">Cancel</button>
     <button type="submit" nz-button nzType="primary">Create</button>
   </div>
 </form>

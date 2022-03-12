@@ -1,0 +1,34 @@
+<nz-table #entryTable [nzData]="schemaEntries.value">
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th class="text-end">
+        <button type="button" nz-button nzSize="small" nzType="primary" (click)="onAddEntry()"><i nz-icon nzType="plus"></i></button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let entryForm of schemaEntries.controls; let i = index">
+      <tr [formGroup]="entryForm">
+        <td>
+          <nz-form-item class="mb-0">
+            <nz-form-control nzHasFeedback>
+              <nz-time-picker formControlName="fromTimestamp" nzFormat="HH:mm"></nz-time-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </td>
+        <td>
+          <nz-form-item class="mb-0">
+            <nz-form-control nzHasFeedback>
+              <nz-time-picker formControlName="toTimestamp" nzFormat="HH:mm"></nz-time-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </td>
+        <td class="text-end">
+          <button type="button" nz-button nzSize="small" nzType="primary" nzDanger (click)="onDeleteEntry(i)"><i nz-icon nzType="delete"></i></button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>
