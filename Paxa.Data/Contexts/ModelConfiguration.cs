@@ -47,14 +47,6 @@ namespace Paxa.Data.Contexts
 
             // SchemaEntry
             modelBuilder.Entity<SchemaEntry>()
-                .HasOne(schemaEntry => schemaEntry.FromTimestamp)
-                .WithOne(timestamp => timestamp.SchemaEntryFromTimestamp)
-                .HasForeignKey<SchemaEntry>(schemaEntry => schemaEntry.FromTimestampId);
-            modelBuilder.Entity<SchemaEntry>()
-                .HasOne(schemaEntry => schemaEntry.ToTimestamp)
-                .WithOne(timestamp => timestamp.SchemaEntryToTimestamp)
-                .HasForeignKey<SchemaEntry>(schemaEntry => schemaEntry.ToTimestampId);
-            modelBuilder.Entity<SchemaEntry>()
                 .HasOne(schemaEntry => schemaEntry.Weekday)
                 .WithMany(weekday => weekday.SchemaEntries)
                 .HasForeignKey(schemaEntry => schemaEntry.WeekdayId);

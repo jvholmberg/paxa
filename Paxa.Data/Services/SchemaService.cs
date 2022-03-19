@@ -31,9 +31,7 @@ namespace Paxa.Data.Services
             return _context.Schemas
                 .Include(x => x.Organization)
                 .Include(x => x.Resources)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.Weekday)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.FromTimestamp)
-                .Include(x => x.SchemaEntries).ThenInclude(x => x.ToTimestamp) as IQueryable<Schema>;
+                .Include(x => x.SchemaEntries).ThenInclude(x => x.Weekday) as IQueryable<Schema>;
         }
 
         private IQueryable<Schema> SlimData() {

@@ -169,24 +169,10 @@ namespace Paxa.Data.Contexts
             modelBuilder
                 .Entity<SchemaEntry>()
                 .HasData(
-                    new SchemaEntry { Id = 1, FromTimestampId = 1, ToTimestampId = 2, SchemaId = 1, WeekdayId = 1 },
-                    new SchemaEntry { Id = 2, FromTimestampId = 3, ToTimestampId = 4, SchemaId = 1, WeekdayId = 1 },
-                    new SchemaEntry { Id = 3, FromTimestampId = 5, ToTimestampId = 6, SchemaId = 1, WeekdayId = 7 },
-                    new SchemaEntry { Id = 4, FromTimestampId = 7, ToTimestampId = 8, SchemaId = 1, WeekdayId = 7 }
-                );
-
-            // Timestamp
-            modelBuilder
-                .Entity<Timestamp>()
-                .HasData(
-                    new Timestamp { Id = 1, Hours = 10, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 2, Hours = 11, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 3, Hours = 11, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 4, Hours = 12, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 5, Hours = 10, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 6, Hours = 11, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 7, Hours = 11, Minutes = 0, Seconds = 0 },
-                    new Timestamp { Id = 8, Hours = 12, Minutes = 0, Seconds = 0 }
+                    new SchemaEntry { Id = 1, FromTimestamp = "8:00:00", ToTimestamp = "9:00:00", SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 2, FromTimestamp = "9:00:00", ToTimestamp = "10:00:00", SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 3, FromTimestamp = "14:00:00", ToTimestamp = "15:00:00", SchemaId = 1, WeekdayId = 7 },
+                    new SchemaEntry { Id = 4, FromTimestamp = "15:00:00", ToTimestamp = "16:00:00", SchemaId = 1, WeekdayId = 7 }
                 );
         }
     }

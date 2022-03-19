@@ -31,10 +31,10 @@
 
   <nz-tabset *ngIf="weekdays$ | async as weekdays">
     <nz-tab *ngFor="let weekday of weekdays" [nzTitle]="weekday.name">
-      <app-schema-entry-list-edit
+      <app-schema-entry-list-create
         [weekday]="weekday.number"
-        [schemaEntries]="schemaEntries">
-      </app-schema-entry-list-edit>
+        [schemaEntries]="getSchemaEntries(weekday.number)">
+      </app-schema-entry-list-create>
     </nz-tab>
   </nz-tabset>
 

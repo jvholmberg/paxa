@@ -9,12 +9,12 @@ import { OrganizationService } from '@organization/services/organization.service
 import { Organization } from '@organization/services/organization.model';
 
 @Component({
-  selector: 'app-schema-entry-list-edit',
-  templateUrl: './schema-entry-list-edit.component.html',
-  styleUrls: ['./schema-entry-list-edit.component.css']
+  selector: 'app-schema-entry-list-create',
+  templateUrl: './schema-entry-list-create.component.html',
+  styleUrls: ['./schema-entry-list-create.component.css']
 })
-export class SchemaEntryListEdit implements OnInit {
-  @Input() schemaIdId: number;
+export class SchemaEntryListCreate implements OnInit {
+  @Input() schemaId: number;
   @Input() weekdayId: number;
   @Input() schemaEntries: FormArray;
 
@@ -22,15 +22,16 @@ export class SchemaEntryListEdit implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   onAddEntry(): void {
 
     const entryForm = this.formBuilder.group({
       fromTimestamp: [null, Validators.required],
-      toTimestamp: [null, Validators.required],
-      weekdayId:[null, Validators.required],
-      schemaId:[null, Validators.required],
+      toTimestamp: [null, [Validators.required]],
+      weekdayId: this.weekdayId,
     });
     this.schemaEntries.push(entryForm);
   }

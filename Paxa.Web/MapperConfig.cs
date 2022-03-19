@@ -165,10 +165,6 @@ namespace Paxa.Web
                 cfg.CreateMap<Weekday, WeekdayDto>()
                     .ReverseMap();
 
-                // Timestamp
-                cfg.CreateMap<Timestamp, TimestampDto>()
-                    .ReverseMap();
-
             });
 
             // Make sure mapping is valid

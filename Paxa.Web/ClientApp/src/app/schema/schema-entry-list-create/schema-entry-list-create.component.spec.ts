@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SchemaEntryListEdit } from './schema-entry-list-edit.component';
+import { SchemaEntryListCreate } from './schema-entry-list-create.component';
 
-describe('SchemaEntryListEdit', () => {
-  let component: SchemaEntryListEdit;
-  let fixture: ComponentFixture<SchemaEntryListEdit>;
+describe('SchemaEntryListCreate', () => {
+  let component: SchemaEntryListCreate;
+  let fixture: ComponentFixture<SchemaEntryListCreate>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SchemaEntryListEdit ]
+      declarations: [ SchemaEntryListCreate ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SchemaEntryListEdit);
+    fixture = TestBed.createComponent(SchemaEntryListCreate);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

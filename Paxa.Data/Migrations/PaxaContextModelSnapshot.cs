@@ -729,27 +729,23 @@ namespace Paxa.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FromTimestampId")
-                        .HasColumnType("integer");
+                    b.Property<string>("FromTimestamp")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("SchemaId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ToTimestampId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ToTimestamp")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("WeekdayId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FromTimestampId")
-                        .IsUnique();
-
                     b.HasIndex("SchemaId");
-
-                    b.HasIndex("ToTimestampId")
-                        .IsUnique();
 
                     b.HasIndex("WeekdayId");
 
@@ -759,33 +755,33 @@ namespace Paxa.Data.Migrations
                         new
                         {
                             Id = 1,
-                            FromTimestampId = 1,
+                            FromTimestamp = "8:00:00",
                             SchemaId = 1,
-                            ToTimestampId = 2,
+                            ToTimestamp = "9:00:00",
                             WeekdayId = 1
                         },
                         new
                         {
                             Id = 2,
-                            FromTimestampId = 3,
+                            FromTimestamp = "9:00:00",
                             SchemaId = 1,
-                            ToTimestampId = 4,
+                            ToTimestamp = "10:00:00",
                             WeekdayId = 1
                         },
                         new
                         {
                             Id = 3,
-                            FromTimestampId = 5,
+                            FromTimestamp = "14:00:00",
                             SchemaId = 1,
-                            ToTimestampId = 6,
+                            ToTimestamp = "15:00:00",
                             WeekdayId = 7
                         },
                         new
                         {
                             Id = 4,
-                            FromTimestampId = 7,
+                            FromTimestamp = "15:00:00",
                             SchemaId = 1,
-                            ToTimestampId = 8,
+                            ToTimestamp = "16:00:00",
                             WeekdayId = 7
                         });
                 });
@@ -817,145 +813,65 @@ namespace Paxa.Data.Migrations
                         new
                         {
                             Id = 1,
-                            From = new DateTime(2022, 2, 24, 18, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 18, 23, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 24, 19, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 2,
-                            From = new DateTime(2022, 2, 24, 19, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 24, 20, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 3,
-                            From = new DateTime(2022, 2, 24, 20, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 24, 21, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 4,
-                            From = new DateTime(2022, 2, 24, 21, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 24, 22, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 5,
-                            From = new DateTime(2022, 2, 24, 22, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 24, 23, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 6,
-                            From = new DateTime(2022, 2, 24, 23, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 25, 0, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 7,
-                            From = new DateTime(2022, 2, 25, 0, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 25, 1, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 8,
-                            From = new DateTime(2022, 2, 25, 1, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 25, 2, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
+                            To = new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         },
                         new
                         {
                             Id = 9,
-                            From = new DateTime(2022, 2, 25, 2, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490),
+                            From = new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
                             ResourceId = 1,
-                            To = new DateTime(2022, 2, 25, 3, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490)
-                        });
-                });
-
-            modelBuilder.Entity("Paxa.Common.Entities.Timestamp", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Hours")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Minutes")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Seconds")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Timestamps");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Hours = 10,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Hours = 11,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Hours = 11,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Hours = 12,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Hours = 10,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Hours = 11,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Hours = 11,
-                            Minutes = 0,
-                            Seconds = 0
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Hours = 12,
-                            Minutes = 0,
-                            Seconds = 0
+                            To = new DateTime(2022, 3, 19, 8, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
                         });
                 });
 
@@ -991,28 +907,28 @@ namespace Paxa.Data.Migrations
                         {
                             Id = 1,
                             Email = "johan.holmberg@domain.se",
-                            PasswordHash = "$2a$11$QMRxbdrQUPbeQxras2xCse4jLoELG.SM6SY5mPVO40ICcQ31FH9TG",
+                            PasswordHash = "$2a$11$npImLhcmHuc1aX5K/IachuZbZ1Zx8C.oPHl4F4onQLHT6XVIy9UCe",
                             PersonId = 1
                         },
                         new
                         {
                             Id = 2,
                             Email = "joel.holmberg@domain.se",
-                            PasswordHash = "$2a$11$uYNVQGc2GiAJUeMswoaVzOXy77v3TWM5TRl6D7jpLfb.ekmvkwpda",
+                            PasswordHash = "$2a$11$v/gQ7QQY/cj3E7uvMojGouW0qcXecvW1q4zGDLGcyr6tckXyMnlue",
                             PersonId = 2
                         },
                         new
                         {
                             Id = 3,
                             Email = "owner@houseofpadel.se",
-                            PasswordHash = "$2a$11$q/ehJXP0PXtSKG8v8BuPreO5WB6vB3YebRFf1v4C9sRY5ZsVJ83ZC",
+                            PasswordHash = "$2a$11$FUcB/KB.nire/fivCziFLemcTrWO2HXG.cC3U6N1M0CefehjZEg5G",
                             PersonId = 3
                         },
                         new
                         {
                             Id = 4,
                             Email = "owner@sanktgorans.se",
-                            PasswordHash = "$2a$11$bu/KeOmQHPz329H14XZm6uqy7CYQc30Zy.2I7s8q3kRD263z9Gk8K",
+                            PasswordHash = "$2a$11$1RC1gI5JARh3JnfEYAoAU.xBe5jfONsOicgm9a7QRg.uL578Xnwg2",
                             PersonId = 4
                         });
                 });
@@ -1250,21 +1166,9 @@ namespace Paxa.Data.Migrations
 
             modelBuilder.Entity("Paxa.Common.Entities.SchemaEntry", b =>
                 {
-                    b.HasOne("Paxa.Common.Entities.Timestamp", "FromTimestamp")
-                        .WithOne("SchemaEntryFromTimestamp")
-                        .HasForeignKey("Paxa.Common.Entities.SchemaEntry", "FromTimestampId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Paxa.Common.Entities.Schema", "Schema")
                         .WithMany("SchemaEntries")
                         .HasForeignKey("SchemaId");
-
-                    b.HasOne("Paxa.Common.Entities.Timestamp", "ToTimestamp")
-                        .WithOne("SchemaEntryToTimestamp")
-                        .HasForeignKey("Paxa.Common.Entities.SchemaEntry", "ToTimestampId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.HasOne("Paxa.Common.Entities.Weekday", "Weekday")
                         .WithMany("SchemaEntries")
@@ -1272,11 +1176,7 @@ namespace Paxa.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FromTimestamp");
-
                     b.Navigation("Schema");
-
-                    b.Navigation("ToTimestamp");
 
                     b.Navigation("Weekday");
                 });
@@ -1436,15 +1336,6 @@ namespace Paxa.Data.Migrations
             modelBuilder.Entity("Paxa.Common.Entities.Timeslot", b =>
                 {
                     b.Navigation("Booking")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Paxa.Common.Entities.Timestamp", b =>
-                {
-                    b.Navigation("SchemaEntryFromTimestamp")
-                        .IsRequired();
-
-                    b.Navigation("SchemaEntryToTimestamp")
                         .IsRequired();
                 });
 

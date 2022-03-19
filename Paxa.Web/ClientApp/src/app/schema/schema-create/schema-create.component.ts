@@ -22,8 +22,8 @@ export class SchemaCreateComponent implements OnInit {
 
   form: FormGroup;
 
-  get schemaEntries() {
-    return this.form.controls["schemaEntries"] as FormArray;
+  getSchemaEntries(weekdayNumber: number) {
+    return this.form.controls[weekdayNumber] as FormArray;
   }
 
   constructor(
@@ -47,17 +47,44 @@ export class SchemaCreateComponent implements OnInit {
       organizationId: [null, Validators.required],
       name: ['', [Validators.required, Validators.minLength(2)]],
       resourceIds: [[], Validators.minLength(0)],
-      schemaEntries: this.formBuilder.array([], Validators.minLength(0)),
+      0: this.formBuilder.array([]),
+      1: this.formBuilder.array([]),
+      2: this.formBuilder.array([]),
+      3: this.formBuilder.array([]),
+      4: this.formBuilder.array([]),
+      5: this.formBuilder.array([]),
+      6: this.formBuilder.array([]),
     });
   }
 
   onSubmit(f: NgForm): void {
     if (f.invalid) {
+      console.log(f)
       this.form.markAllAsTouched();
       return;
     }
+
+    // Merge schema-entries
+    const schemaEntries = [
+      ...f.value[0],
+      ...f.value[1],
+      ...f.value[2],
+      ...f.value[3],
+      ...f.value[4],
+      ...f.value[5],
+      ...f.value[6],
+    ];
+
+    // Create body
+    const body = {
+      organizationId: f.value.organizationId,
+      name: f.value.name,
+      resourceIds: f.value.resourceIds,
+      schemaEntries,
+    };
+
     this.schemaService
-      .create(f.value)
+      .create(body)
       .subscribe(
         (res) => {
           this.router.navigate(['/', 'schemas', res.id], { replaceUrl: true });

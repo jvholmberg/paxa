@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Paxa.Data.Migrations
 {
-    public partial class Initial_migration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,21 +110,6 @@ namespace Paxa.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ResourceTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Timestamps",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Hours = table.Column<int>(type: "integer", nullable: false),
-                    Minutes = table.Column<int>(type: "integer", nullable: false),
-                    Seconds = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Timestamps", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -386,10 +371,10 @@ namespace Paxa.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FromTimestampId = table.Column<int>(type: "integer", nullable: false),
-                    ToTimestampId = table.Column<int>(type: "integer", nullable: false),
+                    SchemaId = table.Column<int>(type: "integer", nullable: false),
                     WeekdayId = table.Column<int>(type: "integer", nullable: false),
-                    SchemaId = table.Column<int>(type: "integer", nullable: false)
+                    FromTimestamp = table.Column<string>(type: "text", nullable: false),
+                    ToTimestamp = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -399,18 +384,6 @@ namespace Paxa.Data.Migrations
                         column: x => x.SchemaId,
                         principalTable: "Schemas",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SchemaEntries_Timestamps_FromTimestampId",
-                        column: x => x.FromTimestampId,
-                        principalTable: "Timestamps",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SchemaEntries_Timestamps_ToTimestampId",
-                        column: x => x.ToTimestampId,
-                        principalTable: "Timestamps",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SchemaEntries_Weekdays_WeekdayId",
                         column: x => x.WeekdayId,
@@ -555,21 +528,6 @@ namespace Paxa.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Timestamps",
-                columns: new[] { "Id", "Hours", "Minutes", "Seconds" },
-                values: new object[,]
-                {
-                    { 1, 10, 0, 0 },
-                    { 2, 11, 0, 0 },
-                    { 3, 11, 0, 0 },
-                    { 4, 12, 0, 0 },
-                    { 5, 10, 0, 0 },
-                    { 6, 11, 0, 0 },
-                    { 7, 11, 0, 0 },
-                    { 8, 12, 0, 0 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Weekdays",
                 columns: new[] { "Id", "Name", "Number" },
                 values: new object[,]
@@ -631,10 +589,10 @@ namespace Paxa.Data.Migrations
                 columns: new[] { "Id", "Email", "PasswordHash", "PersonId" },
                 values: new object[,]
                 {
-                    { 1, "johan.holmberg@domain.se", "$2a$11$QMRxbdrQUPbeQxras2xCse4jLoELG.SM6SY5mPVO40ICcQ31FH9TG", 1 },
-                    { 2, "joel.holmberg@domain.se", "$2a$11$uYNVQGc2GiAJUeMswoaVzOXy77v3TWM5TRl6D7jpLfb.ekmvkwpda", 2 },
-                    { 3, "owner@houseofpadel.se", "$2a$11$q/ehJXP0PXtSKG8v8BuPreO5WB6vB3YebRFf1v4C9sRY5ZsVJ83ZC", 3 },
-                    { 4, "owner@sanktgorans.se", "$2a$11$bu/KeOmQHPz329H14XZm6uqy7CYQc30Zy.2I7s8q3kRD263z9Gk8K", 4 }
+                    { 1, "johan.holmberg@domain.se", "$2a$11$npImLhcmHuc1aX5K/IachuZbZ1Zx8C.oPHl4F4onQLHT6XVIy9UCe", 1 },
+                    { 2, "joel.holmberg@domain.se", "$2a$11$v/gQ7QQY/cj3E7uvMojGouW0qcXecvW1q4zGDLGcyr6tckXyMnlue", 2 },
+                    { 3, "owner@houseofpadel.se", "$2a$11$FUcB/KB.nire/fivCziFLemcTrWO2HXG.cC3U6N1M0CefehjZEg5G", 3 },
+                    { 4, "owner@sanktgorans.se", "$2a$11$1RC1gI5JARh3JnfEYAoAU.xBe5jfONsOicgm9a7QRg.uL578Xnwg2", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -649,13 +607,13 @@ namespace Paxa.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "SchemaEntries",
-                columns: new[] { "Id", "FromTimestampId", "SchemaId", "ToTimestampId", "WeekdayId" },
+                columns: new[] { "Id", "FromTimestamp", "SchemaId", "ToTimestamp", "WeekdayId" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 2, 1 },
-                    { 2, 3, 1, 4, 1 },
-                    { 3, 5, 1, 6, 7 },
-                    { 4, 7, 1, 8, 7 }
+                    { 1, "8:00:00", 1, "9:00:00", 1 },
+                    { 2, "9:00:00", 1, "10:00:00", 1 },
+                    { 3, "14:00:00", 1, "15:00:00", 7 },
+                    { 4, "15:00:00", 1, "16:00:00", 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -663,15 +621,15 @@ namespace Paxa.Data.Migrations
                 columns: new[] { "Id", "From", "ResourceId", "To" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 2, 24, 18, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 24, 19, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 2, new DateTime(2022, 2, 24, 19, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 24, 20, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 3, new DateTime(2022, 2, 24, 20, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 24, 21, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 4, new DateTime(2022, 2, 24, 21, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 24, 22, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 5, new DateTime(2022, 2, 24, 22, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 24, 23, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 6, new DateTime(2022, 2, 24, 23, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 25, 0, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 7, new DateTime(2022, 2, 25, 0, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 25, 1, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 8, new DateTime(2022, 2, 25, 1, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 25, 2, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) },
-                    { 9, new DateTime(2022, 2, 25, 2, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490), 1, new DateTime(2022, 2, 25, 3, 25, 35, 516, DateTimeKind.Utc).AddTicks(7490) }
+                    { 1, new DateTime(2022, 3, 18, 23, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 2, new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 3, new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 4, new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 5, new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 6, new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 7, new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 8, new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
+                    { 9, new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 8, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) }
                 });
 
             migrationBuilder.InsertData(
@@ -788,21 +746,9 @@ namespace Paxa.Data.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SchemaEntries_FromTimestampId",
-                table: "SchemaEntries",
-                column: "FromTimestampId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SchemaEntries_SchemaId",
                 table: "SchemaEntries",
                 column: "SchemaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SchemaEntries_ToTimestampId",
-                table: "SchemaEntries",
-                column: "ToTimestampId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchemaEntries_WeekdayId",
@@ -863,9 +809,6 @@ namespace Paxa.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Timestamps");
 
             migrationBuilder.DropTable(
                 name: "Weekdays");
