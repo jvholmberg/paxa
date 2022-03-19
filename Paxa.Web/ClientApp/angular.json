@@ -29,6 +29,7 @@
               }
             ],
             "styles": [
+              "src/styles.css",
               "src/theme.less",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
