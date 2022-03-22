@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 import { BannerComponent } from './components/banner/banner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const externalLibs = [
   CommonModule,
@@ -50,6 +51,7 @@ const externalLibs = [
 
 const components = [
   BannerComponent,
+  FooterComponent,
   NavbarComponent,
   ProfileDropdownComponent,
 ];

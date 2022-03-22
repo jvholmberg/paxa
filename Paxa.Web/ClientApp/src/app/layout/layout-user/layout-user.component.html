@@ -1,5 +1,10 @@
-<app-navbar
-  [mainLinks]="mainLinks"
-  [userLinks]="userLinks">
-</app-navbar>
-<ng-content></ng-content>
+<div class="min-h-full flex flex-col justify-items-stretch">
+  <app-navbar
+    [mainLinks]="mainLinks"
+    [userLinks]="userLinks">
+  </app-navbar>
+  <div class="grow">
+    <ng-content></ng-content>
+  </div>
+  <app-footer></app-footer>
+</div>
