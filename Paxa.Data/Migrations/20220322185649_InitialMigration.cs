@@ -373,8 +373,12 @@ namespace Paxa.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SchemaId = table.Column<int>(type: "integer", nullable: false),
                     WeekdayId = table.Column<int>(type: "integer", nullable: false),
-                    FromTimestamp = table.Column<string>(type: "text", nullable: false),
-                    ToTimestamp = table.Column<string>(type: "text", nullable: false)
+                    StartHour = table.Column<int>(type: "integer", nullable: false),
+                    StartMinute = table.Column<int>(type: "integer", nullable: false),
+                    StartSecond = table.Column<int>(type: "integer", nullable: false),
+                    EndHour = table.Column<int>(type: "integer", nullable: false),
+                    EndMinute = table.Column<int>(type: "integer", nullable: false),
+                    EndSecond = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -589,10 +593,10 @@ namespace Paxa.Data.Migrations
                 columns: new[] { "Id", "Email", "PasswordHash", "PersonId" },
                 values: new object[,]
                 {
-                    { 1, "johan.holmberg@domain.se", "$2a$11$npImLhcmHuc1aX5K/IachuZbZ1Zx8C.oPHl4F4onQLHT6XVIy9UCe", 1 },
-                    { 2, "joel.holmberg@domain.se", "$2a$11$v/gQ7QQY/cj3E7uvMojGouW0qcXecvW1q4zGDLGcyr6tckXyMnlue", 2 },
-                    { 3, "owner@houseofpadel.se", "$2a$11$FUcB/KB.nire/fivCziFLemcTrWO2HXG.cC3U6N1M0CefehjZEg5G", 3 },
-                    { 4, "owner@sanktgorans.se", "$2a$11$1RC1gI5JARh3JnfEYAoAU.xBe5jfONsOicgm9a7QRg.uL578Xnwg2", 4 }
+                    { 1, "johan.holmberg@domain.se", "$2a$11$7ol0bh5QSHFnFK.LMqZ6PO4.WMa.fjmNAhHyNbIj/MWbY7GvwR9a.", 1 },
+                    { 2, "joel.holmberg@domain.se", "$2a$11$9XuA7.CYEktruydadcESn.08XBmOdyZaI2vIG9IFH1uSvzwdt2g2W", 2 },
+                    { 3, "owner@houseofpadel.se", "$2a$11$FTbDG057.d5YP/5MhjA5seNXnbuGQi/yib.JBX9N/jYzbQ1bsyKDO", 3 },
+                    { 4, "owner@sanktgorans.se", "$2a$11$eXz0abrpfNgxoZjsO/UPCe5uLGnba3dq8fwUKXjkau3wiGJvkDV1m", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -607,13 +611,13 @@ namespace Paxa.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "SchemaEntries",
-                columns: new[] { "Id", "FromTimestamp", "SchemaId", "ToTimestamp", "WeekdayId" },
+                columns: new[] { "Id", "EndHour", "EndMinute", "EndSecond", "SchemaId", "StartHour", "StartMinute", "StartSecond", "WeekdayId" },
                 values: new object[,]
                 {
-                    { 1, "8:00:00", 1, "9:00:00", 1 },
-                    { 2, "9:00:00", 1, "10:00:00", 1 },
-                    { 3, "14:00:00", 1, "15:00:00", 7 },
-                    { 4, "15:00:00", 1, "16:00:00", 7 }
+                    { 1, 9, 0, 0, 1, 8, 0, 0, 1 },
+                    { 2, 10, 0, 0, 1, 9, 0, 0, 1 },
+                    { 3, 15, 0, 0, 1, 14, 0, 0, 7 },
+                    { 4, 16, 0, 0, 1, 15, 0, 0, 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -621,15 +625,15 @@ namespace Paxa.Data.Migrations
                 columns: new[] { "Id", "From", "ResourceId", "To" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 3, 18, 23, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 2, new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 3, new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 4, new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 5, new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 6, new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 7, new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 8, new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) },
-                    { 9, new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210), 1, new DateTime(2022, 3, 19, 8, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210) }
+                    { 1, new DateTime(2022, 3, 22, 18, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 22, 19, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 2, new DateTime(2022, 3, 22, 19, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 22, 20, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 3, new DateTime(2022, 3, 22, 20, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 22, 21, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 4, new DateTime(2022, 3, 22, 21, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 22, 22, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 5, new DateTime(2022, 3, 22, 22, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 22, 23, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 6, new DateTime(2022, 3, 22, 23, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 23, 0, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 7, new DateTime(2022, 3, 23, 0, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 23, 1, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 8, new DateTime(2022, 3, 23, 1, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 23, 2, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) },
+                    { 9, new DateTime(2022, 3, 23, 2, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520), 1, new DateTime(2022, 3, 23, 3, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520) }
                 });
 
             migrationBuilder.InsertData(

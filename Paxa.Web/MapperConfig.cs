@@ -155,7 +155,14 @@ namespace Paxa.Web
 
                 // SchemaEntry
                 cfg.CreateMap<SchemaEntry, SchemaEntryDto>()
-                    .ReverseMap();
+                    .ReverseMap()
+                    .ForMember(
+                        destination => destination.WeekdayId,
+                        options => options.MapFrom(
+                            source => source.Weekday.Id
+                        )
+                    )
+                    .ForMember(destination => destination.Weekday, options => options.Ignore());
 
                 // Timeslot
                 cfg.CreateMap<Timeslot, TimeslotDto>()

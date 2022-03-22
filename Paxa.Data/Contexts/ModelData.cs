@@ -169,10 +169,10 @@ namespace Paxa.Data.Contexts
             modelBuilder
                 .Entity<SchemaEntry>()
                 .HasData(
-                    new SchemaEntry { Id = 1, FromTimestamp = "8:00:00", ToTimestamp = "9:00:00", SchemaId = 1, WeekdayId = 1 },
-                    new SchemaEntry { Id = 2, FromTimestamp = "9:00:00", ToTimestamp = "10:00:00", SchemaId = 1, WeekdayId = 1 },
-                    new SchemaEntry { Id = 3, FromTimestamp = "14:00:00", ToTimestamp = "15:00:00", SchemaId = 1, WeekdayId = 7 },
-                    new SchemaEntry { Id = 4, FromTimestamp = "15:00:00", ToTimestamp = "16:00:00", SchemaId = 1, WeekdayId = 7 }
+                    new SchemaEntry { Id = 1, StartHour = 8, StartMinute = 0, StartSecond = 0, EndHour = 9, EndMinute = 0, EndSecond = 0, SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 2, StartHour = 9, StartMinute = 0, StartSecond = 0, EndHour = 10, EndMinute = 0, EndSecond = 0, SchemaId = 1, WeekdayId = 1 },
+                    new SchemaEntry { Id = 3, StartHour = 14, StartMinute = 0, StartSecond = 0, EndHour = 15, EndMinute = 0, EndSecond = 0, SchemaId = 1, WeekdayId = 7 },
+                    new SchemaEntry { Id = 4, StartHour = 15, StartMinute = 0, StartSecond = 0, EndHour = 16, EndMinute = 0, EndSecond = 0,  SchemaId = 1, WeekdayId = 7 }
                 );
         }
     }

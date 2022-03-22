@@ -12,7 +12,7 @@ using Paxa.Data.Contexts;
 namespace Paxa.Data.Migrations
 {
     [DbContext(typeof(PaxaContext))]
-    [Migration("20220318230435_InitialMigration")]
+    [Migration("20220322185649_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -731,16 +731,26 @@ namespace Paxa.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FromTimestamp")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("EndHour")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EndMinute")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EndSecond")
+                        .HasColumnType("integer");
 
                     b.Property<int>("SchemaId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ToTimestamp")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("StartHour")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartMinute")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartSecond")
+                        .HasColumnType("integer");
 
                     b.Property<int>("WeekdayId")
                         .HasColumnType("integer");
@@ -757,33 +767,49 @@ namespace Paxa.Data.Migrations
                         new
                         {
                             Id = 1,
-                            FromTimestamp = "8:00:00",
+                            EndHour = 9,
+                            EndMinute = 0,
+                            EndSecond = 0,
                             SchemaId = 1,
-                            ToTimestamp = "9:00:00",
+                            StartHour = 8,
+                            StartMinute = 0,
+                            StartSecond = 0,
                             WeekdayId = 1
                         },
                         new
                         {
                             Id = 2,
-                            FromTimestamp = "9:00:00",
+                            EndHour = 10,
+                            EndMinute = 0,
+                            EndSecond = 0,
                             SchemaId = 1,
-                            ToTimestamp = "10:00:00",
+                            StartHour = 9,
+                            StartMinute = 0,
+                            StartSecond = 0,
                             WeekdayId = 1
                         },
                         new
                         {
                             Id = 3,
-                            FromTimestamp = "14:00:00",
+                            EndHour = 15,
+                            EndMinute = 0,
+                            EndSecond = 0,
                             SchemaId = 1,
-                            ToTimestamp = "15:00:00",
+                            StartHour = 14,
+                            StartMinute = 0,
+                            StartSecond = 0,
                             WeekdayId = 7
                         },
                         new
                         {
                             Id = 4,
-                            FromTimestamp = "15:00:00",
+                            EndHour = 16,
+                            EndMinute = 0,
+                            EndSecond = 0,
                             SchemaId = 1,
-                            ToTimestamp = "16:00:00",
+                            StartHour = 15,
+                            StartMinute = 0,
+                            StartSecond = 0,
                             WeekdayId = 7
                         });
                 });
@@ -815,65 +841,65 @@ namespace Paxa.Data.Migrations
                         new
                         {
                             Id = 1,
-                            From = new DateTime(2022, 3, 18, 23, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 18, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 22, 19, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 2,
-                            From = new DateTime(2022, 3, 19, 0, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 19, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 22, 20, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 3,
-                            From = new DateTime(2022, 3, 19, 1, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 20, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 22, 21, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 4,
-                            From = new DateTime(2022, 3, 19, 2, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 21, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 22, 22, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 5,
-                            From = new DateTime(2022, 3, 19, 3, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 22, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 22, 23, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 6,
-                            From = new DateTime(2022, 3, 19, 4, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 22, 23, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 23, 0, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 7,
-                            From = new DateTime(2022, 3, 19, 5, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 23, 0, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 23, 1, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 8,
-                            From = new DateTime(2022, 3, 19, 6, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 23, 1, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 23, 2, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         },
                         new
                         {
                             Id = 9,
-                            From = new DateTime(2022, 3, 19, 7, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210),
+                            From = new DateTime(2022, 3, 23, 2, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520),
                             ResourceId = 1,
-                            To = new DateTime(2022, 3, 19, 8, 4, 34, 340, DateTimeKind.Utc).AddTicks(5210)
+                            To = new DateTime(2022, 3, 23, 3, 56, 48, 151, DateTimeKind.Utc).AddTicks(3520)
                         });
                 });
 
@@ -909,28 +935,28 @@ namespace Paxa.Data.Migrations
                         {
                             Id = 1,
                             Email = "johan.holmberg@domain.se",
-                            PasswordHash = "$2a$11$npImLhcmHuc1aX5K/IachuZbZ1Zx8C.oPHl4F4onQLHT6XVIy9UCe",
+                            PasswordHash = "$2a$11$7ol0bh5QSHFnFK.LMqZ6PO4.WMa.fjmNAhHyNbIj/MWbY7GvwR9a.",
                             PersonId = 1
                         },
                         new
                         {
                             Id = 2,
                             Email = "joel.holmberg@domain.se",
-                            PasswordHash = "$2a$11$v/gQ7QQY/cj3E7uvMojGouW0qcXecvW1q4zGDLGcyr6tckXyMnlue",
+                            PasswordHash = "$2a$11$9XuA7.CYEktruydadcESn.08XBmOdyZaI2vIG9IFH1uSvzwdt2g2W",
                             PersonId = 2
                         },
                         new
                         {
                             Id = 3,
                             Email = "owner@houseofpadel.se",
-                            PasswordHash = "$2a$11$FUcB/KB.nire/fivCziFLemcTrWO2HXG.cC3U6N1M0CefehjZEg5G",
+                            PasswordHash = "$2a$11$FTbDG057.d5YP/5MhjA5seNXnbuGQi/yib.JBX9N/jYzbQ1bsyKDO",
                             PersonId = 3
                         },
                         new
                         {
                             Id = 4,
                             Email = "owner@sanktgorans.se",
-                            PasswordHash = "$2a$11$1RC1gI5JARh3JnfEYAoAU.xBe5jfONsOicgm9a7QRg.uL578Xnwg2",
+                            PasswordHash = "$2a$11$eXz0abrpfNgxoZjsO/UPCe5uLGnba3dq8fwUKXjkau3wiGJvkDV1m",
                             PersonId = 4
                         });
                 });

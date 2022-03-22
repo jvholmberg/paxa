@@ -32,8 +32,8 @@
   <nz-tabset *ngIf="weekdays$ | async as weekdays">
     <nz-tab *ngFor="let weekday of weekdays" [nzTitle]="weekday.name">
       <app-schema-entry-list-create
-        [weekday]="weekday.number"
-        [schemaEntries]="getSchemaEntries(weekday.number)">
+        [weekday]="weekday"
+        [schemaEntries]="form.controls[weekday.number]">
       </app-schema-entry-list-create>
     </nz-tab>
   </nz-tabset>

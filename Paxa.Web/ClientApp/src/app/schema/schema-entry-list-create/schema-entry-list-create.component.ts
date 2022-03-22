@@ -7,6 +7,7 @@ import { logError } from '@utils/logger';
 import { SchemaService } from '@schema/services/schema.service';
 import { OrganizationService } from '@organization/services/organization.service';
 import { Organization } from '@organization/services/organization.model';
+import { Weekday } from '@shared/services/lookup-service/weekday.model';
 
 @Component({
   selector: 'app-schema-entry-list-create',
@@ -15,7 +16,7 @@ import { Organization } from '@organization/services/organization.model';
 })
 export class SchemaEntryListCreate implements OnInit {
   @Input() schemaId: number;
-  @Input() weekdayId: number;
+  @Input() weekday: Weekday;
   @Input() schemaEntries: FormArray;
 
   constructor(
@@ -29,9 +30,13 @@ export class SchemaEntryListCreate implements OnInit {
   onAddEntry(): void {
 
     const entryForm = this.formBuilder.group({
-      fromTimestamp: [null, Validators.required],
-      toTimestamp: [null, [Validators.required]],
-      weekdayId: this.weekdayId,
+      startHour: [null, [Validators.required, Validators.min(0), Validators.max(23)]],
+      startMinute: [null, [Validators.required, Validators.min(0), Validators.max(59)]],
+      startSecond: 0,
+      endHour: [null, [Validators.required, Validators.min(0), Validators.max(23)]],
+      endMinute: [null, [Validators.required, Validators.min(0), Validators.max(59)]],
+      endSecond: 0,
+      weekday: this.weekday,
     });
     this.schemaEntries.push(entryForm);
   }

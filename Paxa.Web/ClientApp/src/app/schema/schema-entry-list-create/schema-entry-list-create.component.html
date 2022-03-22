@@ -12,18 +12,12 @@
     <ng-container *ngFor="let entryForm of schemaEntries.controls; let i = index">
       <tr [formGroup]="entryForm">
         <td>
-          <nz-form-item class="mb-0">
-            <nz-form-control nzHasFeedback>
-              <nz-time-picker formControlName="fromTimestamp" nzFormat="HH:mm"></nz-time-picker>
-            </nz-form-control>
-          </nz-form-item>
+          <input formControlName="startHour" />
+          <input formControlName="startMinute" />
         </td>
         <td>
-          <nz-form-item class="mb-0">
-            <nz-form-control nzHasFeedback>
-              <nz-time-picker formControlName="toTimestamp" nzFormat="HH:mm"></nz-time-picker>
-            </nz-form-control>
-          </nz-form-item>
+          <input formControlName="endHour" />
+          <input formControlName="endMinute" />
         </td>
         <td class="text-end">
           <button type="button" nz-button nzSize="small" nzType="primary" nzDanger (click)="onDeleteEntry(i)"><i nz-icon nzType="delete"></i></button>

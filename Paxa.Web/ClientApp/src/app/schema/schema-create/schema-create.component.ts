@@ -9,6 +9,7 @@ import { OrganizationService } from '@organization/services/organization.service
 import { Organization } from '@organization/services/organization.model';
 import { LookupService } from '@shared/services/lookup-service/lookup.service';
 import { Weekday } from '@shared/services/lookup-service/weekday.model';
+import { SchemaEntry } from '@schema/services/schema-entry.model';
 
 @Component({
   selector: 'app-schema-create',
@@ -23,6 +24,7 @@ export class SchemaCreateComponent implements OnInit {
   form: FormGroup;
 
   getSchemaEntries(weekdayNumber: number) {
+    console.log(weekdayNumber);
     return this.form.controls[weekdayNumber] as FormArray;
   }
 
@@ -74,6 +76,7 @@ export class SchemaCreateComponent implements OnInit {
       ...f.value[5],
       ...f.value[6],
     ];
+
 
     // Create body
     const body = {
