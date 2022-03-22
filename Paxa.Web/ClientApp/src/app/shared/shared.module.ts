@@ -20,6 +20,10 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { IconsProviderModule } from '../icons-provider.module';
 import { RouterModule } from '@angular/router';
 
+import { BannerComponent } from './components/banner/banner.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
+
 const externalLibs = [
   CommonModule,
   FormsModule,
@@ -45,12 +49,14 @@ const externalLibs = [
 ];
 
 const components = [
-
+  BannerComponent,
+  NavbarComponent,
+  ProfileDropdownComponent,
 ];
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
   ],
   imports: [
     ...externalLibs

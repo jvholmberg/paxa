@@ -1,46 +1,12 @@
+<ng-template #notLoggedIn>
+  <app-layout-unknown></app-layout-unknown>
+</ng-template>
+
+<ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
+  <app-layout-user></app-layout-user>
+</ng-container>
+
 <nz-layout>
-  <nz-header>
-    <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-      <ng-template #notLoggedIn>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'welcome']">Landing</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'get-started']">Get started</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'login']">Login</a>
-        </li>
-      </ng-template>
-      <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'organization']">Organization</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'resource']">Resource</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'schemas']">Schemas</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'timeslot']">Timeslot</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'user']">User</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'booking']">Booking</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'person']">Person</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a [routerLink]="['/', 'logout']">Logout</a>
-        </li>
-      </ng-container>
-    </ul>
-  </nz-header>
 
   <nz-layout>
     <nz-sider nzCollapsible nzWidth="200px" nzTheme="light">

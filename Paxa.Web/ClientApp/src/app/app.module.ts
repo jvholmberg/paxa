@@ -10,8 +10,10 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { sv_SE } from 'ng-zorro-antd/i18n';
 
 import { appInitializer } from './app-initializer';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutModule } from '@layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { BearerTokenInterceptor } from '@core/bearer-token/bearer-token.interceptor';
@@ -43,6 +45,7 @@ registerLocaleData(sv);
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
+    LayoutModule,
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthorizationService] },
