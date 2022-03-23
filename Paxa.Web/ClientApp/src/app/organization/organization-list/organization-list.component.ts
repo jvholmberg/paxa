@@ -12,6 +12,11 @@ export class OrganizationListComponent implements OnInit {
 
   organizations$: Observable<Organization[]>;
 
+  headers = [
+    { key: 'name', title: 'Name'},
+    { title: '' },
+  ]
+
   constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {

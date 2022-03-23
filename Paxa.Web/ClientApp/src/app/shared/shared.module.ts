@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -24,10 +25,13 @@ import { BannerComponent } from './components/banner/banner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { IconComponent } from './components/icon/icon.component';
+import { TableComponent } from './components/table/table.component';
 
 const externalLibs = [
   CommonModule,
   FormsModule,
+  FontAwesomeModule,
   ReactiveFormsModule,
   RouterModule,
 
@@ -52,8 +56,10 @@ const externalLibs = [
 const components = [
   BannerComponent,
   FooterComponent,
+  IconComponent,
   NavbarComponent,
   ProfileDropdownComponent,
+  TableComponent,
 ];
 
 @NgModule({

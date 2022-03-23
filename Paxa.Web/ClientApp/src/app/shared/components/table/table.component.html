@@ -1,0 +1,12 @@
+<table class="w-full">
+  <thead class="bg-brand-gray">
+    <tr class="h-10">
+      <th *ngFor="let header of headers" (click)="onSort(header.key)" class="px-4">
+        {{header.title}}
+      </th>
+    </tr>
+  </thead>
+  <tbody class="pt-2">
+    <ng-content></ng-content>
+  </tbody>
+</table>

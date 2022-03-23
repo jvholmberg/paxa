@@ -1,24 +1,19 @@
-
-<nz-table #organizationsTable [nzData]="organizations$ | async">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let dataItem of organizationsTable.data">
-      <td>
-        <a [routerLink]="['/', 'organization', dataItem.id]">{{dataItem.name}}</a>
-      </td>
-      <td>
-        <button nz-button nzType="text" [routerLink]="['/', 'organization', dataItem.id, 'edit']">
-          Edit
-        </button>
-        <button nz-button nzType="text" nzDanger [routerLink]="['/', 'organization', dataItem.id, 'remove']">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+<app-table [headers]="headers">
+  <tr *ngFor="let organization of organizations$ | async">
+    <td class="px-4 py-2">
+      <a
+        class="text-brand-black no-underline"
+        [routerLink]="['/', 'organization', organization.id]">
+        {{organization.name}}
+      </a>
+    </td>
+    <td>
+      <button [routerLink]="['/', 'organization', organization.id, 'edit']">
+        Edit
+      </button>
+      <button [routerLink]="['/', 'organization', organization.id, 'remove']">
+        Delete
+      </button>
+    </td>
+  </tr>
+</app-table>
