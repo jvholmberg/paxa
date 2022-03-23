@@ -5,15 +5,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: {
+          100: "#abd9f4",
+          300: "#51b3e9",
+          500: "#019fe3",
+          700: "#0480b5",
+          900: "#0b5f88",
+        },
+        accent: {
+          300: "#f051a3",
+          500: "#e9148c",
+          700: "#ba1470",
+        },
+
         brand: {
-          primary: "#019fe3",
-          primaryLight: "#51b3e9",
-          primaryLighter: "#abd9f4",
-          primaryDark: "#0480b5",
-          primaryDarker: "#0b5f88",
-          accent: "#e9148c",
-          accentLight: "#f051a3",
-          accentDark: "#ba1470",
 
           black: "#354343",
           gray: "#8c8c8c1f",

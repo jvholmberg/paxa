@@ -1,19 +1,20 @@
 <app-table [headers]="headers">
-  <tr *ngFor="let organization of organizations$ | async">
-    <td class="px-4 py-2">
-      <a
-        class="text-brand-black no-underline"
-        [routerLink]="['/', 'organization', organization.id]">
+  <tr *ngFor="let organization of organizations$ | async" class="border-b border-zinc-100 hover:bg-zinc-50">
+    <td class="px-4 py-2 text-sm">
+      <a [routerLink]="['/', 'organization', organization.id]">
         {{organization.name}}
       </a>
     </td>
-    <td>
-      <button [routerLink]="['/', 'organization', organization.id, 'edit']">
+    <td class="px-4 py-2 text-right">
+      <button
+        class="inline-block px-2 mr-2 py-1 rounded-sm bg-zinc-700 hover:bg-zinc-500 ease-in transition-colors text-white text-sm"
+        [routerLink]="['/', 'organization', organization.id, 'edit']">
         Edit
       </button>
-      <button [routerLink]="['/', 'organization', organization.id, 'remove']">
+      <button
+        class="inline-block px-2 py-1 rounded-sm bg-zinc-50 hover:bg-zinc-100 ease-in transition-colors text-red-500 text-sm"
+        [routerLink]="['/', 'organization', organization.id, 'remove']">
         Delete
       </button>
-    </td>
   </tr>
 </app-table>
