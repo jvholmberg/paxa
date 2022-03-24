@@ -23,9 +23,9 @@ import { RouterModule } from '@angular/router';
 
 import { BannerComponent } from './components/banner/banner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { IconComponent } from './components/icon/icon.component';
 import { TableComponent } from './components/table/table.component';
 
 const externalLibs = [
@@ -56,8 +56,8 @@ const externalLibs = [
 const components = [
   BannerComponent,
   FooterComponent,
-  IconComponent,
   NavbarComponent,
+  PageHeaderComponent,
   ProfileDropdownComponent,
   TableComponent,
 ];

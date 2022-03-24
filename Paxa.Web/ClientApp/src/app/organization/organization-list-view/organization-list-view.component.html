@@ -1,12 +1,12 @@
-<nz-page-header>
-  <nz-page-header-title>All Organizations</nz-page-header-title>
-  <nz-page-header-subtitle>List of all organizations</nz-page-header-subtitle>
-  <nz-page-header-extra>
-    <button nz-button nzType="primary" [routerLink]="['/', 'organization', 'create']">
-      Create Organization
-    </button>
-  </nz-page-header-extra>
-</nz-page-header>
+<app-page-header
+  title="All Organizations"
+  subtitle="List of all organizations">
+  <button
+    class="inline-block px-2 py-1 rounded-sm bg-zinc-50 hover:bg-zinc-100 ease-in transition-colors text-zinc-700 text-sm"
+    [routerLink]="['/', 'organization', 'create']">
+    Create Organization
+  </button>
+</app-page-header>
 
 <app-organization-list></app-organization-list>
 
