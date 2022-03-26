@@ -15,7 +15,7 @@ export class OrganizationListComponent implements OnInit {
   headers = [
     { key: 'name', title: 'Name'},
     { title: '' },
-  ]
+  ];
 
   constructor(private organizationService: OrganizationService) { }
 

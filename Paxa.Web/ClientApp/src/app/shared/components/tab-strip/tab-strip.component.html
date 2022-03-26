@@ -1,0 +1,11 @@
+
+<ul class="w-full flex flex-row px-4 py-2 gap-4 bg-zinc-50 border-b border-zinc-200">
+  <li
+    *ngFor="let tab of tabs"
+    (click)="onSelect(tab.key)"
+    class="block p-0 cursor-pointer hover:text-accent-300"
+    [ngClass]="{'text-accent-500': active == tab?.key}">
+    {{tab?.value}}
+  </li>
+</ul>
+

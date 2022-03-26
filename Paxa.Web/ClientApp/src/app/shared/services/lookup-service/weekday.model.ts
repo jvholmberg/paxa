@@ -1,5 +1,5 @@
 export interface Weekday {
   id: number;
-  Number: number;
+  number: number;
   name: string;
 }

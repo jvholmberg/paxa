@@ -26,6 +26,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { TabStripComponent } from './components/tab-strip/tab-strip.component';
 import { TableComponent } from './components/table/table.component';
 
 const externalLibs = [
@@ -59,6 +60,7 @@ const components = [
   NavbarComponent,
   PageHeaderComponent,
   ProfileDropdownComponent,
+  TabStripComponent,
   TableComponent,
 ];
 

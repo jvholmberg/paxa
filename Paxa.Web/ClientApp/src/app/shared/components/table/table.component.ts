@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { KeyPair } from '@shared/models/keypair.model';
 
 @Component({
   selector: 'app-table',
@@ -17,17 +18,14 @@ export class TableComponent implements OnInit {
   get sortByValue(): string { return this.sortBySubject.value; }
   get sortDescendingValue(): boolean { return this.sortDescendingSubject.value; }
 
-  @Input() headers: ({ key?: string, title: string })[];
+  @Input() headers: KeyPair[];
   @Output() sort = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.headers);
-  }
+  ngOnInit(): void {}
 
   onSort(key: string): void {
-    console.log(key);
     if (key) {
       if (this.sortByValue === key) {
         this.sortDescendingSubject.next(!this.sortDescendingValue);

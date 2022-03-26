@@ -8,5 +8,21 @@
       </button>
     </nz-page-header-extra>
   </nz-page-header>
-
 </ng-container>
+
+<app-tab-strip
+  [tabs]="entryTabs"
+  [active]="selectedWeekday$ | async"
+  (select)="onSelectTab($event)">
+</app-tab-strip>
+
+<app-table [headers]="entryHeaders">
+  <tr *ngFor="let schemaEntry of schemaEntries$ | async" class="border-b border-zinc-100 hover:bg-zinc-50">
+  <td class="px-4 py-2 text-sm">
+    {{schemaEntry?.startHour}}:{{schemaEntry.startMinute}}:{{schemaEntry.startSecond}}
+  </td>
+  <td class="px-4 py-2 text-sm">
+    {{schemaEntry?.endHour}}:{{schemaEntry.endMinute}}:{{schemaEntry.endSecond}}
+  </td>
+  </tr>
+</app-table>
