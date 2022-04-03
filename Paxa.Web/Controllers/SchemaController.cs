@@ -70,5 +70,15 @@ namespace Paxa.Web.Controllers
             return Ok();
         }
 
+
+
+        [HttpPost("execute")]
+        public async Task<IActionResult> Execute([FromBody] GenerateTimeslotsDto view)
+        {
+            var schema = await _schemaService.GetById(view.Id);
+            var success = await _schemaService.GenerateTimeslots(schema, view.Year, view.Month, view.Day);
+            return Ok();
+        }
+
     }
 }

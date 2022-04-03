@@ -16,6 +16,7 @@ namespace Paxa.Data.Services
         Task<Schema> GetById(int id);
         Task<Schema> Update(int id, Schema schema);
         void Delete(int id);
+        Task<bool> GenerateTimeslots(Schema schema, int year, int month, int day);
     }
 
     public class SchemaService : ISchemaService
@@ -110,6 +111,40 @@ namespace Paxa.Data.Services
             }
             _context.Schemas.Remove(schema);
             _context.SaveChanges();
+        }
+
+        public async Task<bool> GenerateTimeslots(Schema schema, int year, int month, int day) {
+
+            try {
+                // Iterate over resources connected to schema
+                foreach(Resource resource in schema.Resources) {
+
+                    // Iterate over entries in schema
+                    foreach(SchemaEntry schemaEntry in schema.SchemaEntries) {
+
+                        var from = new DateTime(year, month, day, schemaEntry.StartHour, schemaEntry.StartMinute, schemaEntry.StartSecond);
+                        var to = new DateTime(year, month, day, schemaEntry.EndHour, schemaEntry.EndMinute, schemaEntry.EndSecond);
+
+                        // Create Timeslot
+                        var timeslot = new Timeslot {
+                            ResourceId = resource.Id,
+                            From = from.ToUniversalTime(),
+                            To = to.ToUniversalTime(),
+                        };
+
+                        // Add timeslot
+                        await _context.AddAsync(timeslot);
+                    }
+                }
+
+                // Save timeslots
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
         }
     }
 }

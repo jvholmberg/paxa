@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Schema } from '@schema/services/schema.model';
 import { SchemaService } from '@schema/services/schema.service';
 
@@ -11,6 +12,8 @@ import { SchemaService } from '@schema/services/schema.service';
 export class SchemaListComponent  implements OnInit {
 
   @Input() organizationId: number;
+
+  faCircle = faCircle;
 
   schemas$: Observable<Schema[]>;
 

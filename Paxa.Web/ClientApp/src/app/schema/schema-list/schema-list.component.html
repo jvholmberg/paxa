@@ -8,6 +8,11 @@
   <tbody>
     <tr *ngFor="let dataItem of schemasTable.data">
       <td>
+        <fa-icon
+          [icon]="faCircle"
+          [class]="dataItem?.active ? 'text-green-500' : 'text-red-500'"></fa-icon>
+      </td>
+      <td>
         <a [routerLink]="['/', 'schemas', dataItem.id]">{{dataItem.name}}</a>
       </td>
       <td>
