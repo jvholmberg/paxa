@@ -13,7 +13,7 @@ export class SchemaService extends BaseService<Schema> {
     super(http, 'schemas');
   }
 
-  executeSchema(id: number, year: number, month: number, day: number): Observable<any> {
+  execute(id: number, year: number, month: number, day: number): Observable<any> {
     return this.http.post(`${this.serviceUrl}/execute`, {
       id,
       year,

@@ -10,6 +10,7 @@ import { SchemaRemoveComponent } from './schema-remove/schema-remove.component';
 import { SchemaViewComponent } from './schema-view/schema-view.component';
 import { SchemaRoutingModule } from './schema-routing.module';
 import { SchemaComponent } from './schema.component';
+import { SchemaExecuteComponent } from './schema-execute/schema-execute.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SchemaComponent } from './schema.component';
     SchemaRemoveComponent,
     SchemaViewComponent,
     SchemaComponent,
+    SchemaExecuteComponent,
   ],
   imports: [
     SharedModule,

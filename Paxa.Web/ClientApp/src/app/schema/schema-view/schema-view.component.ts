@@ -63,6 +63,10 @@ export class SchemaViewComponent implements OnInit {
     );
   }
 
+  onExecuteSchema(): void {
+    this.schemaService.execute(this.schemaId, 2022, 4, 4).subscribe()
+  }
+
   onSelectTab(key: number): void {
     this.selectedWeekdaySubject.next(key);
   }

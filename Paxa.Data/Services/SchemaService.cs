@@ -114,13 +114,17 @@ namespace Paxa.Data.Services
         }
 
         public async Task<bool> GenerateTimeslots(Schema schema, int year, int month, int day) {
-
             try {
+                // Get entries for supplied date
+                var date = new DateTime(year, month, day);
+                var weekday = (int)date.DayOfWeek;
+                var entries = schema.SchemaEntries.Where(x => x.Weekday.Number == weekday);
+
                 // Iterate over resources connected to schema
                 foreach(Resource resource in schema.Resources) {
 
                     // Iterate over entries in schema
-                    foreach(SchemaEntry schemaEntry in schema.SchemaEntries) {
+                    foreach(SchemaEntry schemaEntry in entries) {
 
                         var from = new DateTime(year, month, day, schemaEntry.StartHour, schemaEntry.StartMinute, schemaEntry.StartSecond);
                         var to = new DateTime(year, month, day, schemaEntry.EndHour, schemaEntry.EndMinute, schemaEntry.EndSecond);
