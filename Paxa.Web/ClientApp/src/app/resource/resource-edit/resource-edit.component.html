@@ -1,9 +1,18 @@
 <form *ngIf="form" nz-form nzLayout="vertical" #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(f)">
 
-  <nz-page-header nzBackIcon (nzBack)="onCancel()">
-    <nz-page-header-title>Edit Resource</nz-page-header-title>
-    <nz-page-header-subtitle>Resource is the second highest hierarchy item</nz-page-header-subtitle>
-  </nz-page-header>
+  <app-page-header
+    title="Edit Resource"
+    subtitle="subtitle"
+    (goBack)="onCancel()">
+  </app-page-header>
+
+  <app-input
+    formControlName="name"
+    label="Name"
+    placeholder="Ex. Cool Padel"
+    >
+
+  </app-input>
 
   <nz-form-item>
     <nz-form-label nzRequired>Name</nz-form-label>

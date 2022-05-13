@@ -1,5 +1,9 @@
 <header class="flex flex-row gap-3 my-6 justify-start items-center">
-  <fa-icon [icon]="faAngleLeft" class="flex w-7 h-7 bg-zinc-50 hover:bg-zinc-100 text-zinc-700 items-center justify-center cursor-pointer"></fa-icon>
+  <fa-icon
+    [icon]="faAngleLeft"
+    class="flex w-7 h-7 bg-zinc-50 hover:bg-zinc-100 text-zinc-700 items-center justify-center cursor-pointer"
+    (click)="goBack.emit()">
+  </fa-icon>
   <h1 class="text-xl m-0">{{title}}</h1>
   <span class="text-sm text-zinc-500 m-0">{{subtitle}}</span>
   <div class="grow inline-flex flex-row justify-end">

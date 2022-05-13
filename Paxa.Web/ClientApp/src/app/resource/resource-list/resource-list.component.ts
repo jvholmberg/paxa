@@ -14,6 +14,11 @@ export class ResourceListComponent  implements OnInit {
 
   resources$: Observable<Resource[]>;
 
+  headers = [
+    { key: 'name', title: 'Name'},
+    { title: '' },
+  ];
+
   constructor(private resourceService: ResourceService) { }
 
   ngOnInit(): void {

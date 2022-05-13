@@ -37,6 +37,7 @@
     "popper.js": "^1.16.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -49,6 +50,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "^12.11.1",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.4",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~4.0.0",

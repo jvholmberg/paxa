@@ -1,17 +1,14 @@
 <ng-container *ngIf="resource$ | async as resource">
-  <nz-page-header nzBackIcon (nzBack)="onGoBack()">
-    <nz-page-header-title>{{resource?.name}}</nz-page-header-title>
-    <nz-page-header-subtitle>{{resource?.description}}</nz-page-header-subtitle>
-    <nz-page-header-extra>
-      <button nz-button [routerLink]="['/', 'resource', resource.id, 'edit']">
-        Edit Resource
-      </button>
-      <button nz-button nzType="primary">
-        Manage Timeslots
-      </button>
-    </nz-page-header-extra>
-  </nz-page-header>
-
+  <app-page-header
+    [title]="resource?.name"
+    [subtitle]="resource?.description"
+    (goBack)="onGoBack()">
+    <button
+      class="inline-block px-2 py-1 rounded-sm bg-zinc-50 hover:bg-zinc-100 ease-in transition-colors text-zinc-700 text-sm"
+      [routerLink]="['/', 'resource', resource.id, 'edit']">
+      Edit Resource
+    </button>
+  </app-page-header>
 </ng-container>
 
 <router-outlet></router-outlet>

@@ -22,10 +22,10 @@ import { IconsProviderModule } from '../icons-provider.module';
 import { RouterModule } from '@angular/router';
 
 import { BannerComponent } from './components/banner/banner.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { TabStripComponent } from './components/tab-strip/tab-strip.component';
 import { TableComponent } from './components/table/table.component';
 
