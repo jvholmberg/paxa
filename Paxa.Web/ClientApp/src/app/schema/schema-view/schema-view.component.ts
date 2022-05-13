@@ -6,6 +6,8 @@ import { Schema } from '@schema/services/schema.model';
 import { SchemaEntry } from '@schema/services/schema-entry.model';
 import { SchemaService } from '@schema/services/schema.service';
 import { KeyPair } from '@shared/models/keypair.model';
+import { LookupService } from '@shared/services/lookup-service/lookup.service';
+import { Weekday } from '@shared/services/lookup-service/weekday.model';
 
 @Component({
   selector: 'app-schema-view',
@@ -14,22 +16,15 @@ import { KeyPair } from '@shared/models/keypair.model';
 })
 export class SchemaViewComponent implements OnInit {
 
+  @Input() schemaId: number;
+
   private readonly selectedWeekdaySubject = new BehaviorSubject<number>(0);
   selectedWeekday$ = this.selectedWeekdaySubject.asObservable();
 
-  @Input() schemaId: number;
+  weekdays$: Observable<KeyPair[]>;
+
   schema$: Observable<Schema>;
   schemaEntries$: Observable<SchemaEntry[]>;
-
-  entryTabs: KeyPair[] = [
-    { key: 0, value: 'Sunday'},
-    { key: 1, value: 'Monday' },
-    { key: 2, value: 'Tuesday'},
-    { key: 3, value: 'Wednesday' },
-    { key: 4, value: 'Thursday'},
-    { key: 5, value: 'Friday' },
-    { key: 6, value: 'Saturday'},
-  ];
 
   entryHeaders: KeyPair[] = [
     { key: 'startTime', value: 'Start'},
@@ -40,6 +35,7 @@ export class SchemaViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private schemaService: SchemaService,
+    private lookupService: LookupService,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +43,14 @@ export class SchemaViewComponent implements OnInit {
     if (this.schemaId === undefined || this.schemaId === null) {
       this.schemaId = +this.activatedRoute.snapshot.params['id'];
     }
+
+    this.weekdays$ = this.lookupService
+      .getWeekdays()
+      .pipe(
+        map<Weekday[], KeyPair[]>((weekdays) => {
+          return weekdays.map((e) => ({ key: e.number, value: e.name }));
+        }),
+      );
 
     this.schema$ = this.schemaService.getById(this.schemaId);
     this.schemaEntries$ = combineLatest([
