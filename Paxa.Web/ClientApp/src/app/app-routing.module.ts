@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { BookingGuard } from '@booking/booking.guard';
 import { OrganizationGuard } from '@organization/organization.guard';
+import { PersonGuard } from '@person/person.guard';
 import { ResourceGuard } from '@resource/resource.guard';
+import { SchemaGuard } from '@schema/schema.guard';
+import { TimeslotGuard } from '@timeslot/timeslot.guard';
+import { UserGuard } from '@user/user.guard';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAllowedComponent } from './not-allowed/not-allowed.component';
@@ -18,7 +23,7 @@ const routes: Routes = [
   { path: 'get-started', component: GetStartedComponent },
   {
     path: 'booking',
-    canLoad: [],
+    canLoad: [BookingGuard],
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
   },
   {
@@ -28,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'person',
-    canLoad: [],
+    canLoad: [PersonGuard],
     loadChildren: () => import('./person/person.module').then(m => m.PersonModule),
   },
   {
@@ -38,17 +43,17 @@ const routes: Routes = [
   },
   {
     path: 'schemas',
-    canLoad: [],
+    canLoad: [SchemaGuard],
     loadChildren: () => import('./schema/schema.module').then(m => m.SchemaModule),
   },
   {
     path: 'timeslot',
-    canLoad: [],
+    canLoad: [TimeslotGuard],
     loadChildren: () => import('./timeslot/timeslot.module').then(m => m.TimeslotModule),
   },
   {
     path: 'user',
-    canLoad: [],
+    canLoad: [UserGuard],
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
   },
   { path: 'logout', component: LogoutComponent },
