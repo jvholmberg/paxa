@@ -63,6 +63,7 @@ namespace Paxa.Web
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IResourceService, ResourceService>();
             services.AddScoped<ISchemaService, SchemaService>();
+            services.AddScoped<ITimeslotService, TimeslotService>();
             services.AddScoped<IUserService, UserService>();
         }
 

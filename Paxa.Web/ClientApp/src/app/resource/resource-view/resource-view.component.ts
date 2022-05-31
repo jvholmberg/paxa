@@ -12,6 +12,7 @@ import { ResourceService } from '@resource/services/resource.service';
 export class ResourceViewComponent implements OnInit {
 
   @Input() resourceId: number;
+
   resource$: Observable<Resource>;
 
   constructor(

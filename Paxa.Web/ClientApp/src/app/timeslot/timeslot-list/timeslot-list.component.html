@@ -1,1 +1,10 @@
 <p>timeslot-list works!</p>
+<app-table [headers]="headers">
+  <tr *ngFor="let timeslot of timeslots$ | async" class="border-b border-zinc-100 hover:bg-zinc-50">
+    <td class="px-4 py-2 text-sm">
+      {{timeslot.from}}
+    </td>
+    <td class="px-4 py-2 text-sm">
+      {{timeslot.to}}
+    </td>
+</app-table>

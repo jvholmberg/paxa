@@ -9,6 +9,7 @@ import { ResourceCreateComponent } from './resource-create/resource-create.compo
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 import { ResourceViewComponent } from './resource-view/resource-view.component';
 import { ResourceRemoveComponent } from './resource-remove/resource-remove.component';
+import { TimeslotModule } from '@timeslot/timeslot.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ResourceRemoveComponent } from './resource-remove/resource-remove.compo
     SharedModule,
     RouterModule,
     ResourceRoutingModule,
+    TimeslotModule,
   ],
   exports: [
     ResourceListComponent,

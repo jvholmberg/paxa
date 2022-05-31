@@ -16,7 +16,7 @@
   Generate timeslots
 </button>
 <app-tab-strip
-  [tabs]="weekdays$ | async"
+  [tabs]="weekdays$ | async"
   [active]="selectedWeekday$ | async"
   (select)="onSelectTab($event)">
 </app-tab-strip>

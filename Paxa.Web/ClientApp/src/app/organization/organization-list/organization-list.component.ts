@@ -13,8 +13,8 @@ export class OrganizationListComponent implements OnInit {
   organizations$: Observable<Organization[]>;
 
   headers = [
-    { key: 'name', title: 'Name'},
-    { title: '' },
+    { key: 'name', value: 'Name'},
+    { value: '' },
   ];
 
   constructor(private organizationService: OrganizationService) { }

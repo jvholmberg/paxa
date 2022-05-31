@@ -17,6 +17,9 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     SharedModule,
     TimeslotRoutingModule,
+  ],
+  exports: [
+    TimeslotListComponent,
   ]
 })
 export class TimeslotModule { }

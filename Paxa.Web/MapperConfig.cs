@@ -168,6 +168,17 @@ namespace Paxa.Web
                 cfg.CreateMap<Timeslot, TimeslotDto>()
                     .ReverseMap();
 
+                cfg.CreateMap<CreateTimeslotRequestDto, Timeslot>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.Resource, options => options.Ignore())
+                    .ForMember(destination => destination.Booking, options => options.Ignore());
+
+                cfg.CreateMap<UpdateTimeslotRequestDto, Timeslot>()
+                    .ForMember(destination => destination.Id, options => options.Ignore())
+                    .ForMember(destination => destination.ResourceId, options => options.Ignore())
+                    .ForMember(destination => destination.Resource, options => options.Ignore())
+                    .ForMember(destination => destination.Booking, options => options.Ignore());
+                    
                 // Weekday
                 cfg.CreateMap<Weekday, WeekdayDto>()
                     .ReverseMap();

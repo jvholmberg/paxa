@@ -9,6 +9,11 @@
       Edit Resource
     </button>
   </app-page-header>
+
+  <app-timeslot-list
+    [resourceId]="resource?.id">
+  </app-timeslot-list>
+
 </ng-container>
 
 <router-outlet></router-outlet>

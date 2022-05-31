@@ -89,7 +89,7 @@ export abstract class BaseService<T> {
 
   setValue(value: T[]): void {
     // Validation
-    if (!value || !value.length) {
+    if (!value || !value.length) {
       logError(`${this.serviceUrl} => setValue`, value, 'Validation Failed');
       return;
     }
@@ -195,8 +195,7 @@ export abstract class BaseService<T> {
         },
         () => {
           this.setLoading(false);
-        })
-
+        });
     }
 
     // Return value

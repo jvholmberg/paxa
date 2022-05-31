@@ -15,7 +15,7 @@ export class ResourceListComponent  implements OnInit {
   resources$: Observable<Resource[]>;
 
   headers = [
-    { key: 'name', title: 'Name'},
+    { key: 'name', value: 'Name'},
     { title: '' },
   ];
 

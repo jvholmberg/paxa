@@ -9,6 +9,6 @@ import { Timeslot } from './timeslot.model';
 export class TimeslotService extends BaseService<Timeslot> {
 
   constructor(http: HttpClient) {
-    super(http, 'timeslot');
+    super(http, 'timeslots');
   }
 }
