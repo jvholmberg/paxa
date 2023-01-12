@@ -28,7 +28,7 @@ export class UserViewComponent implements OnInit {
     }
 
     this.user$ = this.userService
-      .getById(this.userId, false)
+      .getById(this.userId)
       .pipe(
         share(),
       );

@@ -6,40 +6,40 @@
     (goBack)="onCancel()">
   </app-page-header>
 
-  <app-input
-    formControlName="name"
-    label="Name"
-    placeholder="Ex. Cool Padel"
-    >
+  <div>
+    <label class="block w-full" for="name">Name</label>
+    <input class="block w-full" id="name" type="text" formControlName="name" placeholder="Ex. Cool Padel" />
+    <ng-container *ngIf="form.controls['name'] as c">
+      <div *ngIf="c.dirty && c.hasError('required')" class="mt-1 text-red-500">* Name is required</div>
+      <div *ngIf="c.hasError('minlength')" class="mt-1 text-red-500">* Name too short</div>
+    </ng-container>
+  </div>
 
-  </app-input>
+  <div>
+    <label class="block w-full" for="typeId">Type</label>
+    <div class="mb-3">
+      <select
+        formControlName="typeId"
+        class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        aria-label="Default select example">
+        <option
+        *ngFor="let type of resourceTypes$ | async"
+          [value]="type.id">{{type.name}}</option>
+      </select>
+    </div>
+  </div>
 
-  <nz-form-item>
-    <nz-form-label nzRequired>Name</nz-form-label>
-    <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTip">
-      <input nz-input type="text" formControlName="name" placeholder="Ex. Cool Padel" />
-      <ng-template #nameErrorTip let-control>
-        <ng-container *ngIf="control.hasError('required')">Name is required</ng-container>
-        <ng-container *ngIf="control.hasError('minlength')">Name too short</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label>Type</nz-form-label>
-    <nz-form-control nzHasFeedback>
-      <nz-select formControlName="typeId">
-        <nz-option
-          *ngFor="let type of resourceTypes$ | async"
-          [nzValue]="type.id"
-          [nzLabel]="type.name">
-        </nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
-
-  <div class="d-flex justify-content-end">
-    <button type="button" class="mr-2" nz-button nzType="default" (click)="onCancel()">Cancel</button>
-    <button type="submit" nz-button nzType="primary">Update</button>
+  <div class="flex justify-end mt-4">
+    <button
+      type="button"
+      class="inline-block mr-2 px-5 py-2.5 rounded-sm bg-zinc-100 hover:bg-zinc-200 ease-in transition-colors text-sm"
+      (click)="onCancel()">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="inline-block px-5 py-2.5 rounded-sm bg-primary-500 hover:bg-primary-300 ease-in transition-colors text-white text-sm">
+      Update
+    </button>
   </div>
 </form>

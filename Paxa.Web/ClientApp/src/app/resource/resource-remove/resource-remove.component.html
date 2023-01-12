@@ -1,28 +1,13 @@
-
-<nz-modal
+<app-modal
   *ngIf="resource$ | async as resource"
-  [nzVisible]="true"
-  [nzTitle]="modalTitle"
-  [nzContent]="modalContent"
-  [nzFooter]="modalFooter"
-  (nzOnCancel)="onCancel()">
-  <ng-template #modalTitle>
-    Remove {{resource?.name}}
-  </ng-template>
-
-  <ng-template #modalContent>
-    <p>
-      You are about to remove {{resource?.name}}.
-      Are you sure you want to continue?
-    </p>
-  </ng-template>
-
-  <ng-template #modalFooter>
-    <button nz-button nzType="default" (click)="onCancel()">
-      Cancel
-    </button>
-    <button nz-button nzType="primary" nzDanger [nzLoading]="isSubmitting$ | async" [disabled]="isSubmitting$ | async" (click)="onDelete()">
-      Remove
-    </button>
-  </ng-template>
-</nz-modal>
+  title="Remove resource"
+  submitText="Remove"
+  cancelText="Cancel"
+  (submit)="onDelete()"
+  (cancel)="onCancel()"
+  >
+  <p>
+    You are about to remove {{resource?.name}}.
+    Are you sure you want to continue?
+  </p>
+</app-modal>

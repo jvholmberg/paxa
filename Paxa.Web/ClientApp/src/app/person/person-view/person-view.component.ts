@@ -27,7 +27,7 @@ export class PersonViewComponent implements OnInit {
     }
 
     this.person$ = this.personService
-      .getById(this.personId, false)
+      .getById(this.personId)
       .pipe(
         share(),
       );

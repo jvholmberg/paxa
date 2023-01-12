@@ -114,26 +114,24 @@ export abstract class BaseService<T> {
     this.byIdSource.next(nextValue.byId);
   }
 
-  get(force: boolean = false): Observable<T[]> {
+  get(): Observable<T[]> {
     logInfo(`${this.serviceUrl} => get`);
     this.setLoading(true);
 
-    if (!this.initialized || force) {
-      this.http.get<T[]>(this.serviceUrl).subscribe(
-        (res) => {
-          this.initialized = true;
-          this.setValue(res);
-          this.setError(null);
-        },
-        (err) => {
-          this.setValue(null);
-          this.setError(err);
-        },
-        () => {
-          this.setLoading(false);
-        }
-      );
-    }
+    this.http.get<T[]>(this.serviceUrl).subscribe(
+      (res) => {
+        this.initialized = true;
+        this.setValue(res);
+        this.setError(null);
+      },
+      (err) => {
+        this.setValue(null);
+        this.setError(err);
+      },
+      () => {
+        this.setLoading(false);
+      }
+    );
 
     return this.value$;
   }
@@ -175,7 +173,7 @@ export abstract class BaseService<T> {
     );
   }
 
-  getById(id: number, force: boolean = false): Observable<T> {
+  getById(id: number): Observable<T> {
     logInfo(`${this.serviceUrl} => getById`, id);
 
     // Get current value
@@ -183,20 +181,18 @@ export abstract class BaseService<T> {
     const previousValue = this.byIdSource.value[id];
 
     // Update existing value
-    if (!previousValue || force) {
-      this.http.get<T>(`${this.serviceUrl}/${id}`).subscribe(
-        (res) => {
-          this.setValue([res]);
-          this.setError(null);
-        },
-        (err) => {
-          this.setValue(null);
-          this.setError(err);
-        },
-        () => {
-          this.setLoading(false);
-        });
-    }
+    this.http.get<T>(`${this.serviceUrl}/${id}`).subscribe(
+      (res) => {
+        this.setValue([res]);
+        this.setError(null);
+      },
+      (err) => {
+        this.setValue(null);
+        this.setError(err);
+      },
+      () => {
+        this.setLoading(false);
+      });
 
     // Return value
     return this.byId$.pipe(
