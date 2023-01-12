@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 
 import { BannerComponent } from './components/banner/banner.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
@@ -57,6 +58,7 @@ const externalLibs = [
 const components = [
   BannerComponent,
   FooterComponent,
+  ModalComponent,
   NavbarComponent,
   PageHeaderComponent,
   ProfileDropdownComponent,
